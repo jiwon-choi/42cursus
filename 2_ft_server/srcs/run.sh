@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/05 12:05:47 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/03/05 14:17:14 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/03/09 19:31:40 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ mv phpmyadmin /var/www/html/
 cp -rp /tmp/config.inc.php /var/www/html/phpmyadmin/
 
 service mysql start
+mysql < var/www/html/phpmyadmin/sql/create_tables.sql -u root --skip-password
 echo "CREATE DATABASE IF NOT EXISTS wordpress;" \
 	| mysql -u root --skip-password
 echo "CREATE USER IF NOT EXISTS 'jiwchoi'@'localhost' IDENTIFIED BY 'jiwchoi';" \
