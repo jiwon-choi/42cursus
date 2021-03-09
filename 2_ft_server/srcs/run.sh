@@ -6,13 +6,11 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/05 12:05:47 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/03/09 19:31:40 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/03/09 19:59:15 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/bash
-
-chmod 777 /run.sh
 
 openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Lee/CN=localhost" -keyout localhost.dev.key -out localhost.dev.crt
 mv localhost.dev.crt etc/ssl/certs/
