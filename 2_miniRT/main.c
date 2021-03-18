@@ -47,4 +47,5 @@ int		main()
 	// image를 window로 보냄
 	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, app.img_ptr, 0, 0);
 	mlx_loop(app.mlx_ptr);
+	return (0);
 }
