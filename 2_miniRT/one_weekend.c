@@ -31,7 +31,7 @@ int		main(void)
 		int		i = 0;
 		while (i < img_width)
 		{
-			app.data[j * 256 + i] = mlx_get_color_value(app.mlx_ptr, 0x00ffffff);
+			app.data[j * 256 + i] = mlx_get_color_value(app.mlx_ptr, 0x00ff0000);
 			i++;
 		}
 		j++;
