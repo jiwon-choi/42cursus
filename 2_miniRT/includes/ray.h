@@ -4,11 +4,17 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
 # include "vec3.h"
 
-t_p3	raydefine(t_p3 origin, t_p3 dir, float t);
-t_p3	ray_color(t_p3 dir);
+typedef struct	s_ray {
+	t_p3	origin;
+	t_p3	dir;
+	float	t;
+}				t_ray;
+
+t_p3	ray_at(t_ray r);
+double	hit_sphere(t_p3 center, double r, t_ray r);
+t_p3	ray_color(t_ray r);
 
 #endif

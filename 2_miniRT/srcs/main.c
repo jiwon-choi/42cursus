@@ -32,8 +32,8 @@ int		main(void)
 	t_p3		horizontal = vdefine(viewport_width, 0, 0);
 	t_p3		vertical = vdefine(0, viewport_height, 0);
 	t_p3		lower_left_corner;
-	lower_left_corner.x = origin.x - horizontal.x / 2 - vertical.x / 2;
-	lower_left_corner.y = origin.y - horizontal.y / 2 - vertical.y / 2;
+	lower_left_corner.x = origin.x - horizontal.x / 2;
+	lower_left_corner.y = origin.y - vertical.y / 2;
 	lower_left_corner.z = origin.z - horizontal.z / 2 - vertical.z / 2 - focal_length;
 	t_p3		pixel_color;
 	// lower_left_corner's value = -1.777778, -1.00000, -1.00000
@@ -54,19 +54,20 @@ int		main(void)
 			float	u = (double)i / (image_width - 1); // 0.0 -> 1.0
 			float	v = (image_height - (double)j - 1) / (image_height - 1); // 1.0 -> 0.0
 
-			t_p3	ray; // 방향 벡터
-			ray = lower_left_corner; // -1.777778, -1.00000, -1.00000
+			t_ray	ray; // 방향 벡터
+			ray.origin = origin;
+			ray.dir = lower_left_corner; // -1.777778, -1.00000, -1.00000
 			// x axis, y axis 변화
-			ray = vadd(ray, vscalarmul(horizontal, u));
-			ray = vadd(ray, vscalarmul(vertical, v));
+			ray.dir = vadd(ray.dir, vscalarmul(horizontal, u));
+			ray.dir = vadd(ray.dir, vscalarmul(vertical, v));
 			// 중점 계산
-			ray = vsubstract(ray, origin);
+			ray.dir = vsubstract(ray.dir, origin);
 			// z축 1.0 고정 = ray.z 1.0 고정
-			ray = ray_color(ray);
+			ray.dir = ray_color(ray);
 			
-			int		ir = 255.999 * ray.x;
-			int		ig = 255.999 * ray.y;
-			int		ib = 255.999 * ray.z;
+			int		ir = 255.999 * ray.dir.x;
+			int		ig = 255.999 * ray.dir.y;
+			int		ib = 255.999 * ray.dir.z;
 
 //			printf("%d, %d, %d\n", ir, ig, ib);
 
