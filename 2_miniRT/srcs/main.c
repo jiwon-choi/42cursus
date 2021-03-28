@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   figures.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/28 11:39:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/03/28 11:50:07 by jiwchoi          ###   ########.fr       */
+/*   Created: 2021/03/28 16:23:34 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/03/28 17:39:16 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FIGURES_H_
-# define _FIGURES_H_
+#include "../includes/get_next_line.h"
+#include <stdio.h>
 
-typedef struct	s_sp
+int		main(void)
 {
-	t_p3	c;
-	double	r;
-}				t_sp;
+	char	*line;
+	int		fd;
+	int		ret;
 
-typedef struct	s_pl
-{
-	t_p3	p;
-}				t_pl;
-
-typedef struct	s_sq
-{
-	t_p3	c;
-	double	side;
-}				t_sq;
-
-typedef struct	s_cy
-{
-}				t_cy;
+	line = 0;
+	fd = open("text.rt", O_RDONLY);
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
+	printf("%s\n", line);
+	free(line);
+	return (0);
+}
