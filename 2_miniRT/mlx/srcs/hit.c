@@ -6,20 +6,20 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 10:32:33 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/03/28 10:32:34 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/03/28 11:30:02 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ray.h"
 #include "../includes/vec3.h"
 
-double	hit_sphere(t_p3 center, double radius, t_ray r)
+double	hit_sphere(t_p3 center, double radius, t_ray ray)
 {
 	t_p3	oc;
 
-	oc = vsubstract(r.origin, center);
-	float	a = vdot(r.dir, r.dir);
-	float	b = 2.0 * vdot(oc, r.dir);
+	oc = vsubstract(ray.origin, center);
+	float	a = vdot(ray.dir, ray.dir);
+	float	b = 2.0 * vdot(oc, ray.dir);
 	float	c = vdot(oc, oc) - radius * radius;
 	float	discriminant = b * b - 4 * a * c;
 

@@ -14,7 +14,7 @@ typedef struct	s_ray {
 }				t_ray;
 
 t_p3	ray_at(t_ray r);
-double	hit_sphere(t_p3 center, double r, t_ray r);
+double	hit_sphere(t_p3 center, double radius, t_ray ray);
 t_p3	ray_color(t_ray r);
 
 #endif
