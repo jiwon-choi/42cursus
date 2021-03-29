@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:58:00 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/03/29 16:10:04 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/03/29 17:07:42 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,6 @@ SRCS		= $(addprefix $(DIR_SRCS), $(SRC))
 
 OBJS		= $(SRCS:.c=.o)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $<
-
 $(NAME) : $(OBJS)
 	make -C ./libft
 	make -C ./minilibx_mms
@@ -40,7 +37,11 @@ $(NAME) : $(OBJS)
 	cp ./libft/libft.a libft.a
 	cp ./minilibx_mms/libmlx.dylib libmlx.dylib
 	cp ./minilibx_opengl/libmlx.a libmlx.a
-	$(CC) $(CFLAGS) -I $(DIR_HEADERS) $(LIBMLX) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(DIR_HEADERS) $(LIBMLX) $< -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -I $(DIR_HEADERS) -c $< -o $@
+
 
 all : $(NAME)
 
