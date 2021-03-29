@@ -6,20 +6,26 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:58:00 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/03/28 19:09:34 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/03/29 16:01:24 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= miniRT
-LIBFTDIR	= ./libft
-LIBFTFILE	= libft.a
-
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-AR			= ar rcs
 RM			= rm -f
 
-SRCS		=  
+NAME		= miniRT
+
+DIR_HEADERS	= ./includes/
+DIR_SRCS	= ./srcs/
+
+LIBMLX		= libmlx.dylib \
+			  libmlx.a
+
+SRC			= main.c \
+			  get_next_line.c
+
+SRCS		= $(addprefix $(DIR_SRCS), $(SRC))
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -27,8 +33,12 @@ OBJS		= $(SRCS:.c=.o)
 	$(CC) $(CFLAGS) -c $<
 
 $(NAME) : $(OBJS)
-	make -C $(LIBFTDIR)
-	$(CC) $(CFLAGS) -o $@
+	make -C ./libft
+	make -C ./minilibx_mms
+	make -C ./minilibx_opengl
+	cp ./minilibx_mms/libmlx.dylib
+	cp ./minilibx_opengl/libmlx.a libmlx.a
+	$(CC) $(CFLAGS) -I $(DIR_HEADERS) $(LIBMLX) $< -o $@
 
 all : $(NAME)
 
@@ -36,8 +46,12 @@ clean :
 	$(RM) $(OBJS)
 
 fclean : clean
+	make clean -C ./minilibx_mms
+	make clean -C ./minilibx_opengl
+	$(RM) libmlx.dylib
+	$(RM) libmlx.a
 	$(RM) $(NAME)
 
-re : clean all
+re : fclean all
 
-.PHONY : bonus all clean fclean re
+.PHONY : all clean fclean re bonus
