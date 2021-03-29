@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:58:00 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/03/29 16:22:01 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/03/29 16:10:04 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ NAME		= miniRT
 
 DIR_HEADERS	= ./includes/
 DIR_SRCS	= ./srcs/
-DIR_OBJS	= ./objs/
 
 LIB_FILE	= libft.a \
 			  libmlx.dylib \
@@ -27,10 +26,9 @@ LIB_FILE	= libft.a \
 SRC			= main.c \
 			  get_next_line.c
 
-OBJ			= $(SRC:.c=.o)
-
 SRCS		= $(addprefix $(DIR_SRCS), $(SRC))
-OBJS		= $(addprefix $(DIR_OBJS), $(OBJ))
+
+OBJS		= $(SRCS:.c=.o)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $<
