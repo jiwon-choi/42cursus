@@ -6,13 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 01:05:48 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/03/29 17:36:24 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/03/29 17:44:38 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-char	*ft_strdup(const char *s)
+char	*gnl_strdup(const char *s)
 {
 	size_t		l;
 	char		*dup;
@@ -38,7 +38,7 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-char	*ft_strjoin(char const *save, char const *buf)
+char	*gnl_strjoin(char const *save, char const *buf)
 {
 	int		i;
 	int		j;
@@ -64,7 +64,7 @@ char	*ft_strjoin(char const *save, char const *buf)
 	return (join);
 }
 
-int		ft_newline_idx(const char *s)
+int		gnl_newline_idx(const char *s)
 {
 	int		idx;
 
@@ -78,7 +78,7 @@ int		ft_newline_idx(const char *s)
 	return (-1);
 }
 
-int		ft_separate(char **save, char **line, char *join, int n_idx)
+int		gnl_separate(char **save, char **line, char *join, int n_idx)
 {
 	*save = ft_strdup(join + n_idx + 1);
 	*(join + n_idx) = 0;
