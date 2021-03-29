@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:58:00 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/03/29 16:05:18 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/03/29 16:07:01 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(NAME) : $(OBJS)
 	make -C ./minilibx_opengl
 	cp ./libft/libft.a libft.a
 	cp ./minilibx_mms/libmlx.dylib libmlx.dylib
-	cp ./minilibx_opengl/libmlx.a libmlx.a libmlx.a
+	cp ./minilibx_opengl/libmlx.a libmlx.a
 	$(CC) $(CFLAGS) -I $(DIR_HEADERS) $(LIBMLX) $< -o $@
 
 all : $(NAME)
@@ -51,8 +51,7 @@ fclean : clean
 	make fclean -C ./libft
 	make clean -C ./minilibx_mms
 	make clean -C ./minilibx_opengl
-	$(RM) libmlx.dylib
-	$(RM) libmlx.a
+	$(RM) libft.a libmlx.dylib libmlx.a
 	$(RM) $(NAME)
 
 re : fclean all
