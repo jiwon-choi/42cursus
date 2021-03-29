@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/28 17:58:00 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/03/29 17:10:19 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/03/29 17:58:45 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ LIB_FILE	= libft.a \
 			  libmlx.dylib \
 			  libmlx.a
 
-SRC			= main.c \
-			  get_next_line.c
+SRC			= main.c
 
 SRCS		= $(addprefix $(DIR_SRCS), $(SRC))
 

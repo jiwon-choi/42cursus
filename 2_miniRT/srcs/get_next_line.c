@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 01:05:48 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/03/29 17:44:38 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/03/29 17:48:35 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*gnl_strjoin(char const *save, char const *buf)
 
 	if (!save)
 	{
-		join = ft_strdup(buf);
+		join = gnl_strdup(buf);
 		return (join);
 	}
 	if (!(join = (char *)malloc(ft_strlen(save) + ft_strlen(buf) + 1)))
@@ -80,9 +80,9 @@ int		gnl_newline_idx(const char *s)
 
 int		gnl_separate(char **save, char **line, char *join, int n_idx)
 {
-	*save = ft_strdup(join + n_idx + 1);
+	*save = gnl_strdup(join + n_idx + 1);
 	*(join + n_idx) = 0;
-	*line = ft_strdup(join);
+	*line = gnl_strdup(join);
 	free(join);
 	return (1);
 }
@@ -100,16 +100,16 @@ int		get_next_line(int fd, char **line)
 	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[read_size] = 0;
-		join = ft_strjoin(save, buf);
+		join = gnl_strjoin(save, buf);
 		free(save);
-		if ((n_idx = ft_newline_idx(join)) >= 0)
-			return (ft_separate(&save, line, join, n_idx));
-		save = ft_strdup(join);
+		if ((n_idx = gnl_newline_idx(join)) >= 0)
+			return (gnl_separate(&save, line, join, n_idx));
+		save = gnl_strdup(join);
 		free(join);
 	}
 	if (read_size < 0)
 		return (ERR);
-	*line = ft_strdup(save);
+	*line = gnl_strdup(save);
 	free(save);
 	return (0);
 }
