@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 16:30:47 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/03/28 17:37:50 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/03/29 17:36:11 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define ERR -1
 # define BUFFER_SIZE 1
 
-size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s);
 char		*ft_strjoin(char const *save, char const *buf);
 int			ft_newline_idx(const char *s);
