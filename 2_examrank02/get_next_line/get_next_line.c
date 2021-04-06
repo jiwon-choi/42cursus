@@ -38,16 +38,9 @@ char	*ft_strjoin(char *save, char *buf)
 
 char	*ft_strdup(char *str)
 {
-	char	*dup;
 	int		i = 0;
+	char	*dup = malloc(ft_strlen(str) + 1);
 
-	if (!str)
-	{
-		dup = malloc(1);
-		*dup = 0;
-		return (dup);
-	}
-	dup = malloc(ft_strlen(str) + 1);
 	while (*str)
 		dup[i++] = *str++;
 	dup[i] = 0;
@@ -57,14 +50,12 @@ char	*ft_strdup(char *str)
 int		get_next_line(char **line)
 {
 	static char	*save;
-	char		buf[BUFFER_SIZE + 1];
+	char		buf[2];
 	char		*join = 0;
 	int			idx = 0;
 	int			read_size = 0;
 
-	if (!line)
-		return (ERR);
-	while ((read_size = read(FD, buf, BUFFER_SIZE)) > 0)
+	while ((read_size = read(0, buf, 1)) > 0)
 	{
 		buf[read_size] = 0;
 		join = ft_strjoin(save, buf);
@@ -81,7 +72,7 @@ int		get_next_line(char **line)
 		free(join);
 	}
 	if (read_size < 0)
-		return (ERR);
+		return (-1);
 	*line = ft_strdup(save);
 	free(save);
 	save = 0;
