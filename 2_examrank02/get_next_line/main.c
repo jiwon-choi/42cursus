@@ -4,11 +4,9 @@
 
 int main(void)
 {
-	int		r;
-	char	*line;
+	char	*line = NULL;
 
-	line = NULL;
-	while ((r = get_next_line(&line)) > 0)
+	while (get_next_line(&line) > 0)
 	{
 		printf("%s\n", line);
 		free(line);
