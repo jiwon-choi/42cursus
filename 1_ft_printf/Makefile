@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/30 21:38:42 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/02/14 13:12:09 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/04/08 16:48:51 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,10 @@ BOBJS	= $(BSRCS:.c=.o)
 $(NAME) : $(OBJS)
 	make -C $(LIBFTDIR)
 	cp $(LIBFTDIR)/$(LIBFTFILE) $(NAME)
-	$(AR) $@ $^
+	$(AR) $@ $?
 
 bonus : $(BOBJS)
-	$(AR) $(NAME) $^
+	$(AR) $(NAME) $?
 
 all : $(NAME)
 
