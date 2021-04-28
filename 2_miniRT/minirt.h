@@ -18,6 +18,7 @@ t_p3	rt_ato3(char **str);
 /* parse.c */
 void	parse_resolution(t_scene *data, char *str);
 void	parse_ambient(t_scene *data, char *str);
+void	parse_light(t_scene *data, char *str);
 void	parse(t_scene *data, char *str);
 
 #endif

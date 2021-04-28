@@ -26,9 +26,14 @@ void	parse_light(t_scene *data, char *str)
 	new->next = NULL;
 
 	p = data->light;
-	while (p->next)
-		p = p->next;
-	p->next = new;
+	if (!data->light)
+		data->light = new;
+	else
+	{
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
 }
 
 void	parse(t_scene *data, char *str)
