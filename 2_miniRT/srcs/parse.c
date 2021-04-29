@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "../includes/minirt.h"
 
 void	parse_resolution(t_scene *data, char *str)
 {

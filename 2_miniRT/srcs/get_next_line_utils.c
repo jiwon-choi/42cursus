@@ -6,11 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 01:06:05 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/01/26 21:01:06 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/04/29 18:16:43 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 size_t		ft_strlen(const char *s)
 {

@@ -6,11 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 01:05:48 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/02/03 14:38:41 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/04/29 18:16:13 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 int		ft_separate(char **save, char **line, char *join, int n_idx)
 {
