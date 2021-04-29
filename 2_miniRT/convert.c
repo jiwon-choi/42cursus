@@ -19,9 +19,12 @@ int		rt_atoi(char **nptr)
 	if (**nptr == '-' || **nptr == '+')
 	{
 		if (**nptr == '-')
+		{
 			sign *= -1;
+			*nptr += 1;
+		}
 	}
-	while (**nptr >= '0' && **nptr <= '9')
+	while (ft_isdigit(**nptr))
 	{
 		num *= 10;
 		num += (*(*nptr)++ - '0');
@@ -43,9 +46,12 @@ double	rt_atof(char **nptr)
 	if (**nptr == '-' || **nptr == '+')
 	{
 		if (**nptr == '-')
+		{
 			sign *= -1;
+			*nptr += 1;
+		}
 	}
-	while (**nptr >= '0' && **nptr <= '9')
+	while (ft_isdigit(**nptr))
 	{
 		num *= 10;
 		num += (*(*nptr)++ - '0');
@@ -53,8 +59,10 @@ double	rt_atof(char **nptr)
 	if (**nptr == '.')
 	{
 		*nptr += 1;
-		while (**nptr >= '0' && **nptr <= '9')
-			num += (*(*nptr)++ - '0') * pow(10, n--);
+		while (ft_isdigit(**nptr))
+		{
+			num += ((*(*nptr)++ - '0') * pow(10, n--));
+		}
 	}
 	return (num * sign);
 }

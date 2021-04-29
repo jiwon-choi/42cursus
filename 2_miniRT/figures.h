@@ -1,6 +1,12 @@
 #ifndef _FIGURES_H
 # define _FIGURES_H
 
+# define SP 0
+# define PL 1
+# define SQ 2
+# define CY 3
+# define TR 4
+
 typedef struct	s_p3
 {
 	double	x;

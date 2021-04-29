@@ -36,19 +36,98 @@ void	parse_light(t_scene *data, char *str)
 	}
 }
 
-void	parse(t_scene *data, char *str)
+void	parse_sphere(t_fig *lst, char *str)
+{
+	t_fig	*new;
+	t_fig	*p;
+
+	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
+		return ;
+	new->flag = SP;
+	new->fig.sp.c = rt_ato3(&str);
+	new->fig.sp.diameter = rt_atof(&str);
+	new->fig.sp.color = rt_ato3(&str);
+}
+
+void	parse_plane(t_fig *lst, char *str)
+{
+	t_fig	*new;
+	t_fig	*p;
+
+	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
+		return ;
+	new->flag = PL;
+	new->fig.pl.p = rt_ato3(&str);
+	new->fig.pl.v = rt_ato3(&str);
+	new->fig.pl.color = rt_ato3(&str);
+}
+
+void	parse_square(t_fig *lst, char *str)
+{
+	t_fig	*new;
+	t_fig	*p;
+
+	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
+		return ;
+	new->flag = SQ;
+	new->fig.sq.c = rt_ato3(&str);
+	new->fig.sq.v = rt_ato3(&str);
+	new->fig.sq.side = rt_atof(&str);
+	new->fig.sq.color = rt_ato3(&str);
+}
+
+void	parse_cylinder(t_fig *lst, char *str)
+{
+	t_fig	*new;
+	t_fig	*p;
+
+	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
+		return ;
+	new->flag = CY;
+	new->fig.cy.p = rt_ato3(&str);
+	new->fig.cy.v = rt_ato3(&str);
+	new->fig.cy.diameter = rt_atof(&str);
+	new->fig.cy.height = rt_atof(&str);
+	new->fig.cy.color = rt_ato3(&str);
+}
+
+void	parse_triangle(t_fig *lst, char *str)
+{
+	t_fig	*new;
+	t_fig	*p;
+
+	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
+		return ;
+	new->flag = TR;
+	new->fig.tr.p1 = rt_ato3(&str);
+	new->fig.tr.p2 = rt_ato3(&str);
+	new->fig.tr.p3 = rt_ato3(&str);
+	new->fig.tr.color = rt_ato3(&str);
+}
+
+void	parse(t_scene *data, t_fig *lst, char *str)
 {
 	if (*str == '#' || *str == 0)
 		return ;
 
 	if (*str == 'R')
-		parse_resolution(data, ++str);
+		parse_resolution(data, str + 1);
 	else if (*str == 'A')
-		parse_ambient(data, ++str);
+		parse_ambient(data, str + 1);
 	/*
 	else if (*str == 'c')
 		parse_camera();
 	*/
 	else if (*str == 'l')
-		parse_light(data, ++str);
+		parse_light(data, str + 1);
+	else if (*str == 's' && *(str + 1) == 'p')
+		parse_sphere(lst, str + 2);
+	else if (*str == 'p' && *(str + 1) == 'l')
+		parse_plane(lst, str + 2);
+	else if (*str == 's' && *(str + 1) == 'q')
+		parse_square(lst, str + 2);
+	else if (*str == 'c' && *(str + 1) == 'y')
+		parse_cylinder(lst, str + 2);
+	else if (*str == 't' && *(str + 1) == 'r')
+		parse_triangle(lst, str + 2);
 }
