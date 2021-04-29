@@ -9,6 +9,7 @@ void	parse_resolution(t_scene *data, char *str)
 void	parse_ambient(t_scene *data, char *str)
 {
 	data->ambient_lightning = rt_atof(&str);
+	data->ambient_color = parse_color(&str);
 }
 
 //void	parse_camera();

@@ -90,7 +90,7 @@ typedef struct	s_scene
 	int		x_res;
 	int		y_res;
 	double	ambient_lightning;
-	int		color;
+	int		ambient_color;
 	t_light	*light;
 	t_cam	*cam;
 }				t_scene;
