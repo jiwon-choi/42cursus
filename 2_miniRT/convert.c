@@ -60,9 +60,7 @@ double	rt_atof(char **nptr)
 	{
 		*nptr += 1;
 		while (ft_isdigit(**nptr))
-		{
 			num += ((*(*nptr)++ - '0') * pow(10, n--));
-		}
 	}
 	return (num * sign);
 }
@@ -79,4 +77,21 @@ t_p3	rt_ato3(char **str)
 	comma(str);
 	p.z = rt_atof(str);
 	return (p);
+}
+
+int		parse_color(char **str)
+{
+	int		color;
+
+	color = 0;
+	while (ft_isspace(**str))
+		*str += 1;
+	color += rt_atoi(str);
+	color <<= 8;
+	comma(str);
+	color += rt_atoi(str);
+	color <<= 8;
+	comma(str);
+	color += rt_atoi(str);
+	return (color);
 }

@@ -22,7 +22,7 @@ void	parse_light(t_scene *data, char *str)
 		return ;
 	new->p = rt_ato3(&str);
 	new->brightness = rt_atof(&str);
-	new->color = rt_ato3(&str);
+	new->color = parse_color(&str);
 	new->next = NULL;
 
 	p = data->light;
@@ -36,7 +36,7 @@ void	parse_light(t_scene *data, char *str)
 	}
 }
 
-void	parse_sphere(t_fig *lst, char *str)
+void	parse_sphere(t_fig **lst, char *str)
 {
 	t_fig	*new;
 	t_fig	*p;
@@ -46,10 +46,21 @@ void	parse_sphere(t_fig *lst, char *str)
 	new->flag = SP;
 	new->fig.sp.c = rt_ato3(&str);
 	new->fig.sp.diameter = rt_atof(&str);
-	new->fig.sp.color = rt_ato3(&str);
+	new->fig.sp.color = parse_color(&str);
+	new->next = NULL;
+
+	p = *lst;
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
 }
 
-void	parse_plane(t_fig *lst, char *str)
+void	parse_plane(t_fig **lst, char *str)
 {
 	t_fig	*new;
 	t_fig	*p;
@@ -59,10 +70,21 @@ void	parse_plane(t_fig *lst, char *str)
 	new->flag = PL;
 	new->fig.pl.p = rt_ato3(&str);
 	new->fig.pl.v = rt_ato3(&str);
-	new->fig.pl.color = rt_ato3(&str);
+	new->fig.pl.color = parse_color(&str);
+	new->next = NULL;
+
+	p = *lst;
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
 }
 
-void	parse_square(t_fig *lst, char *str)
+void	parse_square(t_fig **lst, char *str)
 {
 	t_fig	*new;
 	t_fig	*p;
@@ -73,10 +95,21 @@ void	parse_square(t_fig *lst, char *str)
 	new->fig.sq.c = rt_ato3(&str);
 	new->fig.sq.v = rt_ato3(&str);
 	new->fig.sq.side = rt_atof(&str);
-	new->fig.sq.color = rt_ato3(&str);
+	new->fig.sq.color = parse_color(&str);
+	new->next = NULL;
+
+	p = *lst;
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
 }
 
-void	parse_cylinder(t_fig *lst, char *str)
+void	parse_cylinder(t_fig **lst, char *str)
 {
 	t_fig	*new;
 	t_fig	*p;
@@ -88,10 +121,21 @@ void	parse_cylinder(t_fig *lst, char *str)
 	new->fig.cy.v = rt_ato3(&str);
 	new->fig.cy.diameter = rt_atof(&str);
 	new->fig.cy.height = rt_atof(&str);
-	new->fig.cy.color = rt_ato3(&str);
+	new->fig.cy.color = parse_color(&str);
+	new->next = NULL;
+
+	p = *lst;
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
 }
 
-void	parse_triangle(t_fig *lst, char *str)
+void	parse_triangle(t_fig **lst, char *str)
 {
 	t_fig	*new;
 	t_fig	*p;
@@ -102,10 +146,21 @@ void	parse_triangle(t_fig *lst, char *str)
 	new->fig.tr.p1 = rt_ato3(&str);
 	new->fig.tr.p2 = rt_ato3(&str);
 	new->fig.tr.p3 = rt_ato3(&str);
-	new->fig.tr.color = rt_ato3(&str);
+	new->fig.tr.color = parse_color(&str);
+	new->next = NULL;
+
+	p = *lst;
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
 }
 
-void	parse(t_scene *data, t_fig *lst, char *str)
+void	parse(t_scene *data, t_fig **lst, char *str)
 {
 	if (*str == '#' || *str == 0)
 		return ;
