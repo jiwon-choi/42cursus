@@ -1,18 +1,13 @@
 #ifndef _FIGURES_H
 # define _FIGURES_H
 
+# include "vec3.h"
+
 # define SP 0
 # define PL 1
 # define SQ 2
 # define CY 3
 # define TR 4
-
-typedef struct	s_p3
-{
-	double	x;
-	double	y;
-	double	z;
-}				t_p3;
 
 typedef struct	s_sphere
 {

@@ -9,6 +9,8 @@
 # include "../libft/libft.h"
 # include "get_next_line.h"
 # include "figures.h"
+# include "vec3.h"
+# include "ray.h"
 
 typedef struct	s_mlx
 {
@@ -26,7 +28,7 @@ void	comma(char **str);
 int		rt_atoi(char **nptr);
 double	rt_atof(char **nptr);
 t_p3	rt_ato3(char **str);
-int		parse_color(char **str);
+int		rt_color(char **str);
 
 /* parse.c */
 void	parse_resolution(t_scene *data, char *str);
