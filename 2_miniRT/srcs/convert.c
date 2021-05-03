@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:05:46 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/04/30 15:05:48 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/03 20:13:21 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_p3	rt_ato3(char **str)
 	return (p);
 }
 
-int		parse_color(char **str)
+int		rt_color(char **str)
 {
 	int		color;
 

@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:05:34 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/03 20:08:57 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/03 20:13:50 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_resolution(t_scene *data, char *str)
 void	parse_ambient(t_scene *data, char *str)
 {
 	data->ambient_lightning = rt_atof(&str);
-	data->ambient_color = parse_color(&str);
+	data->ambient_color = rt_color(&str);
 }
 
 void	parse_camera(t_scene *data, char *str)
@@ -55,7 +55,7 @@ void	parse_light(t_scene *data, char *str)
 		return ;
 	new->p = rt_ato3(&str);
 	new->brightness = rt_atof(&str);
-	new->color = parse_color(&str);
+	new->color = rt_color(&str);
 	new->next = NULL;
 	p = data->light;
 	if (!data->light)
