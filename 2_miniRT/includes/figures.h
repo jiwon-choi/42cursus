@@ -74,7 +74,7 @@ typedef struct	s_camera
 	t_p3			p;
 	t_p3			v;
 	int				fov;
-	struct s_cam	*next;
+	struct s_camera	*next;
 }				t_cam;
 
 typedef struct	s_light

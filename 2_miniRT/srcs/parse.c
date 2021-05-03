@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:05:34 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/04/30 15:07:13 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/03 20:08:57 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,27 @@ void	parse_ambient(t_scene *data, char *str)
 	data->ambient_color = parse_color(&str);
 }
 
-//void	parse_camera();
+void	parse_camera(t_scene *data, char *str)
+{
+	t_cam	*new;
+	t_cam	*ptr;
+
+	if (!(new = (t_cam *)malloc(sizeof(t_cam))))
+		return ;
+	new->p = rt_ato3(&str);
+	new->v = rt_ato3(&str);
+	new->fov = rt_atoi(&str);
+	new->next = NULL;
+	ptr = data->cam;
+	if (!data->cam)
+		data->cam = new;
+	else
+	{
+		while (ptr->next)
+			ptr = ptr->next;
+		ptr->next = new;
+	}
+}
 
 void	parse_light(t_scene *data, char *str)
 {
@@ -56,10 +76,8 @@ void	parse(t_scene *data, t_fig **lst, char *str)
 		parse_resolution(data, str + 1);
 	else if (*str == 'A')
 		parse_ambient(data, str + 1);
-	/*
 	else if (*str == 'c')
-		parse_camera();
-	*/
+		parse_camera(data, str + 1);
 	else if (*str == 'l')
 		parse_light(data, str + 1);
 	else if (*str == 's' && *(str + 1) == 'p')

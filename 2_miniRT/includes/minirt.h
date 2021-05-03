@@ -31,6 +31,7 @@ int		parse_color(char **str);
 /* parse.c */
 void	parse_resolution(t_scene *data, char *str);
 void	parse_ambient(t_scene *data, char *str);
+void	parse_camera(t_scene *data, char *str);
 void	parse_light(t_scene *data, char *str);
 void	parse(t_scene *data, t_fig **lst, char *str);
 

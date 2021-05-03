@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:05:41 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/04/30 15:52:03 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/03 17:12:15 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ int		main(int argc, char **argv)
 	lst = 0;
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		return (-1);
+
 	while (get_next_line(fd, &str))
 		parse(&data, &lst, str);
 	free(str);
+
 
 	t_mlx	app;
 	app.mlx_ptr = mlx_init();
 	app.win_ptr = mlx_new_window(app.mlx_ptr, data.x_res, data.y_res, "miniRT");
 	app.img_ptr = mlx_new_image(app.mlx_ptr, data.x_res, data.y_res);
-
-
 
 	mlx_loop(app.mlx_ptr);
 	return (0);
