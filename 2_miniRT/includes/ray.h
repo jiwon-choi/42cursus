@@ -1,20 +1,29 @@
-#ifndef _RAY_H_
-# define _RAY_H_
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/04 14:49:19 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/04 14:52:13 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include <math.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "vec3.h"
+#ifndef _RAY_H
+# define _RAY_H
+
+typedef struct	s_p3
+{
+	double	x;
+	double	y;
+	double	z;
+}				t_p3;
 
 typedef struct	s_ray {
 	t_p3	origin;
 	t_p3	dir;
 	float	t;
 }				t_ray;
-
-t_p3	ray_at(t_ray r);
-double	hit_sphere(t_p3 center, double radius, t_ray ray);
-int		ray_color(t_ray r);
 
 #endif

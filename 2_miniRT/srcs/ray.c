@@ -6,12 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 10:32:37 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/03 20:51:30 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/04 14:34:05 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vec3.h"
-#include "../includes/ray.h"
+#include "../includes/minirt.h"
 
 t_p3	ray_at(t_ray r)
 {

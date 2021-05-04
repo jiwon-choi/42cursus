@@ -6,12 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 10:32:33 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/03/28 11:30:02 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/04 14:33:16 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ray.h"
-#include "../includes/vec3.h"
+#include "../includes/minirt.h"
 
 double	hit_sphere(t_p3 center, double radius, t_ray ray)
 {

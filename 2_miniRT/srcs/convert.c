@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:05:46 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/03 20:13:21 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/04 14:56:48 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,32 @@ void	comma(char **str)
 	(*str)++;
 }
 
-int		rt_atoi(char **nptr)
+int		rt_atoi(char **str)
 {
 	int			sign;
 	long long	num;
 
 	sign = 1;
 	num = 0;
-	while (ft_isspace(**nptr))
-		*nptr += 1;
-	if (**nptr == '-' || **nptr == '+')
+	while (ft_isspace(**str))
+		*str += 1;
+	if (**str == '-' || **str == '+')
 	{
-		if (**nptr == '-')
+		if (**str == '-')
 		{
 			sign *= -1;
-			*nptr += 1;
+			*str += 1;
 		}
 	}
-	while (ft_isdigit(**nptr))
+	while (ft_isdigit(**str))
 	{
 		num *= 10;
-		num += (*(*nptr)++ - '0');
+		num += (*(*str)++ - '0');
 	}
 	return (num * sign);
 }
 
-double	rt_atof(char **nptr)
+double	rt_atof(char **str)
 {
 	int			sign;
 	int			n;
@@ -53,26 +53,26 @@ double	rt_atof(char **nptr)
 	sign = 1;
 	num = 0;
 	n = -1;
-	while (ft_isspace(**nptr))
-		*nptr += 1;
-	if (**nptr == '-' || **nptr == '+')
+	while (ft_isspace(**str))
+		*str += 1;
+	if (**str == '-' || **str == '+')
 	{
-		if (**nptr == '-')
+		if (**str == '-')
 		{
 			sign *= -1;
-			*nptr += 1;
+			*str += 1;
 		}
 	}
-	while (ft_isdigit(**nptr))
+	while (ft_isdigit(**str))
 	{
 		num *= 10;
-		num += (*(*nptr)++ - '0');
+		num += (*(*str)++ - '0');
 	}
-	if (**nptr == '.')
+	if (**str == '.')
 	{
-		*nptr += 1;
-		while (ft_isdigit(**nptr))
-			num += ((*(*nptr)++ - '0') * pow(10, n--));
+		*str += 1;
+		while (ft_isdigit(**str))
+			num += ((*(*str)++ - '0') * pow(10, n--));
 	}
 	return (num * sign);
 }

@@ -6,11 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 10:32:43 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/03/28 10:32:47 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/04 14:29:39 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vec3.h"
+#include "../includes/minirt.h"
 
 t_p3	vdefine(double x, double y, double z)
 {

@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   figures.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/04 14:52:27 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/04 16:32:40 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef _FIGURES_H
 # define _FIGURES_H
 
-# include "vec3.h"
+# include "ray.h"
 
 # define SP 0
 # define PL 1
@@ -63,31 +75,5 @@ typedef struct	s_fig
 	union u_fig		fig;	
 	struct s_fig	*next;
 }				t_fig;
-
-typedef struct	s_camera
-{
-	t_p3			p;
-	t_p3			v;
-	int				fov;
-	struct s_camera	*next;
-}				t_cam;
-
-typedef struct	s_light
-{
-	t_p3			p;
-	double			brightness;
-	int				color;
-	struct s_light	*next;
-}				t_light;
-
-typedef struct	s_scene
-{
-	int		x_res;
-	int		y_res;
-	double	ambient_lightning;
-	int		ambient_color;
-	t_light	*light;
-	t_cam	*cam;
-}				t_scene;
 
 #endif
