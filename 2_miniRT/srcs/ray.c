@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 10:32:37 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/04 14:34:05 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/05 20:58:10 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,26 @@ t_p3	ray_at(t_ray r)
 	return (half_line);
 }
 
-int		ray_color(t_ray r)
+t_p3	ray_color(t_fig *lst, t_ray r)
 {
 	t_p3	unit_dir;
 	t_p3	color;
 	t_p3	N;
 	float	t;
 
-	r.t = hit_sphere(vdefine(0.0, 0.0, -1.0), 0.5, r);
+	r.t = hit_sphere(lst->fig.sp.c, 0.5, r);
 	if (r.t > 0.0)
 	{
 		N = ray_at(r);
 		N = vsubstract(N, vdefine(0, 0, -1));
 		N = vunit(N);
 		N = vdefine(0.5 * (N.x + 1), 0.5 * (N.y + 1), 0.5 * (N.z + 1));
-		return (1);
+		return (N);
 	}
 	unit_dir = vunit(r.dir);
 	t = 0.5 * (unit_dir.y + 1.0);
 	color = vdefine(1.0, 1.0, 1.0);
 	color.x *= 1.0 - (t * 0.5);
 	color.y *= 1.0 - (t * 0.3);
-	return (0);
+	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 14:57:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/04 17:11:11 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/05 20:57:41 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ typedef struct	s_scene
 	double	ambient_lightning;
 	int		ambient_color;
 
+	double	aspect_ratio;
 	double	viewport_height;
 	double	viewport_width;
-	double	aspect_ratio;
+	double	focal_length;
 
 	t_light	*light;
 	t_cam	*cam;
 }				t_scene;
-
 
 /* convert.c */
 void	comma(char **str);
@@ -92,7 +92,7 @@ void	parse_triangle(t_fig **lst, char *str);
 
 /* ray.c */
 t_p3	ray_at(t_ray r);
-int		ray_color(t_ray r);
+t_p3	ray_color(t_fig *lst, t_ray r);
 
 /* vec3.c */
 t_p3	vdefine(double x, double y, double z);
