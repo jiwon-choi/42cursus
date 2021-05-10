@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:05:41 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/05 20:57:53 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/06 13:22:29 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		main(int argc, char **argv)
 	scene.focal_length = 1.0;
 
 	// lower_left_corner fixed
-	t_p3	origin = vdefine(0, 0, 0); // camera position
+	t_p3	origin = scene.cam->p; // camera position
 	t_p3	horizontal = vdefine(scene.viewport_width, 0, 0);
 	t_p3	vertical = vdefine(0, scene.viewport_height, 0);
 	t_p3	lower_left_corner;
