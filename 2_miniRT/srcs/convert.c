@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 15:05:46 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/04 14:56:48 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/13 21:37:02 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 double	degrees_to_radians(int a)
 {
 	double res;
+
 	res = (double)a * M_PI / 180;
 	return (res);
 }
@@ -73,16 +74,10 @@ double	rt_atof(char **str)
 		}
 	}
 	while (ft_isdigit(**str))
-	{
-		num *= 10;
-		num += (*(*str)++ - '0');
-	}
-	if (**str == '.')
-	{
-		*str += 1;
+		num = num * 10 + (*(*str)++ - '0');
+	if (**str == '.' && (*str)++)
 		while (ft_isdigit(**str))
 			num += ((*(*str)++ - '0') * pow(10, n--));
-	}
 	return (num * sign);
 }
 
