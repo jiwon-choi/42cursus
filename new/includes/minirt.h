@@ -13,20 +13,35 @@
 # define TRUE 1
 # define FALSE 0
 # define EPSILON 1e-6
+# define LUMEN 3
 
 // convert.c
+double	degrees_to_radians(int a);
 void	comma(char **str);
 int		rt_atoi(char **str);
 double	rt_atof(char **str);
 t_p3	rt_ato3(char **str);
 t_p3	rt_albedo(char **str);
 
+// draw.c
+void	camera_create(t_data *data);
+void	make_picture(t_data *data);
+
 // error.c
 void    error_check(t_flag flag, char *err_msg);
 void	check_null(char **str);
 void    check_values(double num, double min, double max, char *err_msg);
 
+// hit.c
+t_bool	hit_figures(t_fig *lst, t_ray *r, t_hit_record *rec);
+t_bool	hit(t_fig *lst, t_ray *r, t_hit_record *rec);
+
+// hit_figures.c
+void	set_face_normal(t_ray *r, t_hit_record *rec);
+t_bool	hit_sphere(t_fig *lst, t_ray *r, t_hit_record *rec);
+
 // main.c
+int	    key_press (int key, t_data *data);
 void	parse(t_data *data, char *rt_file);
 
 // parse.c
@@ -42,5 +57,37 @@ void	parse_plane(t_fig **lst, char *str);
 void	parse_square(t_fig **lst, char *str);
 void	parse_cylinder(t_fig **lst, char *str);
 void	parse_triangle(t_fig **lst, char *str);
+
+// phong_lighting.c
+t_p3	diffuse(t_light *light, t_hit_record *rec);
+t_p3	reflect(t_p3 v, t_p3 n);
+t_p3	specular(t_light *light, t_ray *r, t_hit_record *rec);
+t_bool	in_shadow(t_fig *lst, t_ray light_ray, double light_len);
+t_p3	point_light_get(t_data *data, t_light *light, t_ray *r, t_hit_record *rec);
+t_p3	phong_lighting(t_data *data, t_ray *r, t_hit_record *rec);
+
+// ray.c
+t_ray	ray(t_p3 orig, t_p3 dir);
+t_p3	ray_at(t_ray *r, double t);
+t_p3	ray_color(t_data *data, t_ray *r);
+t_ray	ray_primary(t_scene *scene, double u, double v);
+
+
+
+
+
+
+t_p3	vscalardiv(t_p3 a, double t);
+t_p3	vscalarmul(t_p3 a, double t);
+t_p3	vdefine(double x, double y, double z);
+t_p3	vadd(t_p3 a, t_p3 b);
+t_p3	vsubstract(t_p3 a, t_p3 b);
+double	vdot(t_p3 a, t_p3 b);
+t_p3	vcross(t_p3 a, t_p3 b);
+double	vlen(t_p3 a);
+t_p3	vunit(t_p3 a);
+t_p3	vmul(t_p3 a, t_p3 b);
+t_p3	vmin(t_p3 a, t_p3 b);
+
 
 #endif

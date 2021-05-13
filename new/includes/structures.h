@@ -142,4 +142,33 @@ typedef struct	s_data
 	t_fig	*lst;
 }				t_data;
 
+typedef struct	s_matrix
+{
+	int		x;
+	int		y;
+	double	u;
+	double	v;
+}				t_matrix;
+
+typedef struct	s_discriminant
+{
+	double	a;
+	double	half_b;
+	double	c;
+	double	discriminant;
+	double	sqrtd;
+	double	root;
+}				t_discriminant;
+
+typedef struct	s_specular
+{
+	t_p3	specular;
+	t_p3	light_dir;
+	t_p3	view_dir;
+	t_p3	reflect_dir;
+	double	s_weight;
+	double	shine;
+	double	spec;
+}				t_specular;
+
 #endif
