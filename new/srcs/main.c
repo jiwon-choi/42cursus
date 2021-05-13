@@ -6,7 +6,10 @@ int		key_press (int key, t_data *data)
 		exit(0);
 	else if (key == 124)
 	{
-		data->mlx.cam = data->mlx.cam->next;
+		if (!data->mlx.cam->next)
+			data->mlx.cam = data->mlx.first_cam;
+		else
+			data->mlx.cam = data->mlx.cam->next;
 		make_picture(data);
 		mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win_ptr, data->mlx.img_ptr, 0, 0);
 	}
@@ -32,6 +35,8 @@ void	parse(t_data *data, char *rt_file)
 		free(str);
 	}
 	free(str);
+	data->mlx.first_cam = data->mlx.cam;
+	data->scene.amb_color = vscalarmul(data->scene.amb_color, data->scene.amb_ratio);
 }
 
 int		main(int argc, char **argv)
@@ -50,16 +55,7 @@ int		main(int argc, char **argv)
 	data.mlx.win_ptr = mlx_new_window(data.mlx.mlx_ptr, data.scene.res_x, data.scene.res_y, "miniRT");
 	data.mlx.img_ptr = mlx_new_image(data.mlx.mlx_ptr, data.scene.res_x, data.scene.res_y);
 	data.mlx.data = (int *)mlx_get_data_addr(data.mlx.img_ptr, &data.mlx.bpp, &data.mlx.size_l, &data.mlx.endian);
-	data.scene.amb_color = vscalarmul(data.scene.amb_color, data.scene.amb_ratio);
 
-	t_cam	*p;
-
-	p = data.mlx.cam;
-	while (p->next)
-		p = p->next;
-	p->next = data.mlx.cam;
-
-	
 	make_picture(&data);
 	mlx_put_image_to_window(data.mlx.mlx_ptr, data.mlx.win_ptr, data.mlx.img_ptr, 0, 0);
 	mlx_hook(data.mlx.win_ptr, 02, 1L << 0, key_press, &data);
