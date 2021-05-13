@@ -6,11 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 01:06:05 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/04/29 18:16:43 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/01/26 21:01:06 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include "../includes/minirt.h"
 
 size_t		ft_strlen(const char *s)
 {
@@ -34,7 +34,7 @@ char		*ft_strjoin(char const *save, char const *buf)
 		return (join);
 	}
 	if (!(join = (char *)malloc(ft_strlen(save) + ft_strlen(buf) + 1)))
-		return (0);
+		error_check(5, "GNL");
 	i = 0;
 	j = 0;
 	while (save[i])
@@ -71,13 +71,13 @@ char		*ft_strdup(const char *s)
 	if (!s)
 	{
 		if (!(dup = (char *)malloc(1)))
-			return (0);
+			error_check(5, "GNL");
 		dup[0] = 0;
 		return (dup);
 	}
 	l = ft_strlen(s);
 	if (!(dup = (char *)malloc(l + 1)))
-		return (0);
+		error_check(5, "GNL");
 	i = 0;
 	while (s[i])
 	{

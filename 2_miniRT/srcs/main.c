@@ -1,92 +1,64 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/30 15:05:41 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/06 13:22:29 by jiwchoi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/minirt.h"
 
-int		main(int argc, char **argv)
+int		key_press (int key, t_data *data)
 {
-	char		*str;
-	int			fd;
+	if (key == 53)
+		exit(0);
+	else if (key == 124)
+	{
+		if (!data->mlx.cam->next)
+			data->mlx.cam = data->mlx.first_cam;
+		else
+			data->mlx.cam = data->mlx.cam->next;
+		make_picture(data);
+		mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win_ptr, data->mlx.img_ptr, 0, 0);
+	}
+	return (0);
+}
 
-	t_scene		scene;
-	t_fig		*lst;
+void	parse(t_data *data, char *rt_file)
+{
+	char	*str;
+	int		fd;
 
-	lst = 0;
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
-		return (-1);
+	data->lst = NULL;
+	data->scene.light = NULL;
+	data->mlx.cam = NULL;
+	data->scene.res_ex = FALSE;
+	data->scene.amb_ex = FALSE;
 
+	if ((fd = open(rt_file, O_RDONLY)) == -1)
+		exit(1);
 	while (get_next_line(fd, &str))
 	{
-		parse(&scene, &lst, str);
+		parse_(data, str);
 		free(str);
 	}
 	free(str);
+	data->mlx.first_cam = data->mlx.cam;
+	data->scene.amb_color = vscalarmul(data->scene.amb_color, data->scene.amb_ratio);
+}
 
-	t_mlx	app;
-	app.mlx_ptr = mlx_init();
-	app.win_ptr = mlx_new_window(app.mlx_ptr, scene.x_res, scene.y_res, "miniRT");
-	app.img_ptr = mlx_new_image(app.mlx_ptr, scene.x_res, scene.y_res);
-	app.data = (int *)mlx_get_data_addr(app.img_ptr, &app.bpp, &app.size_l, &app.endian);
+int		main(int argc, char **argv)
+{
+	t_data	data;
 
-	scene.aspect_ratio = (double)scene.x_res / (double)scene.y_res;
-	scene.viewport_height = 2.0;
-	scene.viewport_width = scene.aspect_ratio * scene.viewport_height;
-	scene.focal_length = 1.0;
+	if (argc < 2 || argc > 3)
+		error_check(1, "");
+	if (argc == 2 && ft_strncmp(argv[1] + ft_strlen(argv[1]) - 3, ".rt", 3))
+		error_check(2, "");
+	if (argc == 3 && ft_strncmp(argv[2], "--save", 6))
+		error_check(3, "");
+	parse(&data, argv[1]);
 
-	// lower_left_corner fixed
-	t_p3	origin = scene.cam->p; // camera position
-	t_p3	horizontal = vdefine(scene.viewport_width, 0, 0);
-	t_p3	vertical = vdefine(0, scene.viewport_height, 0);
-	t_p3	lower_left_corner;
-	lower_left_corner.x = origin.x - horizontal.x / 2;
-	lower_left_corner.y = origin.y - vertical.y / 2;
-	lower_left_corner.z = origin.z - horizontal.z / 2 - vertical.z / 2 - scene.focal_length;
+	data.mlx.mlx_ptr = mlx_init();
+	data.mlx.win_ptr = mlx_new_window(data.mlx.mlx_ptr, data.scene.res_x, data.scene.res_y, "miniRT");
+	data.mlx.img_ptr = mlx_new_image(data.mlx.mlx_ptr, data.scene.res_x, data.scene.res_y);
+	data.mlx.data = (int *)mlx_get_data_addr(data.mlx.img_ptr, &data.mlx.bpp, &data.mlx.size_l, &data.mlx.endian);
 
-	int		j = 0;
-	while (j < scene.y_res)
-	{
-		int		i = 0;
-		while (i < scene.x_res)
-		{
-			float	u = (double)i / (scene.x_res - 1); // 0.0 -> 1.0
-			float	v = (scene.y_res - (double)j - 1) / (scene.y_res - 1); // 1.0 -> 0.0
-
-			t_ray	ray; // 방향 벡터
-			ray.origin = origin;
-			ray.dir = lower_left_corner; // -1.777778, -1.00000, -1.00000
-			// x axis, y axis 변화
-			ray.dir = vadd(ray.dir, vscalarmul(horizontal, u));
-			ray.dir = vadd(ray.dir, vscalarmul(vertical, v));
-			// 중점 계산
-			ray.dir = vsubstract(ray.dir, origin);
-			// z축 1.0 고정 = ray.z 1.0 고정
-/*			int color = 0;
-			if(ray_color(ray))
-				color = lst->fig.sp.color;
-*/
-			ray.dir = ray_color(lst, ray);
-
-			int ir = 255 * ray.dir.x;
-			int ig = 255 * ray.dir.y;
-			int ib = 255 * ray.dir.z;
-
-			int color = ir * 256*256 + ig*256 + ib;
-
-			app.data[j * scene.x_res + i] = mlx_get_color_value(app.mlx_ptr, color);
-			i++;
-		}
-		j++;
-	}
-	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, app.img_ptr, 0, 0);
-	mlx_loop(app.mlx_ptr);
+	make_picture(&data);
+	mlx_put_image_to_window(data.mlx.mlx_ptr, data.mlx.win_ptr, data.mlx.img_ptr, 0, 0);
+	mlx_hook(data.mlx.win_ptr, 02, 1L << 0, key_press, &data);
+	mlx_loop(data.mlx.mlx_ptr);
 	return (0);
 }

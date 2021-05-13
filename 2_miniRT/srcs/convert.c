@@ -12,10 +12,19 @@
 
 #include "../includes/minirt.h"
 
+double	degrees_to_radians(int a)
+{
+	double res;
+	res = (double)a * M_PI / 180;
+	return (res);
+}
+
 void	comma(char **str)
 {
+	while (ft_isspace(**str))
+		*str += 1;
 	if (**str != ',')
-		return ;
+		error_check(4, "p3");
 	(*str)++;
 }
 
@@ -91,19 +100,17 @@ t_p3	rt_ato3(char **str)
 	return (p);
 }
 
-int		rt_color(char **str)
+t_p3	rt_albedo(char **str)
 {
-	int		color;
+	t_p3 p;
 
-	color = 0;
-	while (ft_isspace(**str))
-		*str += 1;
-	color += rt_atoi(str);
-	color <<= 8;
+	p.x = rt_atof(str) / 255.0;
+	check_values(p.x, 0, 1, "Color");
 	comma(str);
-	color += rt_atoi(str);
-	color <<= 8;
+	p.y = rt_atof(str) / 255.0;
+	check_values(p.y, 0, 1, "Color");
 	comma(str);
-	color += rt_atoi(str);
-	return (color);
+	p.z = rt_atof(str) / 255.0;
+	check_values(p.z, 0, 1, "Color");
+	return (p);
 }

@@ -1,108 +1,93 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/04 14:57:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/05 20:57:41 by jiwchoi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef _MINIRT_H
 # define _MINIRT_H
 
-# include <fcntl.h>
-# include <math.h>
 # include <stdio.h>
-
+# include <math.h>
+# include <fcntl.h>
+# include <stdlib.h>
 # include "mlx.h"
-# include "../libft/libft.h"
+# include "structures.h"
 # include "get_next_line.h"
-# include "ray.h"
-# include "figures.h"
+# include "../libft/libft.h"
 
-typedef struct	s_mlx
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-	int		*data;
-	int		bpp;
-	int		size_l;
-	int		endian;
-}				t_mlx;
+# define TRUE 1
+# define FALSE 0
+# define EPSILON 1e-6
+# define LUMEN 3
 
-typedef struct	s_camera
-{
-	t_p3			p;
-	t_p3			v;
-	int				fov;
-	struct s_camera	*next;
-}				t_cam;
-
-typedef struct	s_light
-{
-	t_p3			p;
-	double			brightness;
-	int				color;
-	struct s_light	*next;
-}				t_light;
-
-typedef struct	s_scene
-{
-	int		x_res;
-	int		y_res;
-	double	ambient_lightning;
-	int		ambient_color;
-
-	double	aspect_ratio;
-	double	viewport_height;
-	double	viewport_width;
-	double	focal_length;
-
-	t_light	*light;
-	t_cam	*cam;
-}				t_scene;
-
-/* convert.c */
+// convert.c
+double	degrees_to_radians(int a);
 void	comma(char **str);
 int		rt_atoi(char **str);
 double	rt_atof(char **str);
 t_p3	rt_ato3(char **str);
-int		rt_color(char **str);
+t_p3	rt_albedo(char **str);
 
-/* hit.c */
-double	hit_sphere(t_p3 center, double radius, t_ray ray);
+// draw.c
+void	camera_create(t_data *data);
+void	make_picture(t_data *data);
 
-/* parse.c */
+// error.c
+void    error_check(t_flag flag, char *err_msg);
+void	check_null(char **str);
+void    check_values(double num, double min, double max, char *err_msg);
+
+// hit.c
+t_bool	hit_figures(t_fig *lst, t_ray *r, t_hit_record *rec);
+t_bool	hit(t_fig *lst, t_ray *r, t_hit_record *rec);
+
+// hit_figures.c
+void	set_face_normal(t_ray *r, t_hit_record *rec);
+t_bool	hit_sphere(t_fig *lst, t_ray *r, t_hit_record *rec);
+
+// main.c
+int	    key_press (int key, t_data *data);
+void	parse(t_data *data, char *rt_file);
+
+// parse.c
 void	parse_resolution(t_scene *scene, char *str);
 void	parse_ambient(t_scene *scene, char *str);
-void	parse_camera(t_scene *scene, char *str);
+void	parse_camera(t_mlx *mlx, char *str);
 void	parse_light(t_scene *scene, char *str);
-void	parse(t_scene *scene, t_fig **lst, char *str);
+void	parse_(t_data *data, char *str);
 
-/* parse_figures.c */
+// parse_figures.c
 void	parse_sphere(t_fig **lst, char *str);
 void	parse_plane(t_fig **lst, char *str);
 void	parse_square(t_fig **lst, char *str);
 void	parse_cylinder(t_fig **lst, char *str);
 void	parse_triangle(t_fig **lst, char *str);
 
-/* ray.c */
-t_p3	ray_at(t_ray r);
-t_p3	ray_color(t_fig *lst, t_ray r);
+// phong_lighting.c
+t_p3	diffuse(t_light *light, t_hit_record *rec);
+t_p3	reflect(t_p3 v, t_p3 n);
+t_p3	specular(t_light *light, t_ray *r, t_hit_record *rec);
+t_bool	in_shadow(t_fig *lst, t_ray light_ray, double light_len);
+t_p3	point_light_get(t_data *data, t_light *light, t_ray *r, t_hit_record *rec);
+t_p3	phong_lighting(t_data *data, t_ray *r, t_hit_record *rec);
 
-/* vec3.c */
+// ray.c
+t_ray	ray(t_p3 orig, t_p3 dir);
+t_p3	ray_at(t_ray *r, double t);
+t_p3	ray_color(t_data *data, t_ray *r);
+t_ray	ray_primary(t_scene *scene, double u, double v);
+
+
+
+
+
+
+t_p3	vscalardiv(t_p3 a, double t);
+t_p3	vscalarmul(t_p3 a, double t);
 t_p3	vdefine(double x, double y, double z);
 t_p3	vadd(t_p3 a, t_p3 b);
 t_p3	vsubstract(t_p3 a, t_p3 b);
 double	vdot(t_p3 a, t_p3 b);
 t_p3	vcross(t_p3 a, t_p3 b);
-t_p3	vscalarmul(t_p3 a, double t);
-t_p3	vscalardiv(t_p3 a, double t);
 double	vlen(t_p3 a);
 t_p3	vunit(t_p3 a);
+t_p3	vmul(t_p3 a, t_p3 b);
+t_p3	vmin(t_p3 a, t_p3 b);
+
 
 #endif

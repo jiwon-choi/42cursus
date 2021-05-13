@@ -13,6 +13,8 @@ void	camera_create(t_data *data)
 	data->scene.origin = data->mlx.cam->look_from;
 
 	t_p3	w = vunit(vsubstract(data->scene.origin, data->mlx.cam->look_at));
+	if (w.x == 0 && w.y == 1 && w.z == 0)
+		w = vdefine(EPSILON, EPSILON, EPSILON);
 	t_p3	u = vunit(vcross(vdefine(0, 1, 0), w));
 	t_p3	v = vcross(w, u);
 

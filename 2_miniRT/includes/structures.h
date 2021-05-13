@@ -25,21 +25,21 @@ typedef struct	s_sphere
 
 typedef struct	s_plane
 {
-	t_p3	p;
-	t_p3	v;
+	t_p3	c;
+	t_p3	n;
 }				t_pl;
 
 typedef struct	s_square
 {
 	t_p3	c;
-	t_p3	v;
+	t_p3	n;
 	double	side;
 }				t_sq;
 
 typedef struct	s_cylinder
 {
-	t_p3	p;
-	t_p3	v;
+	t_p3	c;
+	t_p3	n;
 	double	r;
 	double	height;
 }				t_cy;
@@ -132,6 +132,7 @@ typedef struct	s_mlx
 	int		bpp;
 	int		size_l;
 	int		endian;
+	t_cam	*first_cam;
 	t_cam	*cam;
 }				t_mlx;
 

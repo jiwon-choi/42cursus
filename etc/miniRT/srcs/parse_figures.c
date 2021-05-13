@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_figures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/30 15:05:57 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/03 20:14:12 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
 void	parse_sphere(t_fig **lst, char *str)
@@ -6,12 +18,11 @@ void	parse_sphere(t_fig **lst, char *str)
 	t_fig	*p;
 
 	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
-		error_check(5, "Figure");
+		return ;
 	new->flag = SP;
 	new->fig.sp.c = rt_ato3(&str);
-	new->fig.sp.r = rt_atof(&str) / 2;
-	check_values(new->fig.sp.r, 0, INFINITY, "Sphere r");
-	new->albedo = rt_albedo(&str);
+	new->fig.sp.diameter = rt_atof(&str);
+	new->fig.sp.color = rt_color(&str);
 	new->next = NULL;
 	p = *lst;
 	if (!*lst)
@@ -22,7 +33,6 @@ void	parse_sphere(t_fig **lst, char *str)
 			p = p->next;
 		p->next = new;
 	}
-	check_null(&str);
 }
 
 void	parse_plane(t_fig **lst, char *str)
@@ -31,11 +41,11 @@ void	parse_plane(t_fig **lst, char *str)
 	t_fig	*p;
 
 	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
-		error_check(5, "Figure");
+		return ;
 	new->flag = PL;
 	new->fig.pl.p = rt_ato3(&str);
 	new->fig.pl.v = rt_ato3(&str);
-	new->albedo = rt_albedo(&str);
+	new->fig.pl.color = rt_color(&str);
 	new->next = NULL;
 	p = *lst;
 	if (!*lst)
@@ -46,7 +56,6 @@ void	parse_plane(t_fig **lst, char *str)
 			p = p->next;
 		p->next = new;
 	}
-	check_null(&str);
 }
 
 void	parse_square(t_fig **lst, char *str)
@@ -55,13 +64,12 @@ void	parse_square(t_fig **lst, char *str)
 	t_fig	*p;
 
 	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
-		error_check(5, "Figure");
+		return ;
 	new->flag = SQ;
 	new->fig.sq.c = rt_ato3(&str);
 	new->fig.sq.v = rt_ato3(&str);
 	new->fig.sq.side = rt_atof(&str);
-	check_values(new->fig.sq.side, 0, INFINITY, "Square side");
-	new->albedo = rt_albedo(&str);
+	new->fig.sq.color = rt_color(&str);
 	new->next = NULL;
 	p = *lst;
 	if (!*lst)
@@ -72,7 +80,6 @@ void	parse_square(t_fig **lst, char *str)
 			p = p->next;
 		p->next = new;
 	}
-	check_null(&str);
 }
 
 void	parse_cylinder(t_fig **lst, char *str)
@@ -81,15 +88,13 @@ void	parse_cylinder(t_fig **lst, char *str)
 	t_fig	*p;
 
 	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
-		error_check(5, "Figure");
+		return ;
 	new->flag = CY;
 	new->fig.cy.p = rt_ato3(&str);
 	new->fig.cy.v = rt_ato3(&str);
-	new->fig.cy.r = rt_atof(&str);
-	check_values(new->fig.cy.r, 0, INFINITY, "Cylinder r");
+	new->fig.cy.diameter = rt_atof(&str);
 	new->fig.cy.height = rt_atof(&str);
-	check_values(new->fig.cy.height, 0, INFINITY, "Cylinder h");
-	new->albedo = rt_albedo(&str);
+	new->fig.cy.color = rt_color(&str);
 	new->next = NULL;
 	p = *lst;
 	if (!*lst)
@@ -100,7 +105,6 @@ void	parse_cylinder(t_fig **lst, char *str)
 			p = p->next;
 		p->next = new;
 	}
-	check_null(&str);
 }
 
 void	parse_triangle(t_fig **lst, char *str)
@@ -109,12 +113,12 @@ void	parse_triangle(t_fig **lst, char *str)
 	t_fig	*p;
 
 	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
-		error_check(5, "Figure");
+		return ;
 	new->flag = TR;
 	new->fig.tr.p1 = rt_ato3(&str);
 	new->fig.tr.p2 = rt_ato3(&str);
 	new->fig.tr.p3 = rt_ato3(&str);
-	new->albedo = rt_albedo(&str);
+	new->fig.tr.color = rt_color(&str);
 	new->next = NULL;
 	p = *lst;
 	if (!*lst)
@@ -125,5 +129,4 @@ void	parse_triangle(t_fig **lst, char *str)
 			p = p->next;
 		p->next = new;
 	}
-	check_null(&str);
 }
