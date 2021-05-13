@@ -1,19 +1,52 @@
+	printf("R %d %d\n\n", data.scene.res_x, data.scene.res_y);
+	printf("A %lf\n", data.scene.amb_ratio);
+	printf("r %lf, g %lf, b %lf\n\n", data.scene.amb_color.x, data.scene.amb_color.y, data.scene.amb_color.z);
 
-/*
-	printf("R %d %d\n", data.x_res, data.y_res);
-	printf("A %lf %x\n", data.ambient_lightning, data.ambient_color);
-	while (data.light)
+
+	while (data.mlx.cam)
 	{
-		printf("x %lf, y %lf, z %lf\n", data.light->p.x, data.light->p.y, data.light->p.z);
-		printf("brightness %lf, color %x\n", data.light->brightness, data.light->color);
-		data.light = data.light->next;
+		printf("x %lf, y %lf, z %lf\n", data.mlx.cam->look_from.x, data.mlx.cam->look_from.y, data.mlx.cam->look_from.z);
+		printf("x %lf, y %lf, z %lf\n", data.mlx.cam->look_at.x, data.mlx.cam->look_at.y, data.mlx.cam->look_at.z);
+		printf("fov %d\n\n", data.mlx.cam->fov);
+		data.mlx.cam = data.mlx.cam->next;
+	}
+
+	while (data.scene.light)
+	{
+		printf("x %lf, y %lf, z %lf\n", data.scene.light->position.x, data.scene.light->position.y, data.scene.light->position.z);
+		printf("brightness %lf\n", data.scene.light->br);
+		printf("r %lf, g %lf, b %lf\n", data.scene.light->color.x, data.scene.light->color.y, data.scene.light->color.z);
+		data.scene.light = data.scene.light->next;
 	}
 
 	printf("\n");
-	while (lst)
+	while (data.lst)
 	{
-		printf("x %lf, y %lf, z %lf\n", lst->fig.sp.c.x, lst->fig.sp.c.y, lst->fig.sp.c.z);
-		printf("diameter %lf, color %x\n", lst->fig.sp.diameter, lst->fig.sp.color);
-		lst = lst->next;
+		printf("[pl]\n");
+		printf("x %lf, y %lf, z %lf\n", data.lst->fig.pl.p.x, data.lst->fig.pl.p.y, data.lst->fig.pl.p.z);
+		printf("x %lf, y %lf, z %lf\n", data.lst->fig.pl.v.x, data.lst->fig.pl.v.y, data.lst->fig.pl.v.z);
+
+		printf("[sp]\n");
+		printf("x %lf, y %lf, z %lf\n", data.lst->fig.sp.c.x, data.lst->fig.sp.c.y, data.lst->fig.sp.c.z);
+		printf("diameter %lf\n", data.lst->fig.sp.r);
+
+		printf("[sq]\n");
+		printf("x %lf, y %lf, z %lf\n", data.lst->fig.sq.c.x, data.lst->fig.sq.c.y, data.lst->fig.sq.c.z);
+		printf("x %lf, y %lf, z %lf\n", data.lst->fig.sq.v.x, data.lst->fig.sq.v.y, data.lst->fig.sq.v.z);
+		printf("side %lf\n", data.lst->fig.sq.side);
+		
+		printf("[cy]\n");
+		printf("x %lf, y %lf, z %lf\n", data.lst->fig.cy.p.x, data.lst->fig.cy.p.y, data.lst->fig.cy.p.z);
+		printf("x %lf, y %lf, z %lf\n", data.lst->fig.cy.v.x, data.lst->fig.cy.v.y, data.lst->fig.cy.v.z);
+		printf("r %lf, height %lf\n", data.lst->fig.cy.r, data.lst->fig.cy.height);
+
+		printf("[tr]\n");
+		printf("x %lf, y %lf, z %lf\n", data.lst->fig.tr.p1.x, data.lst->fig.tr.p1.y, data.lst->fig.tr.p1.z);
+		printf("x %lf, y %lf, z %lf\n", data.lst->fig.tr.p2.x, data.lst->fig.tr.p2.y, data.lst->fig.tr.p2.z);
+		printf("x %lf, y %lf, z %lf\n\n", data.lst->fig.tr.p3.x, data.lst->fig.tr.p3.y, data.lst->fig.tr.p3.z);
+
+		printf("[albedo]\n");
+		printf("r %lf, g %lf, b %lf\n", data.lst->albedo.x, data.lst->albedo.y, data.lst->albedo.z);
+
+		data.lst = data.lst->next;
 	}
-*/
