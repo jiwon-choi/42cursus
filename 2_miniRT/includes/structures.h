@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/13 21:29:23 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/13 21:29:26 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef _STRUCTURES_H
 # define _STRUCTURES_H
 
@@ -96,9 +108,9 @@ typedef struct	s_ray
 
 typedef struct	s_light
 {
-	t_p3		position;
-	double		br;
-	t_p3		color;
+	t_p3			position;
+	double			br;
+	t_p3			color;
 	struct s_light	*next;
 }				t_light;
 
