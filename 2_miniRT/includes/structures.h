@@ -184,4 +184,27 @@ typedef struct	s_specular
 	double	spec;
 }				t_specular;
 
+typedef struct	s_bmp_header
+{
+	char	type[2];
+	unsigned int	size;
+	unsigned int	reserved;
+	unsigned int	offset;
+}				t_bmp_header;
+
+typedef struct	s_dib_header
+{
+	unsigned int	size;
+	int				width;
+	int				height;
+	unsigned short	colplanes;
+	unsigned short	bpp;
+	unsigned int	compression;
+	unsigned int	img_size;
+	int				x_ppm;
+	int				y_ppm;
+	unsigned int	color_number;
+	unsigned int	important_color;
+}				t_dib_header;
+
 #endif

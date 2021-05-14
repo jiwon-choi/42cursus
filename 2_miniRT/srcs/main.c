@@ -56,6 +56,16 @@ int		main(int argc, char **argv)
 	data.mlx.img_ptr = mlx_new_image(data.mlx.mlx_ptr, data.scene.res_x, data.scene.res_y);
 	data.mlx.data = (int *)mlx_get_data_addr(data.mlx.img_ptr, &data.mlx.bpp, &data.mlx.size_l, &data.mlx.endian);
 
+	if (argc == 3)
+	{
+		while (data.mlx.cam)
+		{
+			make_picture(&data);
+			make_bmp(&data);
+			data.mlx.cam = data.mlx.cam->next;
+		}
+		exit(0);
+	}
 	make_picture(&data);
 	mlx_put_image_to_window(data.mlx.mlx_ptr, data.mlx.win_ptr, data.mlx.img_ptr, 0, 0);
 	mlx_hook(data.mlx.win_ptr, 02, 1L << 0, key_press, &data);

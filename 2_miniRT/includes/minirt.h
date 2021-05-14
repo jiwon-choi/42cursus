@@ -97,4 +97,11 @@ t_p3	vunit(t_p3 a);
 t_p3	vmul(t_p3 a, t_p3 b);
 t_p3	vmin(t_p3 a, t_p3 b);
 
+/* save_image.c */
+static void		create_header(t_scene scene, t_bmp_header *bmp_h, t_dib_header *dib_h);
+static void		write_header(int fd, t_bmp_header bmp_h, t_dib_header dib_h);
+static void		write_file(int fd, t_scene scene, t_mlx mlx);
+static int		create_file(void);
+void	make_bmp(t_data *data);
+
 #endif

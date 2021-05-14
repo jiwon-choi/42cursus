@@ -15,6 +15,8 @@ void	error_check(t_flag flag, char *err_msg)
 		printf("Memory error : %s\n", err_msg);
 	else if (flag == 6)
 		printf("Out of range : %s\n", err_msg);
+	else if (flag == 7)
+		printf("%s\n", err_msg);
 	exit(1);
 }
 
