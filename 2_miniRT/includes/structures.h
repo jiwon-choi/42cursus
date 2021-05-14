@@ -37,7 +37,7 @@ typedef struct	s_sphere
 
 typedef struct	s_plane
 {
-	t_p3	c;
+	t_p3	p;
 	t_p3	n;
 }				t_pl;
 
@@ -94,7 +94,7 @@ typedef struct	s_hit_record
 	t_p3	normal;
 	double	t_min;
 	double	t_max;
-	double	oc_r;
+	double	t;
 	t_bool	front_face;
 	t_p3	albedo;
 }				t_hit_record;

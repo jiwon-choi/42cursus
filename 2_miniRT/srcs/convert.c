@@ -41,10 +41,8 @@ int		rt_atoi(char **str)
 	if (**str == '-' || **str == '+')
 	{
 		if (**str == '-')
-		{
 			sign *= -1;
-			*str += 1;
-		}
+		*str += 1;
 	}
 	while (ft_isdigit(**str))
 	{
@@ -68,10 +66,8 @@ double	rt_atof(char **str)
 	if (**str == '-' || **str == '+')
 	{
 		if (**str == '-')
-		{
 			sign *= -1;
-			*str += 1;
-		}
+		*str += 1;
 	}
 	while (ft_isdigit(**str))
 		num = num * 10 + (*(*str)++ - '0');

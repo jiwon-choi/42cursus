@@ -34,6 +34,7 @@ t_p3	ray_color(t_data *data, t_ray *r)
 		return (vadd(vscalarmul(vdefine(1, 1, 1), 1.0 - t),
 					vscalarmul(vdefine(0.5, 0.7, 1.0), t)));
 	}
+	//return (vdefine(0, 0, 0));
 }
 
 t_ray	ray_primary(t_scene *scene, double u, double v)

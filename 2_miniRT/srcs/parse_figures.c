@@ -33,7 +33,7 @@ void	parse_plane(t_fig **lst, char *str)
 	if (!(new = (t_fig *)malloc(sizeof(t_fig))))
 		error_check(5, "Figure");
 	new->flag = PL;
-	new->fig.pl.c = rt_ato3(&str);
+	new->fig.pl.p = rt_ato3(&str);
 	new->fig.pl.n = vunit(rt_ato3(&str));
 	new->albedo = rt_albedo(&str);
 	new->next = NULL;

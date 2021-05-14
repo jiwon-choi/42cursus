@@ -7,6 +7,8 @@ t_bool	hit_figures(t_fig *lst, t_ray *r, t_hit_record *rec)
 	hit = FALSE;
 	if (lst->flag == SP)
 		hit = hit_sphere(lst, r, rec);
+	else if (lst->flag == PL)
+		hit = hit_plane(lst, r, rec);
 	return (hit);
 }
 
@@ -22,7 +24,7 @@ t_bool	hit(t_fig *lst, t_ray *r, t_hit_record *rec)
 		if (hit_figures(lst, r, &tmp))
 		{
 			hit = TRUE;
-			tmp.t_max = tmp.oc_r;
+			tmp.t_max = tmp.t;
 			*rec = tmp;
 		}
 		lst = lst->next;

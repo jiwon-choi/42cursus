@@ -26,11 +26,45 @@ t_bool	hit_sphere(t_fig *lst, t_ray *r, t_hit_record *rec)
 		if (d.root < rec->t_min || rec->t_max < d.root)
 			return (FALSE);
 	}
-	rec->oc_r = d.root;
+	rec->t = d.root;
 	rec->p = ray_at(r, d.root);
 	rec->normal = vscalardiv(vsubstract(rec->p,
 				lst->fig.sp.c), lst->fig.sp.r);
 	rec->albedo = lst->albedo;
 	set_face_normal(r, rec);
 	return (TRUE);
+}
+
+t_bool	hit_plane(t_fig *lst, t_ray *r, t_hit_record *rec)
+{
+	double	denominator;
+	double	nom;
+	double	t;
+
+	denominator = vdot(r->dir, lst->fig.pl.n);
+	nom = vdot(vsubstract(lst->fig.pl.p, r->origin), lst->fig.pl.n); 
+
+	if (denominator > EPSILON)
+	{
+		// t = (-1) * nom / denominator;
+		if (nom < 0)
+		{
+			lst->fig.pl.n = vscalarmul(lst->fig.pl.n, -1);
+			denominator = vdot(r->dir, lst->fig.pl.n);
+			nom = vdot(vsubstract(lst->fig.pl.p, r->origin), lst->fig.pl.n); 
+		}
+		//printf("%f %f %f\n", lst->fig.pl.n.x, lst->fig.pl.n.y, lst->fig.pl.n.z);
+		t = nom / denominator;
+		if (t > rec->t_min && t < rec->t_max)
+		{
+			// printf("aaa");
+			rec->t = t;
+			rec->p = ray_at(r, t);
+			rec->p = vadd(rec->p, vscalarmul(rec->normal, EPSILON));
+			rec->normal = lst->fig.pl.n;
+			rec->albedo = lst->albedo;
+			return (TRUE);
+		}
+	}
+	return (FALSE);
 }
