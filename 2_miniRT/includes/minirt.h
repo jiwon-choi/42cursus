@@ -52,6 +52,8 @@ t_bool	hit(t_fig *lst, t_ray *r, t_hit_record *rec);
 void	set_face_normal(t_ray *r, t_hit_record *rec);
 t_bool	hit_sphere(t_fig *lst, t_ray *r, t_hit_record *rec);
 t_bool	hit_plane(t_fig *lst, t_ray *r, t_hit_record *rec);
+t_bool	hit_square(t_fig *lst, t_ray *ray, t_hit_record *rec);
+t_bool	hit_triangle(t_fig *lst, t_ray *r, t_hit_record *rec);
 
 /* main.c */
 int		key_press (int key, t_data *data);

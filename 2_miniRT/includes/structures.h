@@ -103,7 +103,6 @@ typedef struct	s_ray
 {
 	t_p3	origin;
 	t_p3	dir;
-	float	t;
 }				t_ray;
 
 typedef struct	s_light

@@ -29,12 +29,12 @@ t_p3	ray_color(t_data *data, t_ray *r)
 	if (hit(data->lst, r, &rec))
 		return (phong_lighting(data, r, &rec));
 	else
-	{
-		t = 0.5 * (r->dir.y + 1.0);
-		return (vadd(vscalarmul(vdefine(1, 1, 1), 1.0 - t),
-					vscalarmul(vdefine(0.5, 0.7, 1.0), t)));
-	}
-	//return (vdefine(0, 0, 0));
+		return (vdefine(1, 1, 1));
+	// {
+	// 	t = 0.5 * (r->dir.y + 1.0);
+	// 	return (vadd(vscalarmul(vdefine(1, 1, 1), 1.0 - t),
+	// 				vscalarmul(vdefine(0.5, 0.7, 1.0), t)));
+	// }
 }
 
 t_ray	ray_primary(t_scene *scene, double u, double v)
