@@ -55,3 +55,48 @@ t_bool	hit_plane(t_fig *lst, t_ray *r, t_hit_record *rec)
 	set_face_normal(r, rec);
 	return (TRUE);
 }
+
+t_bool	hit_square(t_fig *lst, t_ray *ray, t_hit_record *rec)
+{
+	t_p3 r;
+	t_p3 side_v;
+	double	denominator;
+	double nom;
+	double t;
+
+	denominator = vdot(ray->dir, lst->fig.sq.n);
+	nom = vdot(vsubstract(lst->fig.sq.c, ray->origin), lst->fig.sq.n); 
+	if (!denominator)
+		return (FALSE);
+	t = nom / denominator;
+	
+	if (t < rec->t_min || t > rec->t_max)
+		return (FALSE);
+
+	r = vdefine(0, 1, 0);
+	if(fabs(lst->fig.sq.n.y) == 1)
+		r = vdefine(1, 0, 0);
+
+	side_v =vcross(lst->fig.sq.n, r);
+
+	t_p3 p = vadd(ray->origin, vscalarmul(ray->dir, t));
+	t_p3 v = vsubstract(p,lst->fig.sq.c);
+
+	double cosine = fabs(vdot(side_v, v) / (vlen(side_v) * vlen(v)));
+	if (cosine < sqrt(2) / 2)
+		cosine = cos(M_PI_2 - acos(cosine));
+	double	limit = (lst->fig.sq.side / 2) / cosine;
+	if (vlen(v) > limit)
+		return (FALSE);
+	if(t >= 0)
+		{
+			rec->t = t;
+			rec->p = ray_at(ray, t);
+			rec->normal = lst->fig.sq.n;
+			rec->p = vadd(rec->p, vscalarmul(rec->normal, EPSILON));
+			rec->albedo = lst->albedo;
+			set_face_normal(ray, rec);
+			return(TRUE);
+		}
+	return (FALSE);
+}

@@ -25,7 +25,7 @@
 # define TRUE 1
 # define FALSE 0
 # define EPSILON 1e-6
-# define LUMEN 1.3
+# define LUMEN 1
 
 /* convert.c */
 double	degrees_to_radians(int a);
@@ -52,7 +52,7 @@ t_bool	hit(t_fig *lst, t_ray *r, t_hit_record *rec);
 void	set_face_normal(t_ray *r, t_hit_record *rec);
 t_bool	hit_sphere(t_fig *lst, t_ray *r, t_hit_record *rec);
 t_bool	hit_plane(t_fig *lst, t_ray *r, t_hit_record *rec);
-t_bool	hit_square(t_fig *lst, t_ray *ray, t_hit_record *rec);
+t_bool	hit_square(t_fig *lst, t_ray *r, t_hit_record *rec);
 t_bool	hit_triangle(t_fig *lst, t_ray *r, t_hit_record *rec);
 
 /* main.c */

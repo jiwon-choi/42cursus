@@ -26,8 +26,6 @@ t_p3	ray_color(t_data *data, t_ray *r)
 
 	rec.t_min = EPSILON;
 	rec.t_max = INFINITY;
-	data->scene.amb_color = vscalarmul(data->scene.amb_color, data->scene.amb_ratio);
-
 	if (hit(data->lst, r, &rec))
 		return (phong_lighting(data, r, &rec));
 	else
