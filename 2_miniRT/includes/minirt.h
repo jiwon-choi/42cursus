@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 21:28:07 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/13 21:32:19 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/16 20:26:13 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include "mlx.h"
+# include "../mlx/mlx.h"
 # include "structures.h"
 # include "get_next_line.h"
 # include "../libft/libft.h"
@@ -25,7 +25,7 @@
 # define TRUE 1
 # define FALSE 0
 # define EPSILON 1e-6
-# define LUMEN 3
+# define LUMEN 1.3
 
 /* convert.c */
 double	degrees_to_radians(int a);
