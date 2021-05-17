@@ -34,6 +34,7 @@ void	parse(t_data *data, char *rt_file)
 		parse_(data, str);
 		free(str);
 	}
+	parse_(data,str);
 	free(str);
 	if (!data->scene.res_ex || !data->scene.amb_ex || !data->mlx.cam)
 		error_check(4, "Empty R or A or Camera");

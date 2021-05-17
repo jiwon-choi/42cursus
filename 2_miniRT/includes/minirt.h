@@ -54,6 +54,7 @@ t_bool	hit_sphere(t_fig *lst, t_ray *r, t_hit_record *rec);
 t_bool	hit_plane(t_fig *lst, t_ray *r, t_hit_record *rec);
 t_bool	hit_square(t_fig *lst, t_ray *r, t_hit_record *rec);
 t_bool	hit_triangle(t_fig *lst, t_ray *r, t_hit_record *rec);
+t_bool	hit_cylinder(t_fig *lst, t_ray *r, t_hit_record *rec);
 
 /* main.c */
 int		key_press (int key, t_data *data);
@@ -70,8 +71,8 @@ void	parse_(t_data *data, char *str);
 void	parse_sphere(t_fig **lst, char *str);
 void	parse_plane(t_fig **lst, char *str);
 void	parse_square(t_fig **lst, char *str);
-void	parse_cylinder(t_fig **lst, char *str);
 void	parse_triangle(t_fig **lst, char *str);
+void	parse_cylinder(t_fig **lst, char *str);
 
 /* phong_lighting.c */
 t_p3	diffuse(t_light *light, t_hit_record *rec);
