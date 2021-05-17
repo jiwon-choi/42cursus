@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 18:34:09 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/17 18:34:10 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
 void	parse_resolution(t_scene *scene, char *str)
@@ -93,5 +105,4 @@ void	parse_(t_data *data, char *str)
 		parse_camera(&data->mlx, str + 1);
 	else if (*str == 'l')
 		parse_light(&data->scene, str + 1);
-	
 }

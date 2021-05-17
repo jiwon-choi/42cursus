@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 21:29:23 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/13 21:29:26 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:12:44 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct	s_scene
 
 	double		viewport_h;
 	double		viewport_w;
+	double		aspect_ratio;
 	double		focal_length;
 	t_p3		origin;
 	t_p3		horizontal;
@@ -185,7 +186,7 @@ typedef struct	s_specular
 
 typedef struct	s_bmp_header
 {
-	char	type[2];
+	char			type[2];
 	unsigned int	size;
 	unsigned int	reserved;
 	unsigned int	offset;

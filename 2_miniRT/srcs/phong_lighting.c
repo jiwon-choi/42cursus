@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   phong_lighting.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 18:35:25 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/17 18:35:39 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
 t_p3	diffuse(t_light *light, t_hit_record *rec)
@@ -42,7 +54,8 @@ t_bool	in_shadow(t_fig *lst, t_ray light_ray, double light_len)
 	return (FALSE);
 }
 
-t_p3	point_light_get(t_data *data, t_light *light, t_ray *r, t_hit_record *rec)
+t_p3	point_light_get(t_data *data, t_light *light, t_ray *r,
+														t_hit_record *rec)
 {
 	t_p3	light_dir;
 	double	light_len;
@@ -52,7 +65,7 @@ t_p3	point_light_get(t_data *data, t_light *light, t_ray *r, t_hit_record *rec)
 	light_len = vlen(light_dir);
 	light_ray = ray(vadd(rec->p, vscalarmul(rec->normal, EPSILON)), light_dir);
 	if (in_shadow(data->lst, light_ray, light_len))
- 		return (vdefine(0, 0, 0));
+		return (vdefine(0, 0, 0));
 	light_dir = vunit(light_dir);
 	return (vscalarmul(vadd(vadd(data->scene.amb_color, diffuse(light, rec)),
 					specular(light, r, rec)), light->br * LUMEN));

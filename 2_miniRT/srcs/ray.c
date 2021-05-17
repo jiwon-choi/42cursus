@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 18:36:00 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/17 18:36:00 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
 t_ray	ray(t_p3 orig, t_p3 dir)
@@ -30,11 +42,6 @@ t_p3	ray_color(t_data *data, t_ray *r)
 		return (phong_lighting(data, r, &rec));
 	else
 		return (vdefine(1, 1, 1));
-	// {
-	// 	t = 0.5 * (r->dir.y + 1.0);
-	// 	return (vadd(vscalarmul(vdefine(1, 1, 1), 1.0 - t),
-	// 				vscalarmul(vdefine(0.5, 0.7, 1.0), t)));
-	// }
 }
 
 t_ray	ray_primary(t_scene *scene, double u, double v)

@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save_image.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 18:36:59 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/17 18:37:26 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
-static void		create_header(t_scene scene, t_bmp_header *bmp_h, t_dib_header *dib_h)
+static void		create_header(t_scene scene, t_bmp_header *bmp_h,
+														t_dib_header *dib_h)
 {
 	bmp_h->type[0] = 0x42;
 	bmp_h->type[1] = 0x4D;
@@ -67,10 +80,10 @@ static int		create_file(void)
 {
 	int			fd;
 	static int	i;
-	char *img_num;
-	char *tmp;
-	char *bmpname;
-	
+	char		*img_num;
+	char		*tmp;
+	char		*bmpname;
+
 	img_num = ft_itoa(i);
 	tmp = ft_strjoin("img", img_num);
 	bmpname = ft_strjoin(tmp, ".bmp");
@@ -84,7 +97,7 @@ static int		create_file(void)
 	return (fd);
 }
 
-void	make_bmp(t_data *data)
+void			make_bmp(t_data *data)
 {
 	t_bmp_header	bmp_h;
 	t_dib_header	dib_h;

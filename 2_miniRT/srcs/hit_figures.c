@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_figures.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/17 18:38:41 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/17 18:48:54 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minirt.h"
 
 void	set_face_normal(t_ray *r, t_hit_record *rec)
@@ -41,7 +53,7 @@ t_bool	hit_plane(t_fig *lst, t_ray *r, t_hit_record *rec)
 	double	t;
 
 	denominator = vdot(r->dir, lst->fig.pl.n);
-	nom = vdot(vsubstract(lst->fig.pl.p, r->origin), lst->fig.pl.n); 
+	nom = vdot(vsubstract(lst->fig.pl.p, r->origin), lst->fig.pl.n);
 	if (!denominator)
 		return (FALSE);
 	t = nom / denominator;
@@ -58,72 +70,78 @@ t_bool	hit_plane(t_fig *lst, t_ray *r, t_hit_record *rec)
 
 t_bool	hit_square(t_fig *lst, t_ray *ray, t_hit_record *rec)
 {
-	t_p3 r;
-	t_p3 side_v;
+	t_p3	r;
+	t_p3	side_v;
+	t_p3	p;
+	t_p3	v;
 	double	denominator;
-	double nom;
-	double t;
+	double	nom;
+	double	t;
+	double	cosine;
+	double	limit;
 
 	denominator = vdot(ray->dir, lst->fig.sq.n);
 	if (!denominator)
 		return (FALSE);
-	nom = vdot(vsubstract(lst->fig.sq.c, ray->origin), lst->fig.sq.n); 
+	nom = vdot(vsubstract(lst->fig.sq.c, ray->origin), lst->fig.sq.n);
 	t = nom / denominator;
-	
 	if (t < rec->t_min || t > rec->t_max)
 		return (FALSE);
-
 	r = vdefine(0, 1, 0);
-	if(fabs(lst->fig.sq.n.y) == 1)
+	if (fabs(lst->fig.sq.n.y) == 1)
 		r = vdefine(1, 0, 0);
-
-	side_v =vcross(lst->fig.sq.n, r);
-
-	t_p3 p = vadd(ray->origin, vscalarmul(ray->dir, t));
-	t_p3 v = vsubstract(p,lst->fig.sq.c);
-
-	double cosine = fabs(vdot(side_v, v) / (vlen(side_v) * vlen(v)));
+	side_v = vcross(lst->fig.sq.n, r);
+	p = vadd(ray->origin, vscalarmul(ray->dir, t));
+	v = vsubstract(p, lst->fig.sq.c);
+	cosine = fabs(vdot(side_v, v) / (vlen(side_v) * vlen(v)));
 	if (cosine < sqrt(2) / 2)
 		cosine = cos(M_PI_2 - acos(cosine));
-	double	limit = (lst->fig.sq.side / 2) / cosine;
+	limit = (lst->fig.sq.side / 2) / cosine;
 	if (vlen(v) > limit)
 		return (FALSE);
-	if(t >= 0)
-		{
-			rec->t = t;
-			rec->normal = lst->fig.sq.n;
-			rec->p = ray_at(ray, t);
-			// rec->p = vadd(rec->p, vscalarmul(rec->normal, EPSILON));
-			rec->albedo = lst->albedo;
-			set_face_normal(ray, rec);
-			return(TRUE);
-		}
+	if (t >= 0)
+	{
+		rec->t = t;
+		rec->normal = lst->fig.sq.n;
+		rec->p = ray_at(ray, t);
+		rec->albedo = lst->albedo;
+		set_face_normal(ray, rec);
+		return (TRUE);
+	}
 	return (FALSE);
 }
 
 t_bool	hit_triangle(t_fig *lst, t_ray *r, t_hit_record *rec)
 {
- 	t_p3	n = vunit(vcross(vsubstract(lst->fig.tr.p2, lst->fig.tr.p1), vsubstract(lst->fig.tr.p3, lst->fig.tr.p1)));
+	t_p3	n;
+	t_p3	p;
+	t_p3	un;
+	t_p3	vn;
+	double	denominator;
+	double	nom;
+	double	t;
+	double	s;
+	double	tt;
 
-	double	denominator = vdot(r->dir, n);
+	n = vunit(vcross(vsubstract(lst->fig.tr.p2, lst->fig.tr.p1),
+				vsubstract(lst->fig.tr.p3, lst->fig.tr.p1)));
+	denominator = vdot(r->dir, n);
 	if (!denominator)
 		return (FALSE);
-	double	nom = vdot(vsubstract(lst->fig.tr.p1, r->origin), n);
-	double	t = nom / denominator;
-
+	nom = vdot(vsubstract(lst->fig.tr.p1, r->origin), n);
+	t = nom / denominator;
 	if (t < rec->t_min || t > rec->t_max)
 		return (FALSE);
-
-	t_p3	p = vadd(r->origin, vscalarmul(r->dir, t));
-	t_p3	un = vcross(n, vsubstract(lst->fig.tr.p2, lst->fig.tr.p1));
-	t_p3	vn = vcross(n, vsubstract(lst->fig.tr.p3, lst->fig.tr.p1));
+	p = vadd(r->origin, vscalarmul(r->dir, t));
+	un = vcross(n, vsubstract(lst->fig.tr.p2, lst->fig.tr.p1));
+	vn = vcross(n, vsubstract(lst->fig.tr.p3, lst->fig.tr.p1));
 	denominator = vdot(vsubstract(lst->fig.tr.p2, lst->fig.tr.p1), vn);
 	if (fabs(denominator) < 0.001)
 		return (FALSE);
-	double	s = vdot(vsubstract(p, lst->fig.tr.p1), vn) / denominator;
+	s = vdot(vsubstract(p, lst->fig.tr.p1), vn) / denominator;
 	if (s < 0 || s > 1)
 		return (FALSE);
-	double tt = vdot(vsubstract(p, lst->fig.tr.p1), un) / -denominator;
+	tt = vdot(vsubstract(p, lst->fig.tr.p1), un) / -denominator;
 	if (!(tt >= 0 && (s + tt) <= 1))
 		return (FALSE);
 	rec->t = t;
@@ -131,9 +149,9 @@ t_bool	hit_triangle(t_fig *lst, t_ray *r, t_hit_record *rec)
 	rec->p = ray_at(r, t);
 	rec->albedo = lst->albedo;
 	set_face_normal(r, rec);
-
 	return (TRUE);
 }
+
 typedef struct	s_cyvar
 {
 	double	r2;
@@ -174,7 +192,6 @@ void	t_select(double *t1, double *t2, int flag)
 			*t2 = tmp;
 		}
 	}
-	
 }
 
 double	intersect_check(t_cyvar var, double *t1, double *t2, int flag)
@@ -187,7 +204,8 @@ double	intersect_check(t_cyvar var, double *t1, double *t2, int flag)
 		return (0);
 	if (root > 0)
 	{
-		t = (var.b > 0) ? -0.5 * (var.b + sqrt(root)) : -0.5 * (var.b - sqrt(root));
+		t = (var.b > 0) ? -0.5 * (var.b + sqrt(root))
+						: -0.5 * (var.b - sqrt(root));
 		*t1 = t / var.a;
 		*t2 = var.c / t;
 		t_select(t1, t2, flag);
@@ -204,15 +222,17 @@ double	intersect_check(t_cyvar var, double *t1, double *t2, int flag)
 }
 
 double	cy_calc(t_cyvar var, t_hit_record *rec, int flag)
-{	
+{
 	double	t;
 
 	var.a = vdot(var.v, var.v) - pow(vdot(var.v, var.h), 2);
-	var.b = (vdot(var.v, var.w) - (vdot(var.v, var.h) * vdot(var.w, var.h))) * 2;
+	var.b = (vdot(var.v, var.w)
+			- (vdot(var.v, var.h) * vdot(var.w, var.h))) * 2;
 	var.c = vdot(var.w, var.w) - pow(vdot(var.w, var.h), 2) - var.r2;
 	if (!(intersect_check(var, &var.t1, &var.t2, flag)))
 		return (0);
-	if ((var.t1 < 0 && var.t2 < 0) || (var.t1 > rec->t_max && var.t2 > rec->t_max))
+	if ((var.t1 < 0 && var.t2 < 0)
+			|| (var.t1 > rec->t_max && var.t2 > rec->t_max))
 		return (0);
 	if (var.t2 < 0)
 		return (0);
@@ -223,7 +243,6 @@ double	cy_calc(t_cyvar var, t_hit_record *rec, int flag)
 	return (t);
 }
 
-
 double	ft_vec_dist(t_p3 a, t_p3 b)
 {
 	return (vlen(vsubstract(a, b)));
@@ -232,6 +251,7 @@ double	ft_vec_dist(t_p3 a, t_p3 b)
 int		cy_boundary(t_fig *lst, t_ray *r, t_cyvar var)
 {
 	double	len;
+
 	var.p = ray_at(r, var.t);
 	len = sqrt(pow(lst->fig.cy.r, 2.0) + pow(lst->fig.cy.height, 2.0));
 	if (ft_vec_dist(lst->fig.cy.c, var.p) > len)
@@ -245,7 +265,8 @@ t_p3	get_cy_normal(t_p3 pos, t_fig *lst)
 	t_p3	normal;
 
 	tmp = vsubstract(pos, lst->fig.cy.c);
-	normal = vunit(vsubstract(tmp, vscalarmul(lst->fig.cy.n, vdot(lst->fig.cy.n, tmp))));
+	normal = vunit(vsubstract(tmp,
+				vscalarmul(lst->fig.cy.n, vdot(lst->fig.cy.n, tmp))));
 	return (normal);
 }
 
@@ -254,13 +275,14 @@ int		intersect_cylinder(t_fig *lst, t_ray *r, t_hit_record *rec, int flag)
 	t_cyvar	var;
 
 	var.r2 = lst->fig.cy.r * lst->fig.cy.r;
-	var.top = vsubstract(lst->fig.cy.c, vscalarmul(lst->fig.cy.n, lst->fig.cy.height));
-	var.bot = vadd(lst->fig.cy.c, vscalarmul(lst->fig.cy.n, lst->fig.cy.height));
+	var.top = vsubstract(lst->fig.cy.c,
+			vscalarmul(lst->fig.cy.n, lst->fig.cy.height));
+	var.bot = vadd(lst->fig.cy.c,
+			vscalarmul(lst->fig.cy.n, lst->fig.cy.height));
 	var.hc = vsubstract(var.top, var.bot);
 	var.h = vunit(var.hc);
 	var.w = vsubstract(r->origin, var.bot);
 	var.v = r->dir;
-
 	if (!(var.t = cy_calc(var, rec, flag)))
 		return (0);
 	if (!cy_boundary(lst, r, var))
@@ -275,10 +297,13 @@ int		intersect_cylinder(t_fig *lst, t_ray *r, t_hit_record *rec, int flag)
 
 t_bool	hit_cylinder(t_fig *lst, t_ray *r, t_hit_record *rec)
 {
-	int		i = 2;
-	int		flag = 1;
-	t_bool	res = FALSE;
+	int		i;
+	int		flag;
+	t_bool	res;
 
+	i = 2;
+	flag = 1;
+	res = FALSE;
 	while (i--)
 	{
 		if ((res = intersect_cylinder(lst, r, rec, flag)))
