@@ -207,4 +207,49 @@ typedef struct	s_dib_header
 	unsigned int	important_color;
 }				t_dib_header;
 
+typedef struct	s_cy_data
+{
+	double	r2;
+	double	t;
+	double	a;
+	double	b;
+	double	c;
+	double	t1;
+	double	t2;
+	t_p3	top;
+	t_p3	bot;
+	t_p3	hc;
+	t_p3	h;
+	t_p3	w;
+	t_p3	v;
+	t_p3	p;
+}				t_cy_data;
+
+typedef struct	s_sq_data
+{
+	t_p3	r;
+	t_p3	side_v;
+	t_p3	p;
+	t_p3	v;
+	double	denominator;
+	double	nom;
+	double	t;
+	double	cosine;
+	double	limit;
+}				t_sq_data;
+
+typedef struct	s_tr_data
+{
+	t_p3	n;
+	t_p3	p;
+	t_p3	un;
+	t_p3	vn;
+	double	denominator;
+	double	nom;
+	double	t;
+	double	s;
+	double	tt;
+}				t_tr_data;
+
+
 #endif

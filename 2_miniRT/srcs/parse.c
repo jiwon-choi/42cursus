@@ -14,6 +14,9 @@
 
 void	parse_resolution(t_scene *scene, char *str)
 {
+	int		tmp_x;
+	int		tmp_y;
+
 	if (scene->res_ex)
 		error_check(4, "Double declaration Resolution");
 	scene->res_ex = TRUE;

@@ -20,15 +20,6 @@ double	degrees_to_radians(int a)
 	return (res);
 }
 
-void	comma(char **str)
-{
-	while (ft_isspace(**str))
-		*str += 1;
-	if (**str != ',')
-		error_check(4, "p3");
-	(*str)++;
-}
-
 int		rt_atoi(char **str)
 {
 	int			sign;

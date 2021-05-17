@@ -53,9 +53,10 @@ void	parse(t_data *data, char *rt_file)
 	data->mlx.first_cam = data->mlx.cam;
 	data->scene.amb_color = vscalarmul(data->scene.amb_color,
 												data->scene.amb_ratio);
+	ft_mlx_init(data);
 }
 
-void	mlx_init(t_data *data)
+void	ft_mlx_init(t_data *data)
 {
 	data->mlx.mlx_ptr = mlx_init();
 	data->mlx.win_ptr = mlx_new_window(data->mlx.mlx_ptr,

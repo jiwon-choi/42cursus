@@ -46,3 +46,8 @@ t_p3	vmin(t_p3 a, t_p3 b)
 		a.z = b.z;
 	return (a);
 }
+
+double	ft_vec_dist(t_p3 a, t_p3 b)
+{
+	return (vlen(vsubstract(a, b)));
+}
