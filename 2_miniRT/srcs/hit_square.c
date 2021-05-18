@@ -6,13 +6,25 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 19:56:08 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/17 19:56:19 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/18 16:08:21 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_bool	hit_square(t_fig *lst, t_ray *ray, t_hit_record *rec)
+static void		init_square(t_fig *lst, t_ray *ray, t_sq_data *var)
+{
+	var->r = vdefine(0, 1, 0);
+	if (fabs(lst->fig.sq.n.y) == 1)
+		var->r = vdefine(1, 0, 0);
+	var->side_v = vcross(lst->fig.sq.n, var->r);
+	var->p = vadd(ray->origin, vscalarmul(ray->dir, var->t));
+	var->v = vsubstract(var->p, lst->fig.sq.c);
+	var->cosine = fabs(vdot(var->side_v, var->v)
+			/ (vlen(var->side_v) * vlen(var->v)));
+}
+
+t_bool			hit_square(t_fig *lst, t_ray *ray, t_hit_record *rec)
 {
 	t_sq_data	var;
 
@@ -23,13 +35,7 @@ t_bool	hit_square(t_fig *lst, t_ray *ray, t_hit_record *rec)
 	var.t = var.nom / var.denominator;
 	if (var.t < rec->t_min || var.t > rec->t_max)
 		return (FALSE);
-	var.r = vdefine(0, 1, 0);
-	if (fabs(lst->fig.sq.n.y) == 1)
-		var.r = vdefine(1, 0, 0);
-	var.side_v = vcross(lst->fig.sq.n, var.r);
-	var.p = vadd(ray->origin, vscalarmul(ray->dir, var.t));
-	var.v = vsubstract(var.p, lst->fig.sq.c);
-	var.cosine = fabs(vdot(var.side_v, var.v) / (vlen(var.side_v) * vlen(var.v)));
+	init_square(lst, ray, &var);
 	if (var.cosine < sqrt(2) / 2)
 		var.cosine = cos(M_PI_2 - acos(var.cosine));
 	var.limit = (lst->fig.sq.side / 2) / var.cosine;

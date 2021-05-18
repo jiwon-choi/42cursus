@@ -6,13 +6,28 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 19:56:25 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/17 19:56:35 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/18 16:08:38 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_bool	hit_triangle(t_fig *lst, t_ray *r, t_hit_record *rec)
+static t_bool	judge_triangle(t_fig *lst, t_tr_data *var)
+{
+	if (fabs(var->denominator) < 0.001)
+		return (FALSE);
+	var->s = vdot(vsubstract(var->p, lst->fig.tr.p1), var->vn)
+			/ var->denominator;
+	if (var->s < 0 || var->s > 1)
+		return (FALSE);
+	var->tt = vdot(vsubstract(var->p, lst->fig.tr.p1), var->un)
+			/ -var->denominator;
+	if (!(var->tt >= 0 && (var->s + var->tt) <= 1))
+		return (FALSE);
+	return (TRUE);
+}
+
+t_bool			hit_triangle(t_fig *lst, t_ray *r, t_hit_record *rec)
 {
 	t_tr_data	var;
 
@@ -29,13 +44,7 @@ t_bool	hit_triangle(t_fig *lst, t_ray *r, t_hit_record *rec)
 	var.un = vcross(var.n, vsubstract(lst->fig.tr.p2, lst->fig.tr.p1));
 	var.vn = vcross(var.n, vsubstract(lst->fig.tr.p3, lst->fig.tr.p1));
 	var.denominator = vdot(vsubstract(lst->fig.tr.p2, lst->fig.tr.p1), var.vn);
-	if (fabs(var.denominator) < 0.001)
-		return (FALSE);
-	var.s = vdot(vsubstract(var.p, lst->fig.tr.p1), var.vn) / var.denominator;
-	if (var.s < 0 || var.s > 1)
-		return (FALSE);
-	var.tt = vdot(vsubstract(var.p, lst->fig.tr.p1), var.un) / -var.denominator;
-	if (!(var.tt >= 0 && (var.s + var.tt) <= 1))
+	if (!(judge_triangle(lst, &var)))
 		return (FALSE);
 	rec->t = var.t;
 	rec->normal = var.n;

@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 21:29:23 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/17 18:12:44 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/18 16:06:36 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,5 @@ typedef struct	s_tr_data
 	double	s;
 	double	tt;
 }				t_tr_data;
-
 
 #endif

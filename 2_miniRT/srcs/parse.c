@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:34:09 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/17 18:34:10 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/18 15:56:40 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	parse_light(t_scene *scene, char *str)
 
 void	parse_(t_data *data, char *str)
 {
+	while (ft_isspace(*str))
+		str += 1;
 	if (*str == '#' || *str == 0)
 		return ;
 	else if (*str == 's' && *(str + 1) == 'p')
