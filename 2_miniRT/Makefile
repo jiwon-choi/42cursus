@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 12:29:09 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/05/18 15:22:48 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/05/18 17:22:45 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS		= $(SRCS:.c=.o)
 
 .c.o :
-	$(CC) $(CFLAGS) -I $(INCS_DIR) -o $@ -c $<
+	$(CC) $(CFLAGS) -I $(INCS_DIR) -o $@ -c $?
 
 $(TARGET) : $(OBJS)
 	make -C $(LIBFT_DIR)

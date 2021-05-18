@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/26 10:25:07 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/04/08 16:49:26 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/05/18 17:22:30 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ OBJS	= $(SRCS:.c=.o)
 BOBJS	= $(BSRCS:.c=.o)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $?
 
 $(NAME) : $(OBJS)
 	$(AR) $@ $?
