@@ -42,12 +42,11 @@ void	check_null(char **str);
 void	check_values(double num, double min, double max, char *err_msg);
 t_bool	hit_figures(t_fig *lst, t_ray *r, t_hit_record *rec);
 t_bool	hit(t_fig *lst, t_ray *r, t_hit_record *rec);
-void	ft_select(double *t1, double *t2, int flag);
-double	intersect_check(t_cy_data var, double *t1, double *t2, int flag);
-double	cy_calc(t_cy_data var, t_hit_record *rec, int flag);
-int		cy_boundary(t_fig *lst, t_ray *r, t_cy_data var);
-t_p3	get_cy_normal(t_p3 pos, t_fig *lst);
-int		intersect_cylinder(t_fig *lst, t_ray *r, t_hit_record *rec, int flag);
+double	caps_intersection(t_fig *lst, t_ray *r);
+double	cy_intersection(t_fig *lst, t_ray *r, t_p3 *normal);
+int		solve_cylinder(t_fig *lst, t_ray *r, double x[2]);
+t_p3	calc_cy_normal(t_fig *lst, t_ray *r, double x[2], t_cy_data var);
+double	plane_inter(t_ray *r, t_p3 plane_p, t_p3 plane_nv);
 t_bool	hit_cylinder(t_fig *lst, t_ray *r, t_hit_record *rec);
 void	set_face_normal(t_ray *r, t_hit_record *rec);
 t_bool	hit_sphere(t_fig *lst, t_ray *r, t_hit_record *rec);
@@ -89,7 +88,7 @@ double	vlen(t_p3 a);
 t_p3	vunit(t_p3 a);
 t_p3	vmul(t_p3 a, t_p3 b);
 t_p3	vmin(t_p3 a, t_p3 b);
-double	ft_vec_dist(t_p3 a, t_p3 b);
+double	vdist(t_p3 a, t_p3 b);
 void	make_bmp(t_data *data);
 
 #endif
