@@ -6,12 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 19:52:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/17 19:52:14 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/18 23:58:17 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
 
 t_p3	calc_cy_normal(t_fig *lst, t_ray *r, double x[2], t_cy_data var)
 {

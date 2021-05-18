@@ -83,7 +83,7 @@ void	parse_light(t_scene *scene, char *str)
 	check_null(&str);
 }
 
-void	parse_(t_data *data, char *str)
+void	parse(t_data *data, char *str)
 {
 	while (ft_isspace(*str))
 		str += 1;

@@ -29,44 +29,6 @@ int		key_press(int key, t_data *data)
 	return (0);
 }
 
-void	parse(t_data *data, char *rt_file)
-{
-	char	*str;
-	int		fd;
-
-	data->lst = NULL;
-	data->scene.light = NULL;
-	data->mlx.cam = NULL;
-	data->scene.res_ex = FALSE;
-	data->scene.amb_ex = FALSE;
-	if ((fd = open(rt_file, O_RDONLY)) == -1)
-		exit(1);
-	while (get_next_line(fd, &str))
-	{
-		parse_(data, str);
-		free(str);
-	}
-	parse_(data, str);
-	free(str);
-	if (!data->scene.res_ex || !data->scene.amb_ex || !data->mlx.cam)
-		error_check(4, "Empty R or A or Camera");
-	data->mlx.first_cam = data->mlx.cam;
-	data->scene.amb_color = vscalarmul(data->scene.amb_color,
-												data->scene.amb_ratio);
-	ft_mlx_init(data);
-}
-
-void	ft_mlx_init(t_data *data)
-{
-	data->mlx.mlx_ptr = mlx_init();
-	data->mlx.win_ptr = mlx_new_window(data->mlx.mlx_ptr,
-			data->scene.res_x, data->scene.res_y, "miniRT");
-	data->mlx.img_ptr = mlx_new_image(data->mlx.mlx_ptr,
-			data->scene.res_x, data->scene.res_y);
-	data->mlx.data = (int *)mlx_get_data_addr(data->mlx.img_ptr,
-			&data->mlx.bpp, &data->mlx.size_l, &data->mlx.endian);
-}
-
 int		main(int argc, char **argv)
 {
 	t_data	data;
@@ -77,7 +39,7 @@ int		main(int argc, char **argv)
 		error_check(2, "");
 	if (argc == 3 && ft_strncmp(argv[2], "--save", 6))
 		error_check(3, "");
-	parse(&data, argv[1]);
+	data_init(&data, argv[1]);
 	if (argc == 3)
 	{
 		while (data.mlx.cam)

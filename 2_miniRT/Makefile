@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 12:29:09 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/05/18 17:22:45 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/05/19 00:08:30 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC			= convert.c \
 			  hit_sphere.c \
 			  hit_square.c \
 			  hit_triangle.c \
+			  init.c \
 			  main.c \
 			  parse.c \
 			  parse_figures.c \
