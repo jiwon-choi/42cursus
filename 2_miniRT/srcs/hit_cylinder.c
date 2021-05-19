@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 19:52:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/19 16:07:16 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/19 16:12:01 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,6 @@ static double	cy_intersection(t_fig *lst, t_ray *r, t_p3 *normal)
 		return (INFINITY);
 	*normal = calc_cy_normal(lst, r, x, var);
 	return (x[0]);
-}
-
-static double	plane_inter(t_ray *r, t_p3 plane_p, t_p3 plane_nv)
-{
-	double	x;
-	double	denom;
-
-	denom = vdot(plane_nv, r->dir);
-	if (!denom)
-		return (INFINITY);
-	x = (vdot(plane_nv, vsubstract(plane_p, r->origin))) / denom;
-	return (x > 0 ? x : INFINITY);
 }
 
 t_bool			hit_cylinder(t_fig *lst, t_ray *r, t_hit_record *rec)
