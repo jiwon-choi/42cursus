@@ -6,13 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 12:58:37 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/19 12:58:39 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/19 16:06:57 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_p3	scale_color(t_p3 color)
+static t_p3	scale_color(t_p3 color)
 {
 	color.x = (int)(color.x * 255);
 	color.y = (int)(color.y * 255);
@@ -20,7 +20,7 @@ t_p3	scale_color(t_p3 color)
 	return (color);
 }
 
-void	make_bmp(t_data *data)
+void		make_bmp(t_data *data)
 {
 	while (data->mlx.cam)
 	{
@@ -31,7 +31,7 @@ void	make_bmp(t_data *data)
 	exit(0);
 }
 
-void	make_image(t_data *data)
+void		make_image(t_data *data)
 {
 	t_ray		ray;
 	t_p3		color;

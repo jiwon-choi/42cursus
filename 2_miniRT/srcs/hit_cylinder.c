@@ -6,60 +6,108 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 19:52:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/18 23:58:17 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/19 16:07:16 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-double	caps_intersection(t_fig *lst, t_ray *r)
+static t_p3		calc_cy_normal(t_fig *lst, t_ray *r, double x[2], t_cy_data var)
 {
-	double	id1;
-	double	id2;
-	t_p3	ip1;
-	t_p3	ip2;
-	t_p3	c2;
+	double	dist;
+	double	res;
 
-	c2 = vadd(lst->fig.cy.c, vscalarmul(lst->fig.cy.n, lst->fig.cy.height));
-	id1 = plane_inter(r, lst->fig.cy.c, lst->fig.cy.n);
-	id2 = plane_inter(r, c2, lst->fig.cy.n);
-	if (id1 < INFINITY || id2 < INFINITY)
+	if ((var.dist1 >= 0 && var.dist1 <= lst->fig.cy.height)
+			&& (var.dist2 >= 0 && var.dist2 <= lst->fig.cy.height))
 	{
-		ip1 = vadd(r->origin, vscalarmul(r->dir, id1));
-		ip2 = vadd(r->origin, vscalarmul(r->dir, id2));
-		if ((id1 < INFINITY && vdist(ip1, lst->fig.cy.c) <= lst->fig.cy.r)
-				&& (id2 < INFINITY && vdist(ip2, c2) <= lst->fig.cy.r))
-			return (id1 < id2 ? id1 : id2);
-		else if (id1 < INFINITY && vdist(ip1, lst->fig.cy.c) <= lst->fig.cy.r)
-			return (id1);
-		else if (id2 < INFINITY && vdist(ip2, c2) <= lst->fig.cy.r)
-			return (id2);
+		dist = x[0] < x[1] ? var.dist1 : var.dist2;
+		res = x[0] < x[1] ? x[0] : x[1];
 	}
-	return (INFINITY);
+	else if (var.dist1 <= 0 && var.dist1 <= lst->fig.cy.height)
+	{
+		dist = var.dist1;
+		res = x[0];
+	}
+	else
+	{
+		dist = var.dist2;
+		res = x[1];
+	}
+	x[0] = res;
+	return (vunit(vsubstract(vsubstract(vscalarmul(r->dir, res),
+			vscalarmul(lst->fig.cy.n, dist)),
+			vsubstract(lst->fig.cy.c, r->origin))));
 }
 
-t_bool	hit_cylinder(t_fig *lst, t_ray *r, t_hit_record *rec)
+static int		solve_cylinder(t_fig *lst, t_ray *r, double x[2])
+{
+	t_p3	v;
+	t_p3	u;
+	double	a;
+	double	b;
+	double	c;
+
+	v = vscalarmul(lst->fig.cy.n, vdot(r->dir, lst->fig.cy.n));
+	v = vsubstract(r->dir, v);
+	u = vscalarmul(lst->fig.cy.n, vdot(vsubstract(r->origin,
+			lst->fig.cy.c), lst->fig.cy.n));
+	u = vsubstract(vsubstract(r->origin, lst->fig.cy.c), u);
+	a = vdot(v, v);
+	b = 2 * vdot(v, u);
+	c = vdot(u, u) - pow(lst->fig.cy.r, 2);
+	x[0] = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+	x[1] = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+	if (x[0] < EPSILON && x[1] < EPSILON)
+	{
+		x[0] = INFINITY;
+		x[1] = INFINITY;
+		return (0);
+	}
+	return (1);
+}
+
+static double	cy_intersection(t_fig *lst, t_ray *r, t_p3 *normal)
+{
+	double		x[2];
+	t_cy_data	var;
+
+	if (solve_cylinder(lst, r, x) == 0)
+		return (INFINITY);
+	var.dist1 = vdot(lst->fig.cy.n, vsubstract(vscalarmul(r->dir, x[0]),
+			vsubstract(lst->fig.cy.c, r->origin)));
+	var.dist2 = vdot(lst->fig.cy.n, vsubstract(vscalarmul(r->dir, x[1]),
+			vsubstract(lst->fig.cy.c, r->origin)));
+	if (!((var.dist1 >= 0 && var.dist1 <= lst->fig.cy.height && x[0] > EPSILON)
+		|| (var.dist2 >= 0 && var.dist2 <= lst->fig.cy.height
+		&& x[1] > EPSILON)))
+		return (INFINITY);
+	*normal = calc_cy_normal(lst, r, x, var);
+	return (x[0]);
+}
+
+static double	plane_inter(t_ray *r, t_p3 plane_p, t_p3 plane_nv)
+{
+	double	x;
+	double	denom;
+
+	denom = vdot(plane_nv, r->dir);
+	if (!denom)
+		return (INFINITY);
+	x = (vdot(plane_nv, vsubstract(plane_p, r->origin))) / denom;
+	return (x > 0 ? x : INFINITY);
+}
+
+t_bool			hit_cylinder(t_fig *lst, t_ray *r, t_hit_record *rec)
 {
 	double	cy_inter;
-	double	caps_inter;
 	t_p3	cy_normal;
 
 	cy_inter = cy_intersection(lst, r, &cy_normal);
-	caps_inter = caps_intersection(lst, r);
-	if (cy_inter < INFINITY || caps_inter < INFINITY)
+	if (cy_inter < INFINITY)
 	{
-		if (cy_inter < caps_inter)
-		{
-			rec->t = cy_inter;
-			rec->p = ray_at(r, cy_inter);
-			rec->normal = cy_normal;
-		}
-		else
-		{
-			rec->t = caps_inter;
-			rec->p = ray_at(r, caps_inter);
-			rec->normal = lst->fig.cy.n;
-		}
+		rec->t = cy_inter;
+		rec->p = ray_at(r, cy_inter);
+		rec->normal = cy_normal;
 		rec->albedo = lst->albedo;
 		set_face_normal(r, rec);
 		return (TRUE);

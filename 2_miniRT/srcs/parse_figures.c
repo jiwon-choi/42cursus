@@ -97,7 +97,7 @@ void	parse_cylinder(t_fig **lst, char *str)
 	new->flag = CY;
 	new->fig.cy.c = rt_ato3(&str);
 	new->fig.cy.n = vunit(rt_ato3(&str));
-	new->fig.cy.r = rt_atof(&str);
+	new->fig.cy.r = rt_atof(&str) / 2;
 	check_values(new->fig.cy.r, 0, INFINITY, "Cylinder r");
 	new->fig.cy.height = rt_atof(&str);
 	check_values(new->fig.cy.height, 0, INFINITY, "Cylinder h");

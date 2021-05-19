@@ -30,7 +30,6 @@ SRC			= convert.c \
 			  get_next_line_utils.c \
 			  hit.c \
 			  hit_cylinder.c \
-			  hit_cylinder2.c \
 			  hit_plane.c \
 			  hit_sphere.c \
 			  hit_square.c \
