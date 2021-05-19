@@ -18,8 +18,10 @@ void	parse_resolution(t_scene *scene, char *str)
 		error_check(4, "Double declaration Resolution");
 	scene->res_ex = TRUE;
 	scene->res_x = rt_atoi(&str);
+	scene->res_x = scene->res_x < RX_MAX ? scene->res_x : RX_MAX;
 	check_values(scene->res_x, 1, INFINITY, "Resolution x");
 	scene->res_y = rt_atoi(&str);
+	scene->res_y = scene->res_y < RY_MAX ? scene->res_y : RY_MAX;
 	check_values(scene->res_y, 1, INFINITY, "Resolution y");
 	check_null(&str);
 }

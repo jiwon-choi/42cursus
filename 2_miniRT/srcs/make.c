@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   make.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 18:11:14 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/17 18:26:33 by jiwchoi          ###   ########.fr       */
+/*   Created: 2021/05/19 12:58:37 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/19 12:58:39 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,25 @@ t_p3	scale_color(t_p3 color)
 	return (color);
 }
 
-void	make_picture(t_data *data)
+void	make_bmp(t_data *data)
+{
+	while (data->mlx.cam)
+	{
+		make_image(data);
+		save_image(data);
+		data->mlx.cam = data->mlx.cam->next;
+	}
+	exit(0);
+}
+
+void	make_image(t_data *data)
 {
 	t_ray		ray;
 	t_p3		color;
 	t_matrix	m;
 
 	scene_init(data);
-	camera_init(data);
+	view_init(data);
 	m.y = 0;
 	while (m.y < data->scene.res_y)
 	{

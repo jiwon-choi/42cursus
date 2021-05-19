@@ -56,19 +56,3 @@ t_ray	ray_primary(t_scene *scene, double u, double v)
 	ray.dir = vunit(ray.dir);
 	return (ray);
 }
-
-t_p3	phong_lighting(t_data *data, t_ray *r, t_hit_record *rec)
-{
-	t_p3	light_color;
-	t_light	*lights;
-
-	light_color = vdefine(0, 0, 0);
-	lights = data->scene.light;
-	while (lights)
-	{
-		light_color = vadd(light_color, point_light_get(data, lights, r, rec));
-		lights = lights->next;
-	}
-	light_color = vadd(light_color, data->scene.amb_color);
-	return (vmin(vmul(light_color, rec->albedo), vdefine(1, 1, 1)));
-}

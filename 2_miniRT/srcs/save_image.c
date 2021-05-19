@@ -97,7 +97,7 @@ static int		create_file(void)
 	return (fd);
 }
 
-void			make_bmp(t_data *data)
+void			save_image(t_data *data)
 {
 	t_bmp_header	bmp_h;
 	t_dib_header	dib_h;

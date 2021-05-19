@@ -12,6 +12,17 @@
 
 #include "../includes/minirt.h"
 
+void	ft_mlx_init(t_data *data)
+{
+	data->mlx.mlx_ptr = mlx_init();
+	data->mlx.win_ptr = mlx_new_window(data->mlx.mlx_ptr,
+			data->scene.res_x, data->scene.res_y, "miniRT");
+	data->mlx.img_ptr = mlx_new_image(data->mlx.mlx_ptr,
+			data->scene.res_x, data->scene.res_y);
+	data->mlx.data = (int *)mlx_get_data_addr(data->mlx.img_ptr,
+			&data->mlx.bpp, &data->mlx.size_l, &data->mlx.endian);
+}
+
 void	data_init(t_data *data, char *rt_file)
 {
 	char	*str;
@@ -54,7 +65,7 @@ void	scene_init(t_data *data)
 	data->scene.origin = data->mlx.cam->look_from;
 }
 
-void	camera_init(t_data *data)
+void	view_init(t_data *data)
 {
 	t_p3	w;
 	t_p3	u;
@@ -76,15 +87,4 @@ void	camera_init(t_data *data)
 		- (data->scene.horizontal.y / 2) - (data->scene.vertical.y / 2) - w.y;
 	data->scene.l_l_corner.z = data->scene.origin.z
 		- (data->scene.horizontal.z / 2) - (data->scene.vertical.z / 2) - w.z;
-}
-
-void	ft_mlx_init(t_data *data)
-{
-	data->mlx.mlx_ptr = mlx_init();
-	data->mlx.win_ptr = mlx_new_window(data->mlx.mlx_ptr,
-			data->scene.res_x, data->scene.res_y, "miniRT");
-	data->mlx.img_ptr = mlx_new_image(data->mlx.mlx_ptr,
-			data->scene.res_x, data->scene.res_y);
-	data->mlx.data = (int *)mlx_get_data_addr(data->mlx.img_ptr,
-			&data->mlx.bpp, &data->mlx.size_l, &data->mlx.endian);
 }

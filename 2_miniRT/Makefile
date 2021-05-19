@@ -25,28 +25,28 @@ INCS_DIR	= ./includes/
 SRCS_DIR	= ./srcs/
 
 SRC			= convert.c \
-			  draw.c \
 			  error.c \
 			  get_next_line.c \
 			  get_next_line_utils.c \
 			  hit.c \
 			  hit_cylinder.c \
 			  hit_cylinder2.c \
-			  hit_figures.c \
 			  hit_plane.c \
 			  hit_sphere.c \
 			  hit_square.c \
 			  hit_triangle.c \
 			  init.c \
 			  main.c \
+			  make.c \
 			  parse.c \
 			  parse_figures.c \
 			  phong_lighting.c \
+			  phong_lighting2.c \
 			  ray.c \
 			  save_image.c \
 			  utils.c \
-			  vec_mul.c \
 			  vec_operation.c \
+			  vec_scalar.c \
 			  vec_utils.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
@@ -73,4 +73,6 @@ fclean : clean
 
 re : clean all
 
-.PHONY : all clean fclean re
+bonus : all
+
+.PHONY : all clean fclean re bonus

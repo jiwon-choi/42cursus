@@ -26,6 +26,8 @@
 # define FALSE 0
 # define EPSILON 1e-6
 # define LUMEN 1
+# define RX_MAX 1920
+# define RY_MAX 1080
 
 double	degrees_to_radians(int a);
 void	comma(char **str);
@@ -34,9 +36,9 @@ double	rt_atof(char **str);
 t_p3	rt_ato3(char **str);
 t_p3	rt_albedo(char **str);
 void	scene_init(t_data *data);
-void	camera_init(t_data *data);
+void	view_init(t_data *data);
 t_p3	scale_color(t_p3 color);
-void	make_picture(t_data *data);
+void	make_image(t_data *data);
 void	error_check(t_flag flag, char *err_msg);
 void	check_null(char **str);
 void	check_values(double num, double min, double max, char *err_msg);
@@ -90,5 +92,6 @@ t_p3	vmul(t_p3 a, t_p3 b);
 t_p3	vmin(t_p3 a, t_p3 b);
 double	vdist(t_p3 a, t_p3 b);
 void	make_bmp(t_data *data);
+void	save_image(t_data *data);
 
 #endif
