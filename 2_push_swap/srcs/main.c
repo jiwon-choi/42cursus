@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 13:29:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/25 17:36:55 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/26 21:16:04 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ void	ft_error(void)
 {
 	write(1, "Error\n", 6);
 	exit(1);
+}
+
+t_bool	duplicates_check(t_dlist *lst)
+{
+	t_dlist	*new;
+
+	new = lst->prev;
+	while (lst != new)
+	{
+		if (new->num == lst->num)
+			return (TRUE);
+		lst = lst->next;
+	}
+	return (FALSE);
 }
 
 void	init_stack(t_dlist **lst, t_dlist *node)
@@ -32,6 +46,11 @@ void	init_stack(t_dlist **lst, t_dlist *node)
 		(*lst)->prev = node;
 		node->next = *lst;
 	}
+	if (duplicates_check(*lst))
+	{
+		dlist_clear(*lst);
+		ft_error();
+	}
 }
 
 int		main(int argc, char **argv)
@@ -46,11 +65,12 @@ int		main(int argc, char **argv)
 	while (*(++argv))
 		init_stack(&stack_a, create_node(ft_atoi(*argv)));
 
-	op_rra(&stack_a);
 	for (int i = 0; i < argc - 1; i++)
 	{
 		printf("%d ", stack_a->num);
 		stack_a = stack_a->next;
 	}
+
+	dlist_clear(stack_a);
 	return (0);
 }

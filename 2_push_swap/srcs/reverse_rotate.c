@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 16:52:23 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/25 16:57:16 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/26 18:59:43 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 void	op_rra(t_dlist **stack_a)
 {
+	if (!*stack_a)
+		return ;
 	*stack_a = (*stack_a)->prev;
 }
 
 void	op_rrb(t_dlist **stack_b)
 {
+	if (!*stack_b)
+		return ;
 	*stack_b = (*stack_b)->prev;
 }
 

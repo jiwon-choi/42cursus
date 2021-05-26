@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 13:30:57 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/25 16:55:38 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/26 21:01:45 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# define TRUE 1
+# define FALSE 0
+
+typedef int		t_bool;
 typedef struct	s_dlist
 {
 	int				num;
@@ -41,6 +45,7 @@ void		op_rr(t_dlist **stack_a, t_dlist **stack_b);
 t_dlist		*create_node(int input);
 void		push_node(t_dlist **lst, t_dlist *node);
 t_dlist		*pop_node(t_dlist **lst);
+void		dlist_clear(t_dlist *lst);
 
 void		op_sa(t_dlist *stack_a);
 void		op_sb(t_dlist *stack_b);

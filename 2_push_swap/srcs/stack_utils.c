@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 16:01:31 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/25 17:27:38 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/26 20:25:22 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,17 @@ t_dlist *pop_node(t_dlist **lst)
 		pop->next = pop;
 	}
 	return (pop);
+}
+
+void	dlist_clear(t_dlist *lst)
+{
+	t_dlist	*tmp;
+
+	lst->prev->next = NULL;
+	while (lst)
+	{
+		tmp = lst->next;
+		free(lst);
+		lst = tmp;
+	}
 }

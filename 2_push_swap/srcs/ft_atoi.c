@@ -6,19 +6,19 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:36:34 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/25 15:46:54 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/26 17:13:47 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int		check_over_range(long long num, int sign)
+static int		check_over_range(long long num)
 {
 	if (num > 2147483647)
 		ft_error();
 	if (num < -2147483648)
 		ft_error();
-	return (num * sign);
+	return (num);
 }
 
 int				ft_atoi(char *str)
@@ -41,5 +41,5 @@ int				ft_atoi(char *str)
 		num *= 10;
 		num += (*(str++) - '0');
 	}
-	return (check_over_range(num, sign));
+	return (check_over_range(num * sign));
 }
