@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 16:01:31 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/26 20:25:22 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/27 15:03:34 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	push_node(t_dlist **lst, t_dlist *node)
 	*lst = node;
 }
 
-t_dlist *pop_node(t_dlist **lst)
+t_dlist	*pop_node(t_dlist **lst)
 {
 	t_dlist	*pop;
 
@@ -69,5 +69,25 @@ void	dlist_clear(t_dlist *lst)
 		tmp = lst->next;
 		free(lst);
 		lst = tmp;
+	}
+}
+
+void	init_stack(t_dlist **lst, t_dlist *node)
+{
+	if (!lst || !node)
+		return ;
+	if (!*lst)
+		*lst = node;
+	else
+	{
+		(*lst)->prev->next = node;
+		node->prev = (*lst)->prev;
+		(*lst)->prev = node;
+		node->next = *lst;
+	}
+	if (check_duplicates(*lst))
+	{
+		dlist_clear(*lst);
+		ft_error();
 	}
 }

@@ -6,17 +6,20 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 16:52:23 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/26 18:59:43 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/27 21:15:07 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
+extern int	result;
 void	op_rra(t_dlist **stack_a)
 {
 	if (!*stack_a)
 		return ;
 	*stack_a = (*stack_a)->prev;
+	printf("rra ");
+	result++;
 }
 
 void	op_rrb(t_dlist **stack_b)
@@ -24,6 +27,8 @@ void	op_rrb(t_dlist **stack_b)
 	if (!*stack_b)
 		return ;
 	*stack_b = (*stack_b)->prev;
+	printf("rrb ");
+	result++;
 }
 
 void	op_rrr(t_dlist **stack_a, t_dlist **stack_b)
