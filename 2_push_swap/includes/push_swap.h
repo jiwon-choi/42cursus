@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 13:30:57 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/28 17:45:49 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/28 19:50:17 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void			op_ra(t_dlist **stack_a);
 void			op_rb(t_dlist **stack_b);
 void			op_rr(t_dlist **stack_a, t_dlist **stack_b);
 
+void			op_sa(t_dlist *stack_a);
+void			op_sb(t_dlist *stack_b);
+void			op_ss(t_dlist *stack_a, t_dlist *stack_b);
+
+int				ft_setup_pivot(t_dlist *stack, int length);
+
 void			ft_a_to_b(t_dlist **stack_a, t_dlist **stack_b, int length);
 void			ft_b_to_a(t_dlist **stack_a, t_dlist **stack_b, int length);
 
@@ -57,9 +63,5 @@ void			push_node(t_dlist **lst, t_dlist *node);
 t_dlist			*pop_node(t_dlist **lst);
 void			dlist_clear(t_dlist *lst);
 void			init_stack(t_dlist **lst, t_dlist *node);
-
-void			op_sa(t_dlist *stack_a);
-void			op_sb(t_dlist *stack_b);
-void			op_ss(t_dlist *stack_a, t_dlist *stack_b);
 
 #endif

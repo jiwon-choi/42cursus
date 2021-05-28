@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   op_reverse_rotate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 15:58:45 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/28 19:17:04 by jiwchoi          ###   ########.fr       */
+/*   Created: 2021/05/25 16:52:23 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/05/28 20:02:15 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	op_pa(t_dlist **stack_a, t_dlist **stack_b)
+void	op_rra(t_dlist **stack_a)
 {
-	push_node(stack_a, pop_node(stack_b));
-	write(1, "pa\n", 3);
+	if (!*stack_a)
+		return ;
+	*stack_a = (*stack_a)->prev;
+	write(1, "rra\n", 4);
 }
 
-void	op_pb(t_dlist **stack_a, t_dlist **stack_b)
+void	op_rrb(t_dlist **stack_b)
 {
-	push_node(stack_b, pop_node(stack_a));
-	write(1, "pb\n", 3);
+	if (!*stack_b)
+		return ;
+	*stack_b = (*stack_b)->prev;
+	write(1, "rrb\n", 4);
+}
+
+void	op_rrr(t_dlist **stack_a, t_dlist **stack_b)
+{
+	op_rra(stack_a);
+	op_rrb(stack_b);
 }

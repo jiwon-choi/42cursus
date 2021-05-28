@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/28 19:02:09 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/05/28 19:08:09 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/05/28 20:01:42 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,13 @@ SRCS_DIR	= ./srcs/
 SRC			= check.c \
 			  ft_atoi.c \
 			  main.c \
-			  push.c \
-			  reverse_rotate.c \
-			  rotate.c \
-			  sort.c \
-			  stack_utils.c \
-			  swap.c
+			  op_push.c \
+			  op_reverse_rotate.c \
+			  op_rotate.c \
+			  op_swap.c \
+			  sort_a_to_b.c \
+			  sort_b_to_a.c \
+			  stack_utils.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS		= $(SRCS:.c=.o)
