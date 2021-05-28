@@ -6,13 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 15:40:29 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/28 17:43:26 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/28 19:18:20 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-extern int	result;
 
 void	op_sa(t_dlist *stack_a)
 {
@@ -23,8 +21,7 @@ void	op_sa(t_dlist *stack_a)
 	tmp = stack_a->num;
 	stack_a->num = stack_a->next->num;
 	stack_a->next->num = tmp;
-	printf("sa\n");
-	result++;
+	write(1, "sa\n", 3);
 }
 
 void	op_sb(t_dlist *stack_b)
@@ -36,8 +33,7 @@ void	op_sb(t_dlist *stack_b)
 	tmp = stack_b->num;
 	stack_b->num = stack_b->next->num;
 	stack_b->next->num = tmp;
-	printf("sb\n");
-	result++;
+	write(1, "sb\n", 3);
 }
 
 void	op_ss(t_dlist *stack_a, t_dlist *stack_b)

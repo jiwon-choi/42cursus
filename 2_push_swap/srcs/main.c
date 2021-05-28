@@ -6,14 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 13:29:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/28 17:58:29 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/28 19:14:14 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <stdio.h>
-
-int		result = 0;
 
 void	ft_error(void)
 {
