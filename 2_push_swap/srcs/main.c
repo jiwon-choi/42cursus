@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 13:29:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/27 21:18:06 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/05/28 17:43:07 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,7 @@ int		main(int argc, char **argv)
 		init_stack(&stack_a, create_node(ft_atoi(*argv)));
 	if (!check_ascending(stack_a, argc - 1))
 		ft_a_to_b(&stack_a, &stack_b, argc - 1);
-	printf("\n---------------------------\nA : ");
-	print_stack(stack_a);
-	printf("\nB : ");
-	print_stack(stack_b);
-	printf("\n");
-//	dlist_clear(stack_a);
-
-
-	printf("\n\n\n\nresult %d\n", result);
+	dlist_clear(stack_a);
+	printf("\nresult %d\n", result);
 	return (0);
 }
