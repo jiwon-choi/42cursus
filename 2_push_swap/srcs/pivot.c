@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 13:34:37 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/09 13:34:39 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/09 18:44:11 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,3 @@ int		ft_setup_pivot(t_dlist *stack, int length)
 	}
 	return (arr[0]);
 }
-
-

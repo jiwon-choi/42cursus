@@ -6,11 +6,38 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:55:30 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/09 13:34:58 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/09 21:59:20 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+static void	length_3(t_dlist **stack_a, t_dlist **stack_b)
+{
+	int		min;
+
+	min = ft_min(*stack_b);
+	if ((*stack_b)->next->num == ft_max(*stack_b))
+		op_sb(*stack_b);
+	if ((*stack_b)->num == ft_max(*stack_b))
+	{
+		op_pa(stack_a, stack_b);
+		if ((*stack_b)->num == ft_min(*stack_b))
+			op_sb(*stack_b);
+		op_pa(stack_a, stack_b);
+		op_pa(stack_a, stack_b);
+	}
+	else
+	{
+		op_pa(stack_a, stack_b);
+		op_sb(*stack_b);
+		op_pa(stack_a, stack_b);
+		op_sa(*stack_a);
+		op_pa(stack_a, stack_b);
+		if ((*stack_a)->num != min)
+			op_sa(*stack_a);
+	}
+}
 
 void	ft_b_to_a(t_dlist **stack_a, t_dlist **stack_b, int length)
 {
@@ -22,6 +49,11 @@ void	ft_b_to_a(t_dlist **stack_a, t_dlist **stack_b, int length)
 	if (length < 2)
 	{
 		op_pa(stack_a, stack_b);
+		return ;
+	}
+	if (length == 3)
+	{
+		length_3(stack_a, stack_b);
 		return ;
 	}
 	if (length == 2 && check_ascending(*stack_b, length))
@@ -37,26 +69,14 @@ void	ft_b_to_a(t_dlist **stack_a, t_dlist **stack_b, int length)
 	pa_cnt = 0;
 	while (length--)
 	{
-		if ((*stack_b)->num > pivot)
-		{
+		if ((*stack_b)->num >= pivot && ++pa_cnt)
 			op_pa(stack_a, stack_b);
-			pa_cnt++;
-		}
-		else
-		{
+		else if ((*stack_b)->num < pivot && ++rb_cnt)
 			op_rb(stack_b);
-			rb_cnt++;
-		}
 	}
 	i = 0;
 	while (i++ < rb_cnt)
 		op_rrb(stack_b);
-	if (pa_cnt == 0)
-	{
-		op_pa(stack_a, stack_b);
-		pa_cnt++;
-		rb_cnt--;
-	}
 	ft_a_to_b(stack_a, stack_b, pa_cnt);
 	ft_b_to_a(stack_a, stack_b, rb_cnt);
 }

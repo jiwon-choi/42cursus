@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/28 19:02:09 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/06/09 14:35:24 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/06/09 18:36:54 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ INCS_DIR	= ./includes/
 SRCS_DIR	= ./srcs/
 
 SRC			= check.c \
-			  descend_to_ascend.c \
 			  ft_atoi.c \
 			  main.c \
+			  math.c \
 			  op_push.c \
 			  op_reverse_rotate.c \
 			  op_rotate.c \

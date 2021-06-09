@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 13:30:57 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/09 14:35:33 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/09 18:36:15 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ t_bool			check_duplicates(t_dlist *lst);
 t_bool			check_ascending(t_dlist *lst, int n);
 t_bool			check_descending(t_dlist *lst, int n);
 
-void			descend_to_ascend(t_dlist **stack_a, t_dlist **stack_b, int length);
-
 int				ft_atoi(char *str);
 
 void			ft_error(void);
 void			print_stack(t_dlist *stack);
+
+int				ft_max(t_dlist *stack);
+int				ft_min(t_dlist *stack);
 
 void			op_pa(t_dlist **stack_a, t_dlist **stack_b);
 void			op_pb(t_dlist **stack_a, t_dlist **stack_b);
