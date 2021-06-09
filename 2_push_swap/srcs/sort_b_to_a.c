@@ -6,39 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:55:30 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/05/28 20:10:01 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/09 13:34:58 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int		ft_setup_pivot(t_dlist *stack, int length)
-{
-	int		arr[length];
-	int		i;
-	int		j;
-	int		cnt;
-
-	i = 0;
-	while (i < length)
-	{
-		arr[i++] = stack->num;
-		stack = stack->next;
-	}
-	i = 0;
-	while (i < length)
-	{
-		j = 0;
-		cnt = 0;
-		while (j < length)
-			if (arr[i] > arr[j++])
-				cnt++;
-		if (cnt == length / 2)
-			return (arr[i]);
-		i++;
-	}
-	return (arr[0]);
-}
 
 void	ft_b_to_a(t_dlist **stack_a, t_dlist **stack_b, int length)
 {
