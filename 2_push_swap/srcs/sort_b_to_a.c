@@ -6,13 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:55:30 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/10 13:41:58 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/10 15:05:16 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void	length_3(t_dlist **stack_a, t_dlist **stack_b)
+static void		length_3(t_dlist **stack_a, t_dlist **stack_b)
 {
 	int		min;
 
@@ -39,31 +39,38 @@ static void	length_3(t_dlist **stack_a, t_dlist **stack_b)
 	}
 }
 
-void	ft_b_to_a(t_dlist **stack_a, t_dlist **stack_b, int length)
+static t_bool	except_case(t_dlist **stack_a, t_dlist **stack_b, int length)
+{
+	if (length == 3)
+	{
+		length_3(stack_a, stack_b);
+		return (TRUE);
+	}
+	if (length == 2 && check_ascending(*stack_b, length))
+	{
+		op_sb(*stack_b);
+		op_pa(stack_a, stack_b);
+		op_pa(stack_a, stack_b);
+		return (TRUE);
+	}
+	if (check_descending(*stack_b, length))
+	{
+		while (length--)
+			op_pa(stack_a, stack_b);
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+void			ft_b_to_a(t_dlist **stack_a, t_dlist **stack_b, int length)
 {
 	int		pivot;
 	int		rb_cnt;
 	int		pa_cnt;
 	int		i;
 
-	if (length < 2)
-	{
-		op_pa(stack_a, stack_b);
+	if (except_case(stack_a, stack_b, length))
 		return ;
-	}
-	if (length == 3)
-	{
-		length_3(stack_a, stack_b);
-		return ;
-	}
-	if (length == 2 && check_ascending(*stack_b, length))
-		op_sb(*stack_b);
-	if (check_descending(*stack_b, length))
-	{
-		while (length--)
-			op_pa(stack_a, stack_b);
-		return ;
-	}
 	pivot = ft_setup_pivot(*stack_b, length);
 	rb_cnt = 0;
 	pa_cnt = 0;

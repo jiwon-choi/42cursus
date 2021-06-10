@@ -6,35 +6,19 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 13:29:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/09 18:36:34 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/10 15:15:58 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ft_error(void)
+void		ft_error(void)
 {
 	write(1, "Error\n", 6);
 	exit(1);
 }
 
-void	print_stack(t_dlist *stack)
-{
-	t_dlist	*head;
-
-	if (!stack)
-		return ;
-	head = stack;
-	printf("%d ", stack->num);
-	stack = stack->next;
-	while (stack != head)
-	{
-		printf("%d ", stack->num);
-		stack = stack->next;
-	}
-}
-
-static void	length_3(t_dlist **stack_a)
+void		only_3(t_dlist **stack_a)
 {
 	if (check_ascending(*stack_a, 3))
 		return ;
@@ -65,6 +49,11 @@ static void	descend_to_ascend(t_dlist **stack_a, t_dlist **stack_b, int length)
 {
 	int		i;
 
+	if (length == 2)
+	{
+		op_sa(*stack_a);
+		return ;
+	}
 	i = length - 1;
 	while (i--)
 		op_pb(stack_a, stack_b);
@@ -76,7 +65,27 @@ static void	descend_to_ascend(t_dlist **stack_a, t_dlist **stack_b, int length)
 	}
 }
 
-int		main(int argc, char **argv)
+static void	init_stack(t_dlist **lst, t_dlist *node)
+{
+	if (!lst || !node)
+		return ;
+	if (!*lst)
+		*lst = node;
+	else
+	{
+		(*lst)->prev->next = node;
+		node->prev = (*lst)->prev;
+		(*lst)->prev = node;
+		node->next = *lst;
+	}
+	if (check_duplicates(*lst))
+	{
+		dlist_clear(*lst);
+		ft_error();
+	}
+}
+
+int			main(int argc, char **argv)
 {
 	t_dlist	*stack_a;
 	t_dlist	*stack_b;
@@ -88,7 +97,7 @@ int		main(int argc, char **argv)
 	while (*(++argv))
 		init_stack(&stack_a, create_node(ft_atoi(*argv)));
 	if (argc - 1 == 3)
-		length_3(&stack_a);
+		only_3(&stack_a);
 	if (check_descending(stack_a, argc - 1))
 		descend_to_ascend(&stack_a, &stack_b, argc - 1);
 	if (!check_ascending(stack_a, argc - 1))

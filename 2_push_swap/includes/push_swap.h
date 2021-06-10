@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 13:30:57 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/09 18:36:15 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/10 15:13:01 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_bool			check_descending(t_dlist *lst, int n);
 int				ft_atoi(char *str);
 
 void			ft_error(void);
-void			print_stack(t_dlist *stack);
+void			only_3(t_dlist **stack_a);
 
 int				ft_max(t_dlist *stack);
 int				ft_min(t_dlist *stack);
@@ -65,6 +65,6 @@ t_dlist			*create_node(int input);
 void			push_node(t_dlist **lst, t_dlist *node);
 t_dlist			*pop_node(t_dlist **lst);
 void			dlist_clear(t_dlist *lst);
-void			init_stack(t_dlist **lst, t_dlist *node);
+int				stack_size(t_dlist *lst);
 
 #endif
