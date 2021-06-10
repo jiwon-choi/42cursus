@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:55:30 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/09 21:59:20 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/10 13:41:58 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	length_3(t_dlist **stack_a, t_dlist **stack_b)
 	if ((*stack_b)->num == ft_max(*stack_b))
 	{
 		op_pa(stack_a, stack_b);
-		if ((*stack_b)->num == ft_min(*stack_b))
+		if ((*stack_b)->num == min)
 			op_sb(*stack_b);
 		op_pa(stack_a, stack_b);
 		op_pa(stack_a, stack_b);
