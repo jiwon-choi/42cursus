@@ -6,14 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 13:30:57 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/10 15:13:01 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/11 12:21:13 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 
