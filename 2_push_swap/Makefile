@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/28 19:02:09 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/06/09 18:36:54 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/06/21 15:35:29 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,11 @@ TARGET		= push_swap
 
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra
-RM			= rm -f
+RM			= rm -rf
 
 INCS_DIR	= ./includes/
 SRCS_DIR	= ./srcs/
+OBJS_DIR	= ./objs/
 
 SRC			= check.c \
 			  ft_atoi.c \
@@ -33,18 +34,19 @@ SRC			= check.c \
 			  stack_utils.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
-OBJS		= $(SRCS:.c=.o)
-
-.c.o :
-	$(CC) $(CFLAGS) -I $(INCS_DIR) -o $@ -c $?
+OBJS		= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 
 $(TARGET) : $(OBJS)
 	$(CC) -o $(TARGET) $(OBJS) -I $(INCS_DIR)
 
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -I $(INCS_DIR) -c $< -o $@
+
 all : $(TARGET)
 
 clean :
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_DIR)
 
 fclean : clean
 	$(RM) $(TARGET)
