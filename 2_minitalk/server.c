@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:55:04 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/22 20:48:55 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/23 20:20:46 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "minitalk.h"
 
 void	handler(int sig)
 {
-	if (sig == 30)
-		printf("0 \n");
-	else if (sig == 31)
-		printf("1 \n");
-//	printf("signal no %d!!!\n", sig);
+	static int	data = 0;
+	static int	cnt = 0;
+
+	cnt++;
+	data <<= 1;
+	if (sig == SIGUSR2)
+		data += 1;
+	if (cnt == 8)
+	{
+		write(1, &data, 1);
+		data = 0;
+		cnt = 0;
+	}
 }
 
-int		main(int argc, char **argv)
+int		main(void)
 {
-	printf("%d\n", getpid());
+	char	*pid_str;
+
+	pid_str = ft_itoa(getpid());
+	write(1, pid_str, ft_strlen(pid_str));
+	write(1, "\n", 1);
 	signal(SIGUSR1, (void *)handler);
 	signal(SIGUSR2, (void *)handler);
 	while (1)
 		pause();
-
 	return (0);
 }

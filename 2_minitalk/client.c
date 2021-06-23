@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:45:36 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/22 20:31:33 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/23 20:28:26 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "minitalk.h"
 
-void	ft_error(void)
+void	convert_binary(int server_pid, int ch)
 {
-	write(1, "Error\n", 6);
-	exit(1);
-}
+	int		cnt;
 
-void	convert_binary(int server_pid, char ch)
-{
-	int		binary[8];
-	int		idx;
-
-	idx = 8;
-	while (idx > 0)
+	cnt = 7;
+	while (cnt >= 0)
 	{
-		binary[--idx] = ch % 2;
-		ch /= 2;
-	}
-	for (int i = 0; i < 8; i++)
-	{
-		printf("%d ", binary[i]);
-		if (binary[i] == 0)
+		if ((ch >> cnt & 1) == 0)
 			kill(server_pid, SIGUSR1);
-		else
+		else if ((ch >> cnt & 1) == 1)
 			kill(server_pid, SIGUSR2);
-		usleep(100);
+		usleep(30);
+		cnt--;
 	}
-	printf("\n");
 }
 
 void	send_server(int server_pid, char *str)
@@ -52,8 +39,10 @@ int		main(int argc, char **argv)
 	int		server_pid;
 
 	if (argc != 3)
-		ft_error();
+		ft_error("./client [server PID] [message]");
 	server_pid = ft_atoi(argv[1]);
+	if (server_pid < 2 || server_pid > 32768)
+		ft_error("PID out of range");
 	send_server(server_pid, argv[2]);
 	return (0);
 }
