@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:36:34 by jiwchoi           #+#    #+#             */
-/*   Updated: 2020/12/28 15:53:47 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/06/23 15:50:36 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,34 @@ int				ft_isspace(char ch)
 	return (0);
 }
 
-static int		check_over_range(unsigned long long num, int sign)
+static int		check_over_range(long long num, int sign)
 {
-	if (num > LLONG_MAX - 1 && sign == -1)
+	if (num < -2147483648)
 		return (0);
-	if (num > LLONG_MAX && sign == 1)
+	if (num > 2147483647)
 		return (-1);
 	return (num * sign);
 }
 
 int				ft_atoi(const char *nptr)
 {
-	int					i;
-	int					sign;
-	long long			num;
+	int			sign;
+	long long	num;
 
-	i = 0;
 	sign = 1;
 	num = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
 	{
-		if (nptr[i] == '-')
+		if (*nptr == '-')
 			sign *= -1;
-		i++;
+		nptr++;
 	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
+	while (*nptr >= '0' && *nptr <= '9')
 	{
 		num *= 10;
-		num += (nptr[i++] - '0');
+		num += (*(nptr++) - '0');
 	}
 	return (check_over_range(num, sign));
 }
