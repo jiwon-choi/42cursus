@@ -6,12 +6,12 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:55:57 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/30 15:18:30 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:15:42 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
 # include <unistd.h>
 # include <signal.h>

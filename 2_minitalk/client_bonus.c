@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:45:36 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/30 15:18:23 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:19:15 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		main(int argc, char **argv)
 	if (argc != 3)
 		ft_error("./client [server PID] [message]");
 	server_pid = ft_atoi(argv[1]);
-	if (server_pid < 2 || server_pid > 32768)
+	if (server_pid < 100 || server_pid > 100000)
 		ft_error("PID out of range");
 	send_server(server_pid, argv[2]);
 	return (0);
