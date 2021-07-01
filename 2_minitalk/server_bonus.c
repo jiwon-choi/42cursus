@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 13:55:04 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/30 15:18:36 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/07/01 12:57:14 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		main(void)
 	pid_str = ft_itoa(getpid());
 	write(1, pid_str, ft_strlen(pid_str));
 	write(1, "\n", 1);
+	free(pid_str);
 	signal(SIGUSR1, (void *)handler);
 	signal(SIGUSR2, (void *)handler);
 	while (1)
