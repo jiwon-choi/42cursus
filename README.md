@@ -16,3 +16,5 @@
 | 02 | [miniRT](./2_miniRT) |  |  [![jiwchoi's 42 miniRT Score](https://badge42.herokuapp.com/api/project/jiwchoi/miniRT)](https://github.com/JaeSeoKim/badge42)| 2021-05-19 |
 | 02    | [push_swap](./2_push_swap) | | [![jiwchoi's 42 Push_swap Score](https://badge42.herokuapp.com/api/project/jiwchoi/push_swap)](https://github.com/JaeSeoKim/badge42) | 2021-06-10 |
 | 02    | [minitalk](./2_minitalk) | | [![jiwchoi's 42 minitalk Score](https://badge42.herokuapp.com/api/project/jiwchoi/minitalk)](https://github.com/JaeSeoKim/badge42) | 2021-07-05 |
+| 03    | [minishell](./3_minishell) | | [![jiwchoi's 42 minishell Score](https://badge42.herokuapp.com/api/project/jiwchoi/minishell)](https://github.com/JaeSeoKim/badge42) | |
+| 03    | [Philosophers](./3_Philosophers) | | [![jiwchoi's 42 Philosophers Score](https://badge42.herokuapp.com/api/project/jiwchoi/Philosophers)](https://github.com/JaeSeoKim/badge42) | |
