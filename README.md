@@ -15,6 +15,6 @@
 | 02     | [Exam Rank 02](./2_examrank02)     |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2021-04-13 |
 | 02     | [miniRT](./2_miniRT)               |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/miniRT)](https://github.com/JaeSeoKim/badge42)           | 2021-05-19 |
 | 02     | [push_swap](./2_push_swap)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/push_swap)](https://github.com/JaeSeoKim/badge42)        | 2021-06-10 |
-| 02     | [minitalk](./2_minitalk)           |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/minitalk)](https://github.com/JaeSeoKim/badge42)         | 2021-07-05 |
+| 02     | [minitalk](./2_minitalk)           |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/push_swap)](https://github.com/JaeSeoKim/badge42)         | 2021-07-05 |
 | 03     | [minishell](./3_minishell)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/minishell)](https://github.com/JaeSeoKim/badge42)        | |
 | 03     | [Philosophers](./3_Philosophers)   |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/Philosophers)](https://github.com/JaeSeoKim/badge42)     | |
