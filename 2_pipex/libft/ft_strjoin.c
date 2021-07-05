@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/29 10:55:25 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/07/05 19:02:43 by jiwchoi          ###   ########.fr       */
+/*   Created: 2020/12/26 12:21:43 by jiwchoi           #+#    #+#             */
+/*   Updated: 2020/12/26 15:05:15 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "./libft/libft.h"
-
-# define READ 0
-# define WRITE 1
-
-typedef struct	s_exe
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*cmd[5];
-	char	**argv;
-	char	**envp;
-}				t_exe;
+	int		i;
+	int		j;
+	char	*join;
 
-#endif
+	if (!s1 || !s2)
+		return (0);
+	if (!(join = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
+		return (0);
+	i = 0;
+	j = 0;
+	while (s1[i])
+	{
+		join[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+		join[i++] = s2[j++];
+	join[i] = 0;
+	return (join);
+}

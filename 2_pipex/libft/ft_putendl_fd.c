@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/29 10:55:25 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/07/05 19:02:43 by jiwchoi          ###   ########.fr       */
+/*   Created: 2020/12/26 11:19:13 by jiwchoi           #+#    #+#             */
+/*   Updated: 2020/12/26 13:03:01 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "./libft/libft.h"
-
-# define READ 0
-# define WRITE 1
-
-typedef struct	s_exe
+void	ft_putendl_fd(char *s, int fd)
 {
-	char	*cmd[5];
-	char	**argv;
-	char	**envp;
-}				t_exe;
-
-#endif
+	if (s)
+	{
+		write(fd, s, ft_strlen(s));
+		write(fd, "\n", 1);
+	}
+}

@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/29 10:55:25 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/07/05 19:02:43 by jiwchoi          ###   ########.fr       */
+/*   Created: 2020/12/27 19:37:05 by jiwchoi           #+#    #+#             */
+/*   Updated: 2020/12/27 20:01:20 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "./libft/libft.h"
-
-# define READ 0
-# define WRITE 1
-
-typedef struct	s_exe
+int		ft_lstsize(t_list *lst)
 {
-	char	*cmd[5];
-	char	**argv;
-	char	**envp;
-}				t_exe;
+	int		cnt;
+	t_list	*p;
 
-#endif
+	cnt = 0;
+	p = lst;
+	while (p)
+	{
+		cnt++;
+		p = p->next;
+	}
+	return (cnt);
+}

@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/29 10:55:25 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/07/05 19:02:43 by jiwchoi          ###   ########.fr       */
+/*   Created: 2020/12/22 14:02:54 by jiwchoi           #+#    #+#             */
+/*   Updated: 2020/12/24 17:44:31 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "./libft/libft.h"
-
-# define READ 0
-# define WRITE 1
-
-typedef struct	s_exe
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	char	*cmd[5];
-	char	**argv;
-	char	**envp;
-}				t_exe;
+	size_t	i;
+	size_t	len;
 
-#endif
+	i = 0;
+	if (!dst || !src)
+		return (0);
+	len = ft_strlen(src);
+	if (dstsize == 0)
+		return (len);
+	while (src[i] && i + 1 < dstsize)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = 0;
+	return (len);
+}

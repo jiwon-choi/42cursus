@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/29 10:55:25 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/07/05 19:02:43 by jiwchoi          ###   ########.fr       */
+/*   Created: 2020/12/22 14:04:08 by jiwchoi           #+#    #+#             */
+/*   Updated: 2020/12/22 21:13:06 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "./libft/libft.h"
-
-# define READ 0
-# define WRITE 1
-
-typedef struct	s_exe
+size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	char	*cmd[5];
-	char	**argv;
-	char	**envp;
-}				t_exe;
+	int		d;
+	int		s;
+	size_t	cnt;
 
-#endif
+	d = 0;
+	s = 0;
+	cnt = 0;
+	while (dst[d] && cnt < dstsize)
+	{
+		d++;
+		cnt++;
+	}
+	while (src[s] && cnt + 1 < dstsize)
+	{
+		dst[d++] = src[s++];
+		cnt++;
+	}
+	if (cnt < dstsize)
+		dst[d] = 0;
+	while (src[s])
+	{
+		s++;
+		cnt++;
+	}
+	return (cnt);
+}

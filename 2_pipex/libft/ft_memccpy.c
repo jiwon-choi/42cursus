@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/29 10:55:25 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/07/05 19:02:43 by jiwchoi          ###   ########.fr       */
+/*   Created: 2020/12/22 20:14:09 by jiwchoi           #+#    #+#             */
+/*   Updated: 2020/12/26 11:13:53 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "./libft/libft.h"
-
-# define READ 0
-# define WRITE 1
-
-typedef struct	s_exe
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	char	*cmd[5];
-	char	**argv;
-	char	**envp;
-}				t_exe;
-
-#endif
+	while (n)
+	{
+		*((unsigned char *)dest) = *((unsigned char *)src);
+		if (*(unsigned char *)dest++ == (unsigned char)c)
+			break ;
+		src++;
+		n--;
+	}
+	if (n == 0)
+		return (0);
+	return (dest);
+}
