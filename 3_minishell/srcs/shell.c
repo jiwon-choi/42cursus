@@ -6,13 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:40:08 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/07/09 01:40:11 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/07/13 00:19:28 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		main(void)
+int		main(int argc, char **argv, char **envp)
 {
 	pid_t	pid;
 	int		fildes[2];
@@ -36,7 +36,7 @@ int		main(void)
 	else if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
-		execve("./minishell", 0, 0);
+		execve("./minishell", 0, envp);
 	}
 	return (0);
 }
