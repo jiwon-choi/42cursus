@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 10:54:56 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/07/05 19:03:54 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/07/13 22:39:19 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,33 @@ void	ft_exe(char *argv)
 	while (i++ < 5)
 		execve(exe.cmd[i], exe.argv, exe.envp);
 	perror(exe.argv[0]);
+}
+
+char	*make_path(char **envp, char *cmd)
+{
+	char	**path_arr;
+	char	*path;
+
+	while (*envp)
+	{
+		if (strncmp(*envp, "PATH=", 5) == 0)
+			path_arr = ft_split(*(envp + 5), ':');
+		envp++;
+	}
+	while (*path_arr)
+	{
+		path = ft_strjoin(*path_arr, cmd);
+		if (access(path, X_OK))
+		{
+			// free(path_arr);
+			return (path);
+		}
+		free(path);
+		path_arr++;
+	}
+	// free(path_arr);
+	// error
+	return (0);
 }
 
 int		main(int argc, char **argv)
