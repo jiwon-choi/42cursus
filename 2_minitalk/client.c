@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:45:36 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/07/01 13:18:38 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/07/14 22:19:38 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	convert_binary(int server_pid, int ch)
 			kill(server_pid, SIGUSR1);
 		else if ((ch >> cnt & 1) == 1)
 			kill(server_pid, SIGUSR2);
-		usleep(30);
+		usleep(100);
 		cnt--;
 	}
 }
