@@ -6,56 +6,47 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:51:59 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/09/22 12:05:39 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/09/22 15:26:58 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-/*
-	number_of_philosophers
-	time_to_die
-	time_to_eat
-	time_to_sleep
-	number_of_times_each_philosopher_must_eat
-*/
-
-void	ft_error(char *err_msg)
+int		error_handler(char *err_msg)
 {
 	printf("%s\n", err_msg);
-	exit(1);
+	return (EXIT_FAILURE);
 }
 
-int		philo_atoi(char *str)
+int		init_info(int argc, char **argv, t_info *info)
 {
-	int		num;
-
-	num = 0;
-	while (*str)
-	{
-		if (!(*str >= '0' && *str <= '9'))
-			ft_error("atoi error");
-		num *= 10;
-		num += (*(str++) - '0');
-	}
-	return (num);
+	if ((info->philo_cnt = philo_atoi(argv[1])) < 2)
+		return (-1);
+	if ((info->time_to_die = philo_atoi(argv[2])) < 0)
+		return (-1);
+	if ((info->time_to_eat = philo_atoi(argv[3])) < 0)
+		return (-1);
+	if ((info->time_to_sleep = philo_atoi(argv[4])) < 0)
+		return (-1);
+	info->must_eat = 0;
+	if (argc == 6 && ((info->must_eat = philo_atoi(argv[5])) < 0))
+			return (-1);
+	if (info->philo = (t_philo *)malloc(sizeof(t_philo) * info->philo_cnt))
+		return (-1);
+	if (info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->philo_cnt))
+		return (-1);
+	return (0);
 }
 
 int		main(int argc, char **argv)
 {
-	t_philo		philo;
+	t_info		info;
 
 	if (argc < 5 || argc > 6)
-		ft_error("argc error");
-	philo.philosophers = philo_atoi(argv[1]);	
-	philo.time_to_die = philo_atoi(argv[2]);
-	philo.time_to_eat = philo_atoi(argv[3]);
-	philo.time_to_sleep = philo_atoi(argv[4]);
-	if (argc == 6)
-		philo.must_eat = philo_atoi(argv[5]);
-	else
-		philo.must_eat = -1;
-
-	printf("%d %d %d %d %d\n", philo.philosophers, philo.time_to_die, philo.time_to_eat, philo.time_to_sleep, philo.must_eat);
+		return (error_handler("argc error"));
+	if (init_info(argc, argv, &info) == -1)
+		return (error_handler("input error"));
+	
+	printf("%d %d %d %d %d\n", info.philo_cnt, info.time_to_die, info.time_to_eat, info.time_to_sleep, info.must_eat);
 	return (0);
 }

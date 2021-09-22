@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:49:20 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/09/22 12:05:25 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/09/22 15:34:29 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,20 @@
 
 typedef struct	s_philo
 {
-	int		philosophers;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		must_eat;
+	int			pnum;
+	int			philo_stat;
+	int			eat_cnt;
 }				t_philo;
 
+typedef struct			s_info
+{
+	int					philo_cnt;
+	int					time_to_die;
+	int					time_to_eat;
+	int					time_to_sleep;
+	int					must_eat;
+	t_philo				*philo;
+	pthread_mutex_t		*fork_mutex;
+}						t_info;
 
 #endif
