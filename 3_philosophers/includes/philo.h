@@ -20,4 +20,14 @@
 # include <sys/time.h> // gettimeofday
 # include <pthread.h>
 
+typedef struct	s_philo
+{
+	int		philosophers;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		must_eat;
+}				t_philo;
+
+
 #endif
