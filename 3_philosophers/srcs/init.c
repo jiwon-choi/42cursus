@@ -1,4 +1,4 @@
-#include "../includes/philo.h"
+#include "philo.h"
 
 void	init_philo(t_info *info)
 {
@@ -7,9 +7,10 @@ void	init_philo(t_info *info)
 	i = 0;
 	while (i <= info->philo_cnt)
 	{
-		info->philo->pnum = i + 1;
-		info->philo->philo_stat = THINK;
+		info->philo->number = i + 1;
+		info->philo->stat = THINK;
 		info->philo->eat_cnt = 0;
+		info->philo->info = info;
 		pthread_mutex_init(info->fork_mutex + i, NULL);
 		i++;
 	}

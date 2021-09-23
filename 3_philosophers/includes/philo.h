@@ -20,16 +20,18 @@
 # include <sys/time.h> // gettimeofday
 # include <pthread.h>
 
-# define EAT 0
-# define SLEEP 1
-# define THINK 2
+# define FORKS 0
+# define EAT 1
+# define SLEEP 2
+# define THINK 3
 
-typedef struct	s_philo
+typedef struct		s_philo
 {
-	int			pnum;
-	int			philo_stat;
-	int			eat_cnt;
-}				t_philo;
+	int				number;
+	int				stat;
+	int				eat_cnt;
+	struct s_info	*info;
+}					t_philo;
 
 typedef struct			s_info
 {

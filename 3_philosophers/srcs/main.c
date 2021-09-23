@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
 int	error_handler(char *err_msg)
 {
@@ -18,23 +18,51 @@ int	error_handler(char *err_msg)
 	return (EXIT_FAILURE);
 }
 
-void	*philo_work(void *param)
+void	*philo_work(void *philo)
 {
-
-	return (0);
+	t_philo		*p;
+	pthread_t	tid;
+	
+	p = (t_philo *)philo;
+	if (!(pthread_create(&tid, NULL, monitor_philo, philo)))
+		return ((void *)1);
+	while (1)
+	{
+		take_forks(p);
+		eat(p);
+		sleep_think(p);
+	}
+	return ((void *)0);
 }
 
-int		run_thread(t_info *info)
+int		thread_philo(t_info *info, int i)
 {
 	pthread_t	tid;
-	int			i;
 
-	i = 0;
-	while (i++ < info->philo_cnt)
+	while (i < info->philo_cnt)
 	{
-		pthread_create(&tid, NULL, philo_work, NULL);
+		if (!(pthread_create(&tid, NULL, philo_work, (void *)(&(info->philo[i])))))
+			return (EXIT_FAILURE);
+		pthread_detach(tid);
+		i += 2;
+	}
+	// 대기
+	return (EXIT_SUCCESS);
+}
+
+int		run(t_info *info)
+{
+	pthread_t	tid;
+
+	if (info->must_eat > 0)
+	{
+		if (!(pthread_create(&tid, NULL, monitor_eat, (void *)info)))
+			return (EXIT_FAILURE);
 		pthread_detach(tid);
 	}
+	if (thread_philo(info, 0) == EXIT_FAILURE ||
+		thread_philo(info, 1) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
