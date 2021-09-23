@@ -38,4 +38,6 @@ typedef struct			s_info
 	pthread_mutex_t		*fork_mutex;
 }						t_info;
 
+int	philo_atoi(char *str);
+
 #endif
