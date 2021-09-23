@@ -12,41 +12,45 @@
 
 #include "../includes/philo.h"
 
-int		error_handler(char *err_msg)
+int	error_handler(char *err_msg)
 {
 	printf("%s\n", err_msg);
 	return (EXIT_FAILURE);
 }
 
-int		init_info(int argc, char **argv, t_info *info)
+int	init_info(t_info *info, int *argv_num)
 {
-	if ((info->philo_cnt = philo_atoi(argv[1])) < 2)
-		return (-1);
-	if ((info->time_to_die = philo_atoi(argv[2])) < 0)
-		return (-1);
-	if ((info->time_to_eat = philo_atoi(argv[3])) < 0)
-		return (-1);
-	if ((info->time_to_sleep = philo_atoi(argv[4])) < 0)
-		return (-1);
-	info->must_eat = 0;
-	if (argc == 6 && ((info->must_eat = philo_atoi(argv[5])) < 0))
-			return (-1);
-	if (info->philo = (t_philo *)malloc(sizeof(t_philo) * info->philo_cnt))
-		return (-1);
-	if (info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->philo_cnt))
-		return (-1);
-	return (0);
+	info->philo_cnt = argv_num[0];
+	info->time_to_die = argv_num[1];
+	info->time_to_eat = argv_num[2];
+	info->time_to_sleep = argv_num[3];
+	info->must_eat = argv_num[4];
+	if (!(info->philo = (t_philo *)malloc(sizeof(t_philo) * info->philo_cnt)))
+		return (EXIT_FAILURE);
+	if (!(info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->philo_cnt)))
+	{
+		free(info->philo);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_info		info;
+	int			argv_num[5];
+	int			i;
 
 	if (argc < 5 || argc > 6)
 		return (error_handler("argc error"));
-	if (init_info(argc, argv, &info) == -1)
-		return (error_handler("input error"));
-	
+	i = 0;
+	while (*(++argv))
+	{
+		argv_num[i++] = philo_atoi(*argv);
+		// 음수 예외처리 미리
+	}
+	if (init_info(&info, argv_num))
+		return (error_handler("info error"));
 	printf("%d %d %d %d %d\n", info.philo_cnt, info.time_to_die, info.time_to_eat, info.time_to_sleep, info.must_eat);
-	return (0);
+	return (EXIT_SUCCESS);
 }
