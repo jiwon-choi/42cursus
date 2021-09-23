@@ -20,6 +20,10 @@
 # include <sys/time.h> // gettimeofday
 # include <pthread.h>
 
+# define EAT 0
+# define SLEEP 1
+# define THINK 2
+
 typedef struct	s_philo
 {
 	int			pnum;
@@ -38,6 +42,9 @@ typedef struct			s_info
 	pthread_mutex_t		*fork_mutex;
 }						t_info;
 
-int	philo_atoi(char *str);
+void	init_philo(t_info *info);
+int		init_info(char **argv, t_info *info);
+
+int		philo_atoi(char *str);
 
 #endif

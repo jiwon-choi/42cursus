@@ -18,19 +18,22 @@ int	error_handler(char *err_msg)
 	return (EXIT_FAILURE);
 }
 
-int	init_info(t_info *info, int *argv_num)
+void	*philo_work(void *param)
 {
-	info->philo_cnt = argv_num[0];
-	info->time_to_die = argv_num[1];
-	info->time_to_eat = argv_num[2];
-	info->time_to_sleep = argv_num[3];
-	info->must_eat = argv_num[4];
-	if (!(info->philo = (t_philo *)malloc(sizeof(t_philo) * info->philo_cnt)))
-		return (EXIT_FAILURE);
-	if (!(info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->philo_cnt)))
+
+	return (0);
+}
+
+int		run_thread(t_info *info)
+{
+	pthread_t	tid;
+	int			i;
+
+	i = 0;
+	while (i++ < info->philo_cnt)
 	{
-		free(info->philo);
-		return (EXIT_FAILURE);
+		pthread_create(&tid, NULL, philo_work, NULL);
+		pthread_detach(tid);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -38,19 +41,12 @@ int	init_info(t_info *info, int *argv_num)
 int	main(int argc, char **argv)
 {
 	t_info		info;
-	int			argv_num[5];
-	int			i;
 
 	if (argc < 5 || argc > 6)
 		return (error_handler("argc error"));
-	i = 0;
-	while (*(++argv))
-	{
-		argv_num[i++] = philo_atoi(*argv);
-		// 음수 예외처리 미리
-	}
-	if (init_info(&info, argv_num))
+	if (init_info(argv, &info))
 		return (error_handler("info error"));
-	printf("%d %d %d %d %d\n", info.philo_cnt, info.time_to_die, info.time_to_eat, info.time_to_sleep, info.must_eat);
+	// printf("%d %d %d %d %d\n", info.philo_cnt, info.time_to_die, info.time_to_eat, info.time_to_sleep, info.must_eat);
+	run_thread(&info);
 	return (EXIT_SUCCESS);
 }
