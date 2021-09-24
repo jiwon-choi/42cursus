@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	philo_atoi(char *str)
 {
@@ -25,4 +25,12 @@ int	philo_atoi(char *str)
 		num += (*(str++) - '0');
 	}
 	return (num);
+}
+
+void	print_status(char *str)
+{
+	printf("timestamp_in_ms ");
+	printf("X ");
+	printf("is ");
+	printf("%s\n", str);
 }

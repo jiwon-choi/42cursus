@@ -6,11 +6,11 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:51:59 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/09/22 15:26:58 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/09/24 17:14:06 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	error_handler(char *err_msg)
 {
@@ -39,7 +39,7 @@ int		thread_philo(t_info *info, int i)
 {
 	pthread_t	tid;
 
-	while (i < info->philo_cnt)
+	while (i < info->number_of_philo)
 	{
 		if (!(pthread_create(&tid, NULL, philo_work, (void *)(&(info->philo[i])))))
 			return (EXIT_FAILURE);
@@ -71,10 +71,10 @@ int	main(int argc, char **argv)
 	t_info		info;
 
 	if (argc < 5 || argc > 6)
-		return (error_handler("argc error"));
+		return (error_handler("[Error] argc"));
 	if (init_info(argv, &info))
-		return (error_handler("info error"));
-	// printf("%d %d %d %d %d\n", info.philo_cnt, info.time_to_die, info.time_to_eat, info.time_to_sleep, info.must_eat);
-	run_thread(&info);
+		return (error_handler("[Error] info"));
+	printf("%d %d %d %d %d\n", info.number_of_philo, info.time_to_die, info.time_to_eat, info.time_to_sleep, info.must_eat);
+	// run_thread(&info);
 	return (EXIT_SUCCESS);
 }
