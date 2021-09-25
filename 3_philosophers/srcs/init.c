@@ -6,7 +6,7 @@ int	init_philo(t_info *info)
 
 	i = 0;
 	if (!(info->philo = (t_philo *)malloc(sizeof(t_philo) * info->number_of_philo)))
-		return (EXIT_FAILURE);
+		return (error_handler("[Error] philo malloc"));
 	while (++i <= info->number_of_philo)
 	{
 		info->philo->number = i;
@@ -14,6 +14,7 @@ int	init_philo(t_info *info)
 		info->philo->eat_cnt = 0;
 		info->philo->info = info;
 	}
+	return (EXIT_SUCCESS);
 }
 
 int	init_mutex(t_info *info)
@@ -23,11 +24,12 @@ int	init_mutex(t_info *info)
 	if (!(info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philo)))
 	{
 		free(info->philo);
-		return (EXIT_FAILURE);
+		return (error_handler("[Error] fork_mutex malloc"));
 	}
 	i = -1;
 	while (++i < info->number_of_philo)
 		pthread_mutex_init(info->fork_mutex + i, NULL);
+	return (EXIT_SUCCESS);
 }
 
 int	init_info(char **argv, t_info *info)

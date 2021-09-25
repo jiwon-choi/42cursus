@@ -73,7 +73,7 @@ int	main(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (error_handler("[Error] argc"));
 	if (init_info(argv, &info))
-		return (error_handler("[Error] info"));
+		return (EXIT_FAILURE);
 	printf("%d %d %d %d %d\n", info.number_of_philo, info.time_to_die, info.time_to_eat, info.time_to_sleep, info.must_eat);
 	// run_thread(&info);
 	return (EXIT_SUCCESS);
