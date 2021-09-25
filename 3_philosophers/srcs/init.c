@@ -1,18 +1,30 @@
-#include "../includes/philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/25 16:21:13 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/09/25 16:21:14 by jiwchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
 
 int	init_philo(t_info *info)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (!(info->philo = (t_philo *)malloc(sizeof(t_philo) * info->number_of_philo)))
 		return (error_handler("[Error] philo malloc"));
-	while (++i <= info->number_of_philo)
+	while (++i < info->number_of_philo)
 	{
-		info->philo->number = i;
-		info->philo->stat = THINK;
-		info->philo->eat_cnt = 0;
-		info->philo->info = info;
+		info->philo[i].number = i + 1;
+		info->philo[i].stat = THINK;
+		info->philo[i].eat_cnt = 0;
+		info->philo[i].info = info;
 	}
 	return (EXIT_SUCCESS);
 }

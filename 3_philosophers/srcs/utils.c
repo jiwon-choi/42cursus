@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/22 18:56:08 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/09/22 18:56:09 by jiwchoi          ###   ########.fr       */
+/*   Created: 2021/09/25 16:21:40 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/09/25 16:21:41 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
 int	philo_atoi(char *str)
 {
