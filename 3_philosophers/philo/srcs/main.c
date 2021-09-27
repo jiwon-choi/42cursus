@@ -84,5 +84,9 @@ int	main(int argc, char **argv)
 	// 	return (EXIT_FAILURE);
 	// };
 	pthread_mutex_lock(&info.die_mutex);
+	pthread_mutex_unlock(&info.die_mutex);
+	// pthread_mutex_destroy(&info.die_mutex);
+	// pthread_mutex_destroy(&info.print_mutex);
+	usleep(100000);
 	return (EXIT_SUCCESS);
 }

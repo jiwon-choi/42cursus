@@ -19,8 +19,10 @@ void	*monitor_philo(void *philo)
     p = (t_philo *)philo;
     while (gettimeofnow() < p->time + p->info->time_to_die)
         ;
+    p->stat = DEAD;
+	pthread_mutex_lock(&(p->info->print_mutex));
+    print_status(p);
     pthread_mutex_unlock(&(p->info->die_mutex));
-    print_status(p, "died");
     return (0);
 }
 

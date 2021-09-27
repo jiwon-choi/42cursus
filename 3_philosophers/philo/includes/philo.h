@@ -24,6 +24,7 @@
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
+# define DEAD 4
 
 typedef struct		s_philo
 {
@@ -47,6 +48,7 @@ typedef struct			s_info
 	t_philo				*philo;
 	pthread_mutex_t		*fork_mutex;
 	pthread_mutex_t		die_mutex;
+	pthread_mutex_t		print_mutex;
 }						t_info;
 
 void	init_time(t_info *info);
@@ -65,7 +67,7 @@ void	*monitor_eat(void *philo);
 //utils.c
 unsigned long gettimeofnow(void);
 int		philo_atoi(char *str);
-void	print_status(t_philo *philo, char *str);
+void	print_status(t_philo *philo);
 
 void	take_forks(t_philo *p);
 void	eat(t_philo *p);
