@@ -14,26 +14,34 @@
 
 void	take_forks(t_philo *p)
 {
-	pthread_mutex_lock(&(p->info->fork_mutex[(p->number - 1 + p->info->number_of_philo) % p->info->number_of_philo]));
+	pthread_mutex_lock(p->lfork);
 	p->stat = FORKS;
-	pthread_mutex_lock(&(p->info->fork_mutex[p->number]));
-	print_status("has taken a fork");
+	pthread_mutex_lock(p->rfork);
+	print_status(p, "has taken a fork");
 }
 
 void	eat(t_philo *p)
 {
+	unsigned long	start_time;
+
 	p->stat = EAT;
-	print_status("is eating");
-	usleep(1000 * p->info->time_to_eat);
+	start_time = gettimeofnow();
+	print_status(p, "is eating");
+	while (gettimeofnow() <= start_time + p->info->time_to_eat)
+		;
 	p->eat_cnt++;
+	pthread_mutex_unlock(p->lfork);
+	pthread_mutex_unlock(p->rfork);
 }
 
 void	sleep_think(t_philo *p)
 {
-	pthread_mutex_unlock(&(p->info->fork_mutex[(p->number - 1 + p->info->number_of_philo) % p->info->number_of_philo]));
-	pthread_mutex_unlock(&(p->info->fork_mutex[p->number]));
+	unsigned long	start_time;
+
 	p->stat = SLEEP;
-	print_status("is sleeping");
-	usleep(1000 * p->info->time_to_sleep);
+	start_time = gettimeofnow();
+	print_status(p, "is sleeping");
+	while (gettimeofnow() <= start_time + p->info->time_to_sleep)
+		;
 	p->stat = THINK;
 }

@@ -30,18 +30,21 @@ typedef struct		s_philo
 	int				number;
 	int				stat;
 	int				eat_cnt;
+	pthread_mutex_t	*rfork;
+	pthread_mutex_t	*lfork;
 	struct s_info	*info;
 }					t_philo;
 
 typedef struct			s_info
 {
 	int					number_of_philo;
-	int					time_to_die;
-	int					time_to_eat;
-	int					time_to_sleep;
+	unsigned long		time_to_die;
+	unsigned long		time_to_eat;
+	unsigned long		time_to_sleep;
 	int					must_eat;
 	t_philo				*philo;
 	pthread_mutex_t		*fork_mutex;
+	pthread_mutex_t		die_mutex;
 }						t_info;
 
 int		init_philo(t_info *info);
@@ -56,8 +59,10 @@ int		run(t_info *info);
 void	*monitor_philo(void *param);
 void	*monitor_eat(void *param);
 
+//utils.c
+unsigned long gettimeofnow(void);
 int		philo_atoi(char *str);
-void	print_status(char *str);
+void	print_status(t_philo *philo, char *str);
 
 void	take_forks(t_philo *p);
 void	eat(t_philo *p);

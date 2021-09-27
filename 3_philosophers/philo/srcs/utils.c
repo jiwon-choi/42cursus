@@ -12,6 +12,14 @@
 
 #include "philo.h"
 
+unsigned long gettimeofnow(void)
+{
+	struct timeval tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
 int	philo_atoi(char *str)
 {
 	int		num;
@@ -27,10 +35,7 @@ int	philo_atoi(char *str)
 	return (num);
 }
 
-void	print_status(char *str)
+void	print_status(t_philo *philo, char *str)
 {
-	printf("timestamp_in_ms ");
-	printf("X ");
-	printf("is ");
-	printf("%s\n", str);
+	printf("timestamp_in_ms %d %s\n", philo->number, str);
 }

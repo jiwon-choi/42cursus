@@ -70,19 +70,18 @@ int		run(t_info *info)
 
 int	main(int argc, char **argv)
 {
-	t_info		info;
+	t_info	info;
 
 	if (argc < 5 || argc > 6)
 		return (error_handler("[Error] argc"));
 	if (init_info(argv, &info))
 		return (EXIT_FAILURE);
-	// printf("%d %d %d %d %d\n", info.number_of_philo, info.time_to_die, info.time_to_eat, info.time_to_sleep, info.must_eat);
 	run(&info);
 	// {
 	// 	free(info.philo);
 	// 	free(info.fork_mutex);
 	// 	return (EXIT_FAILURE);
 	// };
-	while (1);
+	pthread_mutex_lock(&info.die_mutex);
 	return (EXIT_SUCCESS);
 }

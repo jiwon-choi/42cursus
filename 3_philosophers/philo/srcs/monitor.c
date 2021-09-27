@@ -15,6 +15,8 @@
 void	*monitor_philo(void *param)
 {
 	(void)param;
+    // if DIE????
+    //     ptrhead_mutex_unlock(&(info->mutex));
     return (0);
 }
 

@@ -24,6 +24,11 @@ int	init_philo(t_info *info)
 		info->philo[i].number = i + 1;
 		info->philo[i].stat = THINK;
 		info->philo[i].eat_cnt = 0;
+		info->philo[i].rfork = &(info->fork_mutex[i]);
+		if (i + 1 == info->number_of_philo)
+			info->philo[i].lfork = &(info->fork_mutex[0]);
+		else
+			info->philo[i].lfork = &(info->fork_mutex[i + 1]);
 		info->philo[i].info = info;
 	}
 	return (EXIT_SUCCESS);
@@ -64,5 +69,7 @@ int	init_info(char **argv, t_info *info)
 	info->must_eat = argv_num[4];
 	init_philo(info);
 	init_mutex(info);
+	pthread_mutex_init(&(info->die_mutex), NULL);
+	pthread_mutex_lock(&(info->die_mutex));
 	return (EXIT_SUCCESS);
 }
