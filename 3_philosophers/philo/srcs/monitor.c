@@ -12,16 +12,20 @@
 
 #include "philo.h"
 
-void	*monitor_philo(void *param)
+void	*monitor_philo(void *philo)
 {
-	(void)param;
-    // if DIE????
-    //     ptrhead_mutex_unlock(&(info->mutex));
+    t_philo     *p;
+
+    p = (t_philo *)philo;
+    while (gettimeofnow() < p->time + p->info->time_to_die)
+        ;
+    pthread_mutex_unlock(&(p->info->die_mutex));
+    print_status(p, "died");
     return (0);
 }
 
-void	*monitor_eat(void *param)
+void	*monitor_eat(void *philo)
 {
-    (void)param;
+    (void)philo;
     return (0);
 }

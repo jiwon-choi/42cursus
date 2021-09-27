@@ -22,12 +22,10 @@ void	take_forks(t_philo *p)
 
 void	eat(t_philo *p)
 {
-	unsigned long	start_time;
-
 	p->stat = EAT;
-	start_time = gettimeofnow();
+	p->time = gettimeofnow();
 	print_status(p, "is eating");
-	while (gettimeofnow() <= start_time + p->info->time_to_eat)
+	while (gettimeofnow() <= p->time + p->info->time_to_eat)
 		;
 	p->eat_cnt++;
 	pthread_mutex_unlock(p->lfork);

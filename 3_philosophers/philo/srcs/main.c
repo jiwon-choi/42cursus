@@ -63,6 +63,7 @@ int		run(t_info *info)
 			return (EXIT_FAILURE);
 		pthread_detach(tid);
 	}
+	init_time(info);
 	if (thread_philo(info, 1) || thread_philo(info, 0))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

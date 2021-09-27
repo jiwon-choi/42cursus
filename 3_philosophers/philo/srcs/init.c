@@ -12,6 +12,19 @@
 
 #include "philo.h"
 
+void	init_time(t_info *info)
+{
+	int				i;
+
+	info->start_time = gettimeofnow();
+	i = -1;
+	while (++i < info->number_of_philo)
+	{
+		info->philo[i].time = info->start_time;
+		// printf("%ld\n", info->philo[i].time);
+	}
+}
+
 int	init_philo(t_info *info)
 {
 	int	i;
