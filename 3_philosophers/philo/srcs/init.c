@@ -22,6 +22,21 @@ void	init_time(t_info *info)
 		info->philo[i].time = info->start_time;
 }
 
+int	init_mutex(t_info *info)
+{
+	int	i;
+
+	if (!(info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philo)))
+	{
+		free(info->philo);
+		return (error_handler("[Error] fork_mutex malloc"));
+	}
+	i = -1;
+	while (++i < info->number_of_philo)
+		pthread_mutex_init(info->fork_mutex + i, NULL);
+	return (EXIT_SUCCESS);
+}
+
 int	init_philo(t_info *info)
 {
 	int	i;
@@ -44,21 +59,6 @@ int	init_philo(t_info *info)
 	return (EXIT_SUCCESS);
 }
 
-int	init_mutex(t_info *info)
-{
-	int	i;
-
-	if (!(info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philo)))
-	{
-		free(info->philo);
-		return (error_handler("[Error] fork_mutex malloc"));
-	}
-	i = -1;
-	while (++i < info->number_of_philo)
-		pthread_mutex_init(info->fork_mutex + i, NULL);
-	return (EXIT_SUCCESS);
-}
-
 int	init_info(char **argv, t_info *info)
 {
 	int		argv_num[5];
@@ -77,8 +77,8 @@ int	init_info(char **argv, t_info *info)
 	info->time_to_eat = argv_num[2];
 	info->time_to_sleep = argv_num[3];
 	info->must_eat = argv_num[4];
-	init_philo(info);
-	init_mutex(info);
+	if (init_philo(info) || init_mutex(info))
+		return (EXIT_FAILURE);
 	pthread_mutex_init(&(info->die_mutex), NULL);
 	pthread_mutex_lock(&(info->die_mutex));
 	pthread_mutex_init(&(info->print_mutex), NULL);
