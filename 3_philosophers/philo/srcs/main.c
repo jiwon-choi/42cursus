@@ -26,14 +26,15 @@ void	*philo_work(void *philo)
 	
 	p = (t_philo *)philo;
 	if (pthread_create(&tid, NULL, monitor_philo, philo))
-		return ((void *)1);
+		return ((void *)EXIT_FAILURE);
+	pthread_detach(tid);
 	while (1)
 	{
 		take_forks(p);
 		eat(p);
 		sleep_think(p);
 	}
-	return ((void *)0);
+	return ((void *)EXIT_SUCCESS);
 }
 
 // 철학자 1인 1쓰레드 생성
@@ -66,6 +67,7 @@ int		run(t_info *info)
 	init_time(info);
 	if (thread_philo(info, 1) || thread_philo(info, 0))
 		return (EXIT_FAILURE);
+	usleep(500 * info->time_to_eat);
 	return (EXIT_SUCCESS);
 }
 
@@ -77,16 +79,14 @@ int	main(int argc, char **argv)
 		return (error_handler("[Error] argc"));
 	if (init_info(argv, &info))
 		return (EXIT_FAILURE);
-	run(&info);
-	// {
-	// 	free(info.philo);
-	// 	free(info.fork_mutex);
-	// 	return (EXIT_FAILURE);
-	// };
+	if (run(&info))
+	{
+		free(info.philo);
+		free(info.fork_mutex);
+		return (EXIT_FAILURE);
+	};
 	pthread_mutex_lock(&info.die_mutex);
 	pthread_mutex_unlock(&info.die_mutex);
-	// pthread_mutex_destroy(&info.die_mutex);
-	// pthread_mutex_destroy(&info.print_mutex);
 	usleep(100000);
 	return (EXIT_SUCCESS);
 }

@@ -37,19 +37,25 @@ int	philo_atoi(char *str)
 
 void	print_status(t_philo *philo)
 {
+	static int	stat = THINK;
 	char	*str;
 
-	if (philo->stat == FORKS)
-		str = "has taken a fork";
-	else if (philo->stat == EAT)
-		str = "is eating";
-	else if (philo->stat == SLEEP)
-		str = "is sleeping";
-	else if (philo->stat == DEAD)
-		str = "died";
-	else
-		str = 0;
-	printf("%lu %d %s\n", gettimeofnow() - philo->info->start_time, philo->number, str);
-	if (philo->stat != DEAD)
+	if (stat != DEAD)
+	{
+		pthread_mutex_lock(&(philo->info->print_mutex));
+		stat = philo->stat;
+		if (philo->stat == FORKS)
+			str = "has taken a fork";
+		else if (philo->stat == EAT)
+			str = "is eating";
+		else if (philo->stat == SLEEP)
+			str = "is sleeping";
+		else if (philo->stat == DEAD)
+			str = "died";
+		else
+			str = 0;
+		printf("%lu %d %s\n", gettimeofnow() - philo->info->start_time, philo->number, str);
+	}
+	if (stat != DEAD)
 		pthread_mutex_unlock(&(philo->info->print_mutex));
 }

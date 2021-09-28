@@ -15,9 +15,9 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <string.h> //memset
-# include <stdio.h> //printf
-# include <sys/time.h> // gettimeofday
+# include <string.h>
+# include <stdio.h>
+# include <sys/time.h>
 # include <pthread.h>
 
 # define FORKS 0
@@ -64,7 +64,7 @@ int		run(t_info *info);
 void	*monitor_philo(void *philo);
 void	*monitor_eat(void *philo);
 
-//utils.c
+// utils.c
 unsigned long gettimeofnow(void);
 int		philo_atoi(char *str);
 void	print_status(t_philo *philo);
