@@ -28,7 +28,7 @@ void	*philo_work(void *philo)
 	if (pthread_create(&tid, NULL, monitor_philo, philo))
 		return ((void *)EXIT_FAILURE);
 	pthread_detach(tid);
-	while (1)
+	while (!p->info->end_flag)
 	{
 		take_forks(p);
 		eat(p);
@@ -42,14 +42,14 @@ int		thread_philo(t_info *info, int i)
 {
 	pthread_t	tid;
 
-	while (i < info->number_of_philo)
+	while (i <= info->number_of_philo)
 	{
 		if (pthread_create(&tid, NULL, philo_work, (void *)(&(info->philo[i]))))
 			return (EXIT_FAILURE);
 		pthread_detach(tid);
 		i += 2;
 	}
-	// 대기
+	// usleep(500 * info->time_to_eat);
 	return (EXIT_SUCCESS);
 }
 
@@ -61,13 +61,12 @@ int		run(t_info *info)
 	if (info->must_eat > 0)
 	{
 		if (pthread_create(&tid, NULL, monitor_eat, (void *)info))
-			return (EXIT_FAILURE);
+			return (error_handler("[Error] Eat count monitor thread create"));
 		pthread_detach(tid);
 	}
 	init_time(info);
-	if (thread_philo(info, 1) || thread_philo(info, 0))
+	if (thread_philo(info, 2) || thread_philo(info, 1))
 		return (EXIT_FAILURE);
-	usleep(500 * info->time_to_eat);
 	return (EXIT_SUCCESS);
 }
 
@@ -87,6 +86,7 @@ int	main(int argc, char **argv)
 	};
 	pthread_mutex_lock(&info.die_mutex);
 	pthread_mutex_unlock(&info.die_mutex);
+	// 메모리 정리 후 정상 종료
 	usleep(100000);
 	return (EXIT_SUCCESS);
 }

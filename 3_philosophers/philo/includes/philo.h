@@ -26,6 +26,11 @@
 # define THINK 3
 # define DEAD 4
 
+# define TRUE 1
+# define FALSE 0
+
+typedef int			t_bool;
+
 typedef struct		s_philo
 {
 	int				number;
@@ -45,22 +50,26 @@ typedef struct			s_info
 	unsigned long		time_to_sleep;
 	int					must_eat;
 	unsigned long		start_time;
+	t_bool				end_flag;
 	t_philo				*philo;
 	pthread_mutex_t		*fork_mutex;
 	pthread_mutex_t		die_mutex;
 	pthread_mutex_t		print_mutex;
 }						t_info;
 
+// init.c
 void	init_time(t_info *info);
-int		init_philo(t_info *info);
 int		init_mutex(t_info *info);
+int		init_philo(t_info *info);
 int		init_info(char **argv, t_info *info);
 
+// main.c
 int		error_handler(char *err_msg);
 void	*philo_work(void *philo);
 int		thread_philo(t_info *info, int i);
 int		run(t_info *info);
 
+// monitor.c
 void	*monitor_philo(void *philo);
 void	*monitor_eat(void *philo);
 
