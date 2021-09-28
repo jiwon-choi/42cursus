@@ -23,7 +23,7 @@ void	*philo_work(void *philo)
 {
 	t_philo		*p;
 	pthread_t	tid;
-	
+
 	p = (t_philo *)philo;
 	if (pthread_create(&tid, NULL, monitor_philo, philo))
 		return ((void *)EXIT_FAILURE);
@@ -38,7 +38,7 @@ void	*philo_work(void *philo)
 }
 
 // 철학자 1인 1쓰레드 생성
-int		thread_philo(t_info *info, int i)
+int	thread_philo(t_info *info, int i)
 {
 	pthread_t	tid;
 
@@ -49,12 +49,12 @@ int		thread_philo(t_info *info, int i)
 		pthread_detach(tid);
 		i += 2;
 	}
-	// usleep(500 * info->time_to_eat);
+	usleep(500 * info->time_to_eat);
 	return (EXIT_SUCCESS);
 }
 
 // 본격적으로 실행 시작, 최소 식사 횟수가 들어온 경우 먹는 횟수를 카운트하는 모니터 쓰레드 생성
-int		run(t_info *info)
+int	run(t_info *info)
 {
 	pthread_t	tid;
 
@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 		free(info.philo);
 		free(info.fork_mutex);
 		return (EXIT_FAILURE);
-	};
+	}
 	pthread_mutex_lock(&info.die_mutex);
 	pthread_mutex_unlock(&info.die_mutex);
 	// 메모리 정리 후 정상 종료

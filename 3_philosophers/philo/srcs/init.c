@@ -26,8 +26,10 @@ int	init_mutex(t_info *info)
 {
 	int	i;
 
+	info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* info->number_of_philo);
 	// 0번 포크 <- 1번 철학자 -> 1번 포크
-	if (!(info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philo)))
+	if (!(info->fork_mutex))
 	{
 		free(info->philo);
 		return (error_handler("[Error] fork_mutex malloc"));
@@ -43,7 +45,9 @@ int	init_philo(t_info *info)
 	int	i;
 
 	// 0번 철학자는 비운다
-	if (!(info->philo = (t_philo *)malloc(sizeof(t_philo) * (info->number_of_philo + 1))))
+	info->philo = (t_philo *)malloc(sizeof(t_philo)
+			* (info->number_of_philo + 1));
+	if (!(info->philo))
 		return (error_handler("[Error] philo malloc"));
 	i = 0;
 	while (++i <= info->number_of_philo)

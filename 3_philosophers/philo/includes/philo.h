@@ -31,7 +31,7 @@
 
 typedef int			t_bool;
 
-typedef struct		s_philo
+typedef struct s_philo
 {
 	int				number;
 	int				stat;
@@ -42,7 +42,7 @@ typedef struct		s_philo
 	struct s_info	*info;
 }					t_philo;
 
-typedef struct			s_info
+typedef struct s_info
 {
 	int					number_of_philo;
 	unsigned long		time_to_die;
@@ -58,28 +58,28 @@ typedef struct			s_info
 }						t_info;
 
 // init.c
-void	init_time(t_info *info);
-int		init_mutex(t_info *info);
-int		init_philo(t_info *info);
-int		init_info(char **argv, t_info *info);
+void			init_time(t_info *info);
+int				init_mutex(t_info *info);
+int				init_philo(t_info *info);
+int				init_info(char **argv, t_info *info);
 
 // main.c
-int		error_handler(char *err_msg);
-void	*philo_work(void *philo);
-int		thread_philo(t_info *info, int i);
-int		run(t_info *info);
+int				error_handler(char *err_msg);
+void			*philo_work(void *philo);
+int				thread_philo(t_info *info, int i);
+int				run(t_info *info);
 
 // monitor.c
-void	*monitor_philo(void *philo);
-void	*monitor_eat(void *philo);
+void			*monitor_philo(void *philo);
+void			*monitor_eat(void *philo);
 
 // utils.c
-unsigned long gettimeofnow(void);
-int		philo_atoi(char *str);
-void	print_status(t_philo *philo);
+unsigned long	gettimeofnow(void);
+int				philo_atoi(char *str);
+void			print_status(t_philo *philo);
 
-void	take_forks(t_philo *p);
-void	eat(t_philo *p);
-void	sleep_think(t_philo *p);
+void			take_forks(t_philo *p);
+void			eat(t_philo *p);
+void			sleep_think(t_philo *p);
 
 #endif

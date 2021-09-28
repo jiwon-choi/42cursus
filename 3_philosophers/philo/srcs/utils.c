@@ -12,9 +12,9 @@
 
 #include "philo.h"
 
-unsigned long gettimeofnow(void)
+unsigned long	gettimeofnow(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
@@ -55,7 +55,8 @@ void	print_status(t_philo *philo)
 		}
 		else
 			str = 0;
-		printf("%lu %d %s\n", gettimeofnow() - philo->info->start_time, philo->number, str);
+		printf("%lums %d %s\n", gettimeofnow() - philo->info->start_time,
+			philo->number, str);
 	}
 	if (!philo->info->end_flag)
 		pthread_mutex_unlock(&(philo->info->print_mutex));
