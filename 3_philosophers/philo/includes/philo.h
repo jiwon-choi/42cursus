@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/22 11:49:20 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/09/24 17:18:36 by jiwchoi          ###   ########.fr       */
+/*   Created: 2021/09/29 13:36:53 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/09/29 16:57:58 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <string.h>
 # include <stdio.h>
-# include <sys/time.h>
+# include <string.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 # define FORKS 0
 # define EAT 1
@@ -29,14 +29,14 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef int			t_bool;
+typedef int		t_bool;
 
 typedef struct s_philo
 {
 	int				number;
 	int				stat;
 	int				eat_cnt;
-	unsigned long	time;
+	uint64_t		time;
 	pthread_mutex_t	*rfork;
 	pthread_mutex_t	*lfork;
 	struct s_info	*info;
@@ -44,42 +44,40 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	int					number_of_philo;
-	unsigned long		time_to_die;
-	unsigned long		time_to_eat;
-	unsigned long		time_to_sleep;
-	int					must_eat;
-	unsigned long		start_time;
-	t_bool				end_flag;
-	t_philo				*philo;
-	pthread_mutex_t		*fork_mutex;
-	pthread_mutex_t		die_mutex;
-	pthread_mutex_t		print_mutex;
-}						t_info;
+	int				number_of_philo;
+	uint64_t		time_to_die;
+	uint64_t		time_to_eat;
+	uint64_t		time_to_sleep;
+	int				must_eat;
+	uint64_t		start_time;
+	t_bool			end;
+	t_philo			*philo;
+	pthread_mutex_t	*fork_mutex;
+	pthread_mutex_t	die_mutex;
+	pthread_mutex_t	print_mutex;
+}					t_info;
 
 // init.c
-void			init_time(t_info *info);
-int				init_mutex(t_info *info);
-int				init_philo(t_info *info);
-int				init_info(char **argv, t_info *info);
-
-// main.c
-int				error_handler(char *err_msg);
-void			*philo_work(void *philo);
-int				thread_philo(t_info *info, int i);
-int				run(t_info *info);
+void		init_time(t_info *info);
+int			init_philo(t_info *info);
+int			init_forks(t_info *info);
+int			init_info(char **argv, t_info *info);
 
 // monitor.c
-void			*monitor_philo(void *philo);
-void			*monitor_eat(void *philo);
+void		*monitor_philo(void *philo);
+
+// routine.c
+void		take_forks(t_philo *philo);
+void		eat(t_philo *philo);
+void		sleep_think(t_philo *philo);
+
+// run.c
+int			run(t_info *info);
 
 // utils.c
-unsigned long	gettimeofnow(void);
-int				philo_atoi(char *str);
-void			print_status(t_philo *philo);
-
-void			take_forks(t_philo *p);
-void			eat(t_philo *p);
-void			sleep_think(t_philo *p);
+int			ft_error(char *str);
+uint64_t	gettimeofnow(void);
+int			philo_atoi(char *str);
+void		print_status(t_philo *p, char *str);
 
 #endif
