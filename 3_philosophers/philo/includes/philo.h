@@ -50,7 +50,6 @@ typedef struct s_info
 	uint64_t		time_to_sleep;
 	int				must_eat;
 	uint64_t		start_time;
-	t_bool			end;
 	t_philo			*philo;
 	pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	die_mutex;
