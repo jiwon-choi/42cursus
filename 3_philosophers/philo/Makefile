@@ -6,14 +6,14 @@
 #    By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/28 19:02:09 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/09/25 20:16:36 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/09/29 11:14:14 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 TARGET		= philo
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra #-fsanitize=address
 RM			= rm -rf
 
 INCS_DIR	= ./includes/
@@ -30,7 +30,7 @@ SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS		= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 
 $(TARGET) : $(OBJS)
-	$(CC) -o $(TARGET) $(OBJS) -I $(INCS_DIR)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) -I $(INCS_DIR)
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
