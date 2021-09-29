@@ -14,16 +14,8 @@
 
 void	take_forks(t_philo *philo)
 {
-//	if (philo->number % 2 == 0)
-//	{
-		pthread_mutex_lock(philo->rfork);
-		pthread_mutex_lock(philo->lfork);
-//	}
-//	else
-//	{
-//		pthread_mutex_lock(philo->lfork);
-//		pthread_mutex_lock(philo->rfork);
-//	}
+	pthread_mutex_lock(philo->rfork);
+	pthread_mutex_lock(philo->lfork);
 	print_status(philo, "has taken a fork");
 }
 
@@ -34,16 +26,8 @@ void	eat(t_philo *philo)
 	while (gettimeofnow() < philo->time + philo->info->time_to_eat)
 		usleep(100);
 	philo->eat_cnt++;
-//	if (philo->number % 2 == 0)
-//	{
-		pthread_mutex_unlock(philo->lfork);
-		pthread_mutex_unlock(philo->rfork);
-//	}
-//	else
-//	{
-//		pthread_mutex_unlock(philo->rfork);
-//		pthread_mutex_unlock(philo->lfork);
-//	}
+	pthread_mutex_unlock(philo->lfork);
+	pthread_mutex_unlock(philo->rfork);
 }
 
 void	sleep_think(t_philo *philo)

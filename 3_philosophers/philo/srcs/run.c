@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 14:49:01 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/09/29 16:55:28 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/09/29 19:41:02 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*philo_routine(void *philo)
 	return ((void *)EXIT_SUCCESS);
 }
 
-int		run_philo(t_info *info, int i)
+int	run_philo(t_info *info, int i)
 {
 	pthread_t	tid;
 
@@ -46,7 +46,7 @@ int		run_philo(t_info *info, int i)
 	return (EXIT_SUCCESS);
 }
 
-int		run(t_info *info)
+int	run(t_info *info)
 {
 	init_time(info);
 	if (run_philo(info, 1) || run_philo(info, 0))

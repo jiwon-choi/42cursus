@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 13:48:09 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/09/29 16:20:55 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/09/29 19:39:35 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	init_forks(t_info *info)
 {
 	int	i;
 
-	info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philo);
+	info->fork_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* info->number_of_philo);
 	if (!info->fork_mutex)
 		return (ft_error("[ERROR] fork_mutex malloc"));
 	i = -1;
