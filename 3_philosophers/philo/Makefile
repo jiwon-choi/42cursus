@@ -13,7 +13,7 @@
 TARGET		= philo
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra # -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra
 RM			= rm -rf
 
 INCS_DIR	= ./includes/

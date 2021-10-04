@@ -74,6 +74,8 @@ void		eat(t_philo *philo);
 void		sleep_think(t_philo *philo);
 
 // run.c
+void		*philo_routine(void *philo);
+int			run_philo(t_info *info, int i);
 int			run(t_info *info);
 
 // utils.c

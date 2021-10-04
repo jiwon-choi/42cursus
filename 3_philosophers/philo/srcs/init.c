@@ -28,7 +28,10 @@ int	init_philo(t_info *info)
 
 	info->philo = (t_philo *)malloc(sizeof(t_philo) * (info->number_of_philo));
 	if (!info->philo)
+	{
+		free(info->fork_mutex);
 		return (ft_error("[ERROR] philo malloc"));
+	}
 	i = -1;
 	while (++i < info->number_of_philo)
 	{

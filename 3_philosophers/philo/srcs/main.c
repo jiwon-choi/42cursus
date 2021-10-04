@@ -15,6 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_info	info;
+	int		i;
 
 	if (argc < 5 || argc > 6)
 		return (ft_error("[ERROR] argc"));
@@ -24,5 +25,12 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	pthread_mutex_lock(&info.die_mutex);
 	pthread_mutex_unlock(&info.die_mutex);
+	i = -1;
+	while (++i < info.number_of_philo)
+		pthread_mutex_destroy(&(info.fork_mutex[i]));
+	pthread_mutex_destroy(&(info.die_mutex));
+	pthread_mutex_destroy(&(info.print_mutex));
+	free(info.fork_mutex);
+	free(info.philo);
 	return (EXIT_SUCCESS);
 }
