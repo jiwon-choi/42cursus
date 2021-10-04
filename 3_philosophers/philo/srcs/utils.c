@@ -46,8 +46,8 @@ void	print_status(t_philo *p, char *str)
 	pthread_mutex_lock(&(p->info->print_mutex));
 	if (!p->info->end)
 	{
-		printf("%lldms %d %s	[%d]\n", gettimeofnow() - p->info->start_time,
-			p->number, str, p->eat_cnt);
+		printf("[%d] %lldms %d %s\n", p->eat_cnt, gettimeofnow() - p->info->start_time,
+			p->number, str);
 		if (str[0] == 'd')
 			p->info->end = TRUE;
 	}

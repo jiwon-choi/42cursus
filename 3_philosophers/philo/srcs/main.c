@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 		pthread_mutex_destroy(&(info.fork_mutex[i]));
 	pthread_mutex_destroy(&(info.die_mutex));
 	pthread_mutex_destroy(&(info.print_mutex));
+	pthread_mutex_destroy(&(info.count_mutex));
 	free(info.fork_mutex);
 	free(info.philo);
 	return (EXIT_SUCCESS);

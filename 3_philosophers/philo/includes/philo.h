@@ -56,6 +56,7 @@ typedef struct s_info
 	pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	die_mutex;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	count_mutex;
 }					t_info;
 
 // init.c

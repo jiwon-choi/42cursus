@@ -27,8 +27,11 @@ void	eat(t_philo *philo)
 	while (gettimeofnow() < philo->time + philo->info->time_to_eat)
 		usleep(100);
 	philo->eat_cnt++;
+	pthread_mutex_lock(&(philo->info->count_mutex));
 	if (philo->eat_cnt == philo->info->must_eat)
 		philo->info->must_eat_cnt++;
+	usleep(100);
+	pthread_mutex_unlock(&(philo->info->count_mutex));
 	pthread_mutex_unlock(philo->lfork);
 	pthread_mutex_unlock(philo->rfork);
 }

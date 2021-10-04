@@ -87,5 +87,6 @@ int	init_info(char **argv, t_info *info)
 	pthread_mutex_init(&(info->die_mutex), NULL);
 	pthread_mutex_lock(&(info->die_mutex));
 	pthread_mutex_init(&(info->print_mutex), NULL);
+	pthread_mutex_init(&(info->count_mutex), NULL);
 	return (EXIT_SUCCESS);
 }
