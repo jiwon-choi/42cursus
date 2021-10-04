@@ -12,38 +12,38 @@
 
 #include "philo.h"
 
-void	take_forks(t_philo *philo)
+void	take_forks(t_philo *p)
 {
-	pthread_mutex_lock(philo->rfork);
-	print_status(philo, "has taken a fork");
-	pthread_mutex_lock(philo->lfork);
-	print_status(philo, "has taken a fork");
+	pthread_mutex_lock(p->rfork);
+	print_status(p, "has taken a fork");
+	pthread_mutex_lock(p->lfork);
+	print_status(p, "has taken a fork");
 }
 
-void	eat(t_philo *philo)
+void	eat(t_philo *p)
 {
-	philo->time = gettimeofnow();
-	print_status(philo, "is eating");
-	while (gettimeofnow() < philo->time + philo->info->time_to_eat)
+	p->time = gettimeofnow();
+	print_status(p, "is eating");
+	while (gettimeofnow() < p->time + p->info->time_to_eat)
 		usleep(100);
-	philo->eat_cnt++;
-	pthread_mutex_lock(&(philo->info->count_mutex));
-	if (philo->eat_cnt == philo->info->must_eat)
-		philo->info->must_eat_cnt++;
+	p->eat_cnt++;
+	pthread_mutex_lock(&(p->info->count_mutex));
+	if (p->eat_cnt == p->info->must_eat)
+		p->info->must_eat_cnt++;
 	usleep(100);
-	pthread_mutex_unlock(&(philo->info->count_mutex));
-	pthread_mutex_unlock(philo->lfork);
-	pthread_mutex_unlock(philo->rfork);
+	pthread_mutex_unlock(&(p->info->count_mutex));
+	pthread_mutex_unlock(p->lfork);
+	pthread_mutex_unlock(p->rfork);
 }
 
-void	sleep_think(t_philo *philo)
+void	sleep_think(t_philo *p)
 {
 	uint64_t	sleep_start;
 
 	sleep_start = gettimeofnow();
-	print_status(philo, "is sleeping");
-	while (gettimeofnow() < sleep_start + philo->info->time_to_sleep)
+	print_status(p, "is sleeping");
+	while (gettimeofnow() < sleep_start + p->info->time_to_sleep)
 		usleep(100);
 	usleep(50);
-	print_status(philo, "is thinking");
+	print_status(p, "is thinking");
 }
