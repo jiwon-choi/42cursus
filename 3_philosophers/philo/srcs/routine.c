@@ -15,6 +15,7 @@
 void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->rfork);
+	print_status(philo, "has taken a fork");
 	pthread_mutex_lock(philo->lfork);
 	print_status(philo, "has taken a fork");
 }
@@ -26,6 +27,8 @@ void	eat(t_philo *philo)
 	while (gettimeofnow() < philo->time + philo->info->time_to_eat)
 		usleep(100);
 	philo->eat_cnt++;
+	if (philo->eat_cnt == philo->info->must_eat)
+		philo->info->must_eat_cnt++;
 	pthread_mutex_unlock(philo->lfork);
 	pthread_mutex_unlock(philo->rfork);
 }

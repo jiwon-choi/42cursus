@@ -43,16 +43,14 @@ int	philo_atoi(char *str)
 
 void	print_status(t_philo *p, char *str)
 {
-	static t_bool	end = FALSE;
-
-	if (!end)
+	pthread_mutex_lock(&(p->info->print_mutex));
+	if (!p->info->end)
 	{
-		pthread_mutex_lock(&(p->info->print_mutex));
-		printf("%lldms %d %s\n", gettimeofnow() - p->info->start_time,
-			p->number, str);
+		printf("%lldms %d %s	[%d]\n", gettimeofnow() - p->info->start_time,
+			p->number, str, p->eat_cnt);
 		if (str[0] == 'd')
-			end = TRUE;
+			p->info->end = TRUE;
 	}
-	if (!end)
+	if (!p->info->end)
 		pthread_mutex_unlock(&(p->info->print_mutex));
 }

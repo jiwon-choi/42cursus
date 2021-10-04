@@ -22,5 +22,19 @@ void	*monitor_philo(void *philo)
 	p->stat = DEAD;
 	print_status(p, "died");
 	pthread_mutex_unlock(&(p->info->die_mutex));
-	return (0);
+	return ((void *)EXIT_SUCCESS);
+}
+
+void	*monitor_must_eat(void *void_info)
+{
+	t_info	*info;
+
+	info = (t_info *)void_info;
+	while (info->must_eat_cnt < info->number_of_philo)
+		usleep(100);
+	pthread_mutex_lock(&(info->print_mutex));
+	printf("full\n");
+	info->end = TRUE;
+	pthread_mutex_unlock(&(info->die_mutex));
+	return ((void *)EXIT_SUCCESS);
 }

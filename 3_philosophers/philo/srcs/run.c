@@ -21,7 +21,7 @@ void	*philo_routine(void *philo)
 	if (pthread_create(&tid, NULL, monitor_philo, philo))
 		return ((void *)EXIT_FAILURE);
 	pthread_detach(tid);
-	while (1)
+	while (!p->info->end)
 	{
 		take_forks(p);
 		eat(p);
@@ -48,6 +48,11 @@ int	run_philo(t_info *info, int i)
 
 int	run(t_info *info)
 {
+	pthread_t	tid;
+
+	if (pthread_create(&tid, NULL, monitor_must_eat, info))
+		return (EXIT_FAILURE);
+	pthread_detach(tid);
 	init_time(info);
 	if (run_philo(info, 1) || run_philo(info, 0))
 		return (EXIT_FAILURE);

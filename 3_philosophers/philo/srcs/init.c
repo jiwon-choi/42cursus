@@ -77,6 +77,8 @@ int	init_info(char **argv, t_info *info)
 	info->time_to_eat = argv_num[2];
 	info->time_to_sleep = argv_num[3];
 	info->must_eat = argv_num[4];
+	info->must_eat_cnt = 0;
+	info->end = FALSE;
 	if (init_forks(info) || init_philo(info))
 		return (EXIT_FAILURE);
 	pthread_mutex_init(&(info->die_mutex), NULL);
