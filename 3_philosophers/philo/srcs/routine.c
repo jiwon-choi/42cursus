@@ -15,6 +15,7 @@
 void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->rfork);
+	print_status(philo, "has taken a fork");
 	pthread_mutex_lock(philo->lfork);
 	print_status(philo, "has taken a fork");
 }

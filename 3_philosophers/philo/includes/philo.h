@@ -50,6 +50,7 @@ typedef struct s_info
 	uint64_t		time_to_sleep;
 	int				must_eat;
 	uint64_t		start_time;
+	t_bool			end;
 	t_philo			*philo;
 	pthread_mutex_t	*fork_mutex;
 	pthread_mutex_t	die_mutex;
@@ -64,6 +65,7 @@ int			init_info(char **argv, t_info *info);
 
 // monitor.c
 void		*monitor_philo(void *philo);
+void		*monitor_must_eat(void *void_info);
 
 // routine.c
 void		take_forks(t_philo *philo);

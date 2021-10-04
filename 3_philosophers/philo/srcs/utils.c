@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 16:21:40 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/09/29 19:41:28 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/04 17:21:50 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,14 @@ int	philo_atoi(char *str)
 
 void	print_status(t_philo *p, char *str)
 {
-	static t_bool	end = FALSE;
-
-	if (!end)
+	if (!p->info->end)
 	{
 		pthread_mutex_lock(&(p->info->print_mutex));
-		printf("%lldms %d %s\n", gettimeofnow() - p->info->start_time,
-			p->number, str);
-		if (str[0] == 'd')
-			end = TRUE;
+		printf("%lldms	%d %s	[%d]\n", gettimeofnow() - p->info->start_time,
+			p->number, str, p->eat_cnt);
+		if (str[0] == 'd' || p->stat == 10)
+			p->info->end = TRUE;
 	}
-	if (!end)
+	if (!p->info->end)
 		pthread_mutex_unlock(&(p->info->print_mutex));
 }
