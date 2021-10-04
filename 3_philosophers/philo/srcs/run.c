@@ -21,7 +21,7 @@ void	*philo_routine(void *philo)
 	if (pthread_create(&tid, NULL, monitor_philo, philo))
 		return ((void *)EXIT_FAILURE);
 	pthread_detach(tid);
-	while (1)
+	while (!p->info->end)
 	{
 		take_forks(p);
 		eat(p);

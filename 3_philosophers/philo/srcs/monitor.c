@@ -22,7 +22,7 @@ void	*monitor_philo(void *philo)
 	p->stat = DEAD;
 	print_status(p, "died");
 	pthread_mutex_unlock(&(p->info->die_mutex));
-	return (0);
+	return ((void *)EXIT_SUCCESS);
 }
 
 void	*monitor_must_eat(void *void_info)

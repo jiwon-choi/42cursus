@@ -49,6 +49,7 @@ typedef struct s_info
 	uint64_t		time_to_eat;
 	uint64_t		time_to_sleep;
 	int				must_eat;
+	int				must_eat_cnt;
 	uint64_t		start_time;
 	t_bool			end;
 	t_philo			*philo;
