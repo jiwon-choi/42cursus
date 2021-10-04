@@ -28,36 +28,13 @@ void	*monitor_philo(void *philo)
 void	*monitor_must_eat(void *void_info)
 {
 	t_info	*info;
-	t_bool	*check;
-	int		i;
-	int		cnt;
 
 	info = (t_info *)void_info;
-	check = (t_bool *)malloc(sizeof(t_bool) * info->number_of_philo);
-	if (!check)
-		return ((void *)EXIT_FAILURE);
-	memset(check, FALSE, info->number_of_philo);
-	i = -1;
-	cnt = 0;
-	while (++i < info->number_of_philo)
-	{
-		if (check[i])
-			continue ;
-		if (info->philo[i].eat_cnt == info->must_eat)
-		{
-			check[i] = TRUE;
-			cnt++;
-			if (cnt == info->number_of_philo)
-			{
-				info->philo[i].stat = 10;
-				print_status(info->philo, "full");
-				pthread_mutex_unlock(&(info->die_mutex));
-				return ((void *)EXIT_SUCCESS);
-			}
-		}
-		if (i == info->number_of_philo - 1)
-			i = -1;
+	while (info->must_eat_cnt < info->number_of_philo)
 		usleep(100);
-	}
+	pthread_mutex_lock(&(info->print_mutex));
+	printf("full\n");
+	info->end = TRUE;
+	pthread_mutex_unlock(&(info->die_mutex));
 	return ((void *)EXIT_SUCCESS);
 }
