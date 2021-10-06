@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 16:21:40 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/09/29 19:41:28 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/06 10:45:00 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	print_status(t_philo *p, char *str)
 	pthread_mutex_lock(&(p->info->print_mutex));
 	if (!p->info->end)
 	{
-		printf("[%d] %lldms %d %s\n", p->eat_cnt, gettimeofnow() - p->info->start_time,
-			p->number, str);
+		printf("[%d] %lldms %d %s\n", p->eat_cnt,
+			gettimeofnow() - p->info->start_time, p->number, str);
 		if (str[0] == 'd')
 			p->info->end = TRUE;
 	}
