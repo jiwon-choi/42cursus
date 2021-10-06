@@ -17,5 +17,5 @@
 | 02     | [push_swap](./2_push_swap)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/push_swap)](https://github.com/JaeSeoKim/badge42)        | 2021-06-10 |
 | 02     | [minitalk](./2_minitalk)           |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/minitalk)](https://github.com/JaeSeoKim/badge42)         | 2021-07-05 |
 | 02     | [pipex](./2_pipex)                 |        | -                                                                                                                    | -          |
-| 03     | [minishell](./3_minishell)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/minishell)](https://github.com/JaeSeoKim/badge42)        | |
 | 03     | [Philosophers](https://github.com/Jiwon-Choi/Philosophers)   |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/Philosophers)](https://github.com/JaeSeoKim/badge42)     | |
+| 03     | [minishell](./3_minishell)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/minishell)](https://github.com/JaeSeoKim/badge42)        | |
