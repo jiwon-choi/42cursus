@@ -10,7 +10,7 @@
 | 00     | [Libft](./0_libft)                 |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/Libft)](https://github.com/JaeSeoKim/badge42)            | 2020-12-30 |
 | 01     | netwhat                            |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/netwhat)](https://github.com/JaeSeoKim/badge42)          | 2021-02-02 |
 | 01     | [get_next_line](./1_get_next_line) |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/get_next_line)](https://github.com/JaeSeoKim/badge42)    | 2021-02-03 |
-| 01     | [ft_printf](./1_ft_printf)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/ft_printf)](https://github.com/JaeSeoKim/badge42)        | 2021-02-20 |
+| 01     | [ft_printf](https://github.com/Jiwon-Choi/ft_printf)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/ft_printf)](https://github.com/JaeSeoKim/badge42)        | 2021-02-20 |
 | 02     | [ft_server](./2_ft_server)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/ft_server)](https://github.com/JaeSeoKim/badge42)        | 2021-03-11 |
 | 02     | [Exam Rank 02](./2_examrank02)     |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2021-04-13 |
 | 02     | [miniRT](./2_miniRT)               |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/miniRT)](https://github.com/JaeSeoKim/badge42)           | 2021-05-19 |
