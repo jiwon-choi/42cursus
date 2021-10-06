@@ -33,7 +33,7 @@ void	*monitor_must_eat(void *void_info)
 	while (info->must_eat_cnt < info->number_of_philo)
 		usleep(100);
 	pthread_mutex_lock(&(info->print_mutex));
-	printf("full\n");
+	printf("All philosophers have finished eating\n");
 	info->end = TRUE;
 	pthread_mutex_unlock(&(info->die_mutex));
 	return ((void *)EXIT_SUCCESS);
