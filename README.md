@@ -19,3 +19,4 @@
 | 02     | [pipex](./2_pipex)                 |        | -                                                                                                                    | -          |
 | 03     | [Philosophers](https://github.com/Jiwon-Choi/Philosophers)   |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/Philosophers)](https://github.com/JaeSeoKim/badge42)     | 2021-10-06 |
 | 03     | [minishell](https://github.com/Jiwon-Choi/minishell)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/minishell)](https://github.com/JaeSeoKim/badge42)        | |
+| 04     | [CPP modules](https://github.com/Jiwon-Choi/CPP-modules)         |        | [![Score](https://badge42.herokuapp.com/api/project/jiwchoi/CPP_Module_08)](https://github.com/JaeSeoKim/badge42)        | |
